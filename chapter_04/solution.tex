@@ -1,0 +1,361 @@
+\documentclass[a4paper]{book}
+
+\usepackage{afterpage}
+\usepackage[hypcap=false]{caption}
+\usepackage{enumitem}	% 定制enumerate标号
+\usepackage{geometry}
+\geometry{%
+	left=2cm,%
+	right=2cm,%
+	top=2cm,%
+	bottom=2cm,%
+	bindingoffset=0cm
+}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=blue,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+\usepackage[none]{hyphenat}	% 阻止长单词分在两行
+\usepackage{longtable}
+\usepackage{mathrsfs}	% 提供\mathscr字体
+\usepackage[version=4]{mhchem}
+\usepackage{multirow}
+\usepackage{subcaption}
+
+\RequirePackage[many]{tcolorbox}
+\tcbset{
+    boxed title style={colback=magenta},
+	breakable,
+	enhanced,
+	sharp corners,
+	attach boxed title to top left={yshift=-\tcboxedtitleheight,  yshifttext=-.75\baselineskip},
+	boxed title style={boxsep=1pt,sharp corners},
+    fonttitle=\bfseries\sffamily,
+}
+
+\definecolor{skyblue}{rgb}{0.54, 0.81, 0.94}
+
+\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{exercise}[1][]{
+    title={Exercise~\thetcbcounter},
+    colframe=skyblue,
+    colback=skyblue!12!white,
+    boxed title style={colback=skyblue},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=skyblue,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
+\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{solution}[1][]{
+%    top=2ex,
+%    boxrule=0pt,
+%    leftrule=1.4pt,
+    title={Solution~\thetcbcounter},
+    colframe=teal!60!green,
+    colback=green!12!white,
+    boxed title style={colback=teal!60!green},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=red,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
+\newcommand{\AO}{{\rm AO}}
+\newcommand{\Heff}{H^{\rm eff,\pi}}
+\newcommand{\Hp}{H^\prime}
+\newcommand{\Sp}{S^\prime}
+\newcommand{\RRR}{{\rm R}^3}
+\newcommand\Figref[1]{Fig \ref{#1}}
+\newcommand\Tableref[1]{Table \ref{#1}}
+\newcommand{\orb}[1]{{\rm #1}}
+\newcommand{\orbp}{\orb{p}}
+
+\newcommand{\Tr}[1]{\text{Trace}(#1)}
+
+\allowdisplaybreaks
+
+\begin{document}
+
+	\setcounter{chapter}{4}
+
+	% 4.1
+	\begin{exercise}
+	
+	Show that for two matrices $A$ and $B$:
+	\begin{enumerate}
+		
+	\item $\tilde{AB} = \tilde{B} \tilde{A}$,
+	
+	\item $(AB)^\dagger = B^\dagger A^\dagger$, and
+	
+	\item $(AB)^{-1} = B^{-1} A^{-1}$.
+	
+	\end{enumerate}		
+	
+	\end{exercise}
+
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.2
+	\begin{exercise}
+	
+	Prove that
+	\begin{enumerate}
+	
+	\item the product of two unitary matrices is also unitary and
+	
+	\item the inverse of a unitary matrix is unitary.
+	
+	\end{enumerate}		
+	
+	\end{exercise}
+
+	\begin{solution}
+
+	\end{solution}
+
+	% 4.3
+	\begin{exercise}
+	
+	Show that if four matrices obey the equation $D=ABC$, then
+	\[
+		D_{ij} = \sum_k \sum_l A_{ik} B_{kl} C_{lj} .
+	\]	
+	
+	\end{exercise}
+	
+	\begin{solution}
+		
+	\end{solution}
+	
+	% 4.4
+	\begin{exercise}
+	
+	\begin{enumerate}
+	
+	\item Show that $\Tr{AB} = \sum_i \sum_j A_{ij} B_{ji}$.
+	
+	\item Given two matrices $A$ and $B$ of demensions $n \times m$ and $m \times n$ respectively, prove $\Tr{AB}=\Tr{BA}$.
+	
+	\end{enumerate}		
+	
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.5
+	\begin{exercise}
+	
+	Prove that for any matrix $A$:
+	\begin{enumerate}
+	
+	\item $A A^\dagger$ and $A^\dagger A$ are Hermitian;
+	
+	\item $(A + A^\dagger)$ and $i(A - A^\dagger)$ are Hermitian.	
+	
+	\end{enumerate}		
+	
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.6
+	\begin{exercise}
+		
+	If $A B = B A$, show that $Q A \tilde{Q}$ and $Q B \tilde{Q}$ commute if $Q$ is orthogonal.		
+		
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.7
+	\begin{exercise}
+
+	Find the inverse of:
+	\begin{enumerate}
+	
+	\item $\begin{pmatrix}
+		a + ib 	&	c + id \\
+		-c +id	& 	a - ib 
+	\end{pmatrix}$,
+	
+	\item $\begin{pmatrix}
+		1 & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 1
+	\end{pmatrix}$,
+	
+	\item $\begin{pmatrix}
+		0 & 0 & a \\
+		0 & b & 0 \\
+		c & 0 & 0 
+	\end{pmatrix}$,
+	
+	\item $\begin{pmatrix}
+		a	& -b 	\\
+		b	& a 
+	\end{pmatrix}$,
+	
+	\item $\begin{pmatrix}
+		0	& -i 	\\
+		i	& 0 
+	\end{pmatrix}$, and
+	
+	\item $\begin{pmatrix}
+		2 & 3 & 1 \\
+		3 & 5 & 2 \\
+		0 & 0 & 2 
+	\end{pmatrix}$.
+	
+	\end{enumerate}
+
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.8
+	\begin{exercise}
+
+	Show that the matrices:
+	\begin{enumerate}
+	
+	\item $\begin{pmatrix}
+		\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}		\\
+		\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}
+	\end{pmatrix}$,
+	
+	\item $\begin{pmatrix}
+		\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}		\\
+		\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}
+	\end{pmatrix}$, and
+	
+	\item $\begin{pmatrix}
+		\cos \theta 	& \sin \theta \\
+		\sin \theta 	& - \cos \theta
+	\end{pmatrix}$
+	
+	\end{enumerate}
+	
+	are orthogonal.
+	
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.9
+	\begin{exercise}
+
+		Show that if $\lambda_1$, $\lambda_2$, $\dots$, $\lambda_n$ are the eigenvalues of $A$, then $\lambda_1 - k$, $\lambda_2 - k$, $\dots$, $\lambda_n - k$ are the eigenvalues of $A - kE$.
+
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+
+	% 4.10
+	\begin{exercise}
+
+		Obtain the eigenvalues and normalized eigenvectors of:
+		\begin{enumerate}
+		
+		\item $\begin{pmatrix}
+			1	&	-8	\\
+			2	&	11	
+		\end{pmatrix}$,
+		
+		\item $\begin{pmatrix}
+			5	&	10	&	8	\\
+			10	&	2	&	-2	\\
+			8	&	-2	&	11	
+		\end{pmatrix}$,
+		
+		\item $\begin{pmatrix}
+				\cos \theta 		& \sin \theta 	& 0 \\
+				- \sin \theta 	& \cos \theta 	& 0 \\
+				0		 		& 0	 			& 1
+		\end{pmatrix}$.
+		
+		\end{enumerate}
+
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.11
+	\begin{exercise}
+		
+		If
+		$
+			A = \begin{pmatrix}
+				- \frac{1}{2} 		& - \frac{\sqrt{3}}{2}	& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 2 
+			\end{pmatrix}
+		$ and $
+			Q = \begin{pmatrix}
+				\frac{1}{2} 			& \frac{\sqrt{3}}{2}		& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix}
+		$, show that $Q^{-1} A Q$ is diagonal.
+		
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+	% 4.12
+	\begin{exercise}
+
+		Diagonalize the following matrices:
+		\begin{enumerate}
+		
+		\item $\begin{pmatrix}
+				5 & 10 & 8 \\
+				10 & 2 & -2 \\
+				8 & -2 & 11
+		\end{pmatrix}$,
+		
+		\item $\begin{pmatrix}
+				\cos \theta 		& \sin \theta 	& 0 \\
+				- \sin \theta 	& \cos \theta 	& 0 \\
+				0		 		& 0	 			& 1
+		\end{pmatrix}$, and
+		
+		\item $\begin{pmatrix}
+			2 		& 4 - i \\
+			4 + i	&	-14 
+		\end{pmatrix}$.
+		
+		\end{enumerate}
+	
+	\end{exercise}
+	
+	\begin{solution}
+	
+	\end{solution}
+	
+
+\end{document}
