@@ -1,4 +1,5 @@
 \documentclass[a4paper]{book}
+\special{dvipdfmx:config z 0} %取消PDF压缩，加快速度，最终版本生成的时候最好把这句话注释掉
 
 \usepackage{afterpage}
 \usepackage[hypcap=false]{caption}
@@ -26,6 +27,10 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
+
+% setting about showing the contents
+\setcounter{chapter}{1}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -65,6 +70,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -75,71 +92,306 @@
 \newcommand{\orb}[1]{{\rm #1}}
 \newcommand{\orbp}{\orb{p}}
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \allowdisplaybreaks
 
 \begin{document}
+	
+	\chapter{Symmetry operations}
 
-	\setcounter{chapter}{2}
-
+	% 2.1
 	\begin{exercise}
-		Give all the symmetry elements of $\ce{H2O}$, $\ce{NH3}$ and $\ce{CH4}$. For each molecule list the symmetry operations which commute.
+	
+	Give all the symmetry elements of $\ce{H2O}$, $\ce{NH3}$ and $\ce{CH4}$. For each molecule list the symmetry operations which commute.
+
 	\end{exercise}
 
 	\begin{solution}
-		\url{https://symotter.org/gallery}
-		\begin{enumerate}[label=(\alph*)]
+
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item $\ce{H2O}$ has 4 symmetry elements,
+	\[	
+		E, C_2, \sigma_{\rm v}(xz), \sigma_{\rm v}(yz).
+	\] 
+	They can be seen in \Figref{fig:H2O_symmetry_elements}.	
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_2/H2O-C2.png}
+		\captionof*{figure}{$C_2$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_2/H2O-sigma_xz.png}
+		\captionof*{figure}{$\sigma_{\rm v}(xz)$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_2/H2O-sigma_yz.png}
+		\captionof*{figure}{$\sigma_{\rm v}(yz)$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{All symmetry elements of $\ce{H2O}$ except the identity $E$.}\label{fig:H2O_symmetry_elements}
+	\end{center}
+	
+	For $\ce{H2O}$, all symmetry operations commute with each other. In the next chapter, readers will know that $\ce{H2O}$ belongs to the point group $\mathscr{C}_{\rm 2v}$, an Abelian group.
+	
+	\item $\ce{NH3}$ has 5 symmetry elements,  
+	\[
+		E, C_3, \sigma^\prime_{\rm v}, \sigma^{\prime\prime}_{\rm v}, \sigma^{\prime\prime\prime}_{\rm v}.
+	\]
+	They can be seen in \Figref{fig:NH3_symmetry_elements}.	
+	
+	\begin{center}
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_2/NH3-C3.png}
+		\captionof*{figure}{$C_3$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_2/NH3-sigma.png}
+		\captionof*{figure}{$\sigma^\prime_{\rm v}, \sigma^{\prime\prime}_{\rm v}, \sigma^{\prime\prime\prime}_{\rm v}$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{All symmetry elements of $\ce{NH3}$ except the identity $E$.}\label{fig:NH3_symmetry_elements}
+	\end{center}
+	
+	For $\ce{NH3}$, not all symmetry operations commute with each other. Now we only list the cases where two different elements commute. 
+	\begin{itemize}
+	
+	\item $E$ commute with other symmetry operations.	
+	
+	\item $C_3$ commute with $C^2_3$.
+
+	\end{itemize}
+	
+	In the next chapter, readers will know that $\ce{NH3}$ belongs to the point group $\mathscr{C}_{\rm 3v}$, a non-abelian group.
+	
+	\item $\ce{CH4}$ has 17 symmetry elements, 
+	\[
+		E, 4 C_3 , 3 C_2, 6 \sigma , 3 S_4 .
+	\]
+	They can be seen in \Figref{fig:CH4_symmetry_elements}.
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.18]{../diagrams/chapter_2/CH4-C3.png}
+		\captionof*{figure}{$4 C_3$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.18]{../diagrams/chapter_2/CH4-C2.png}
+		\captionof*{figure}{$3 C_2$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.18]{../diagrams/chapter_2/CH4-sigma.png}
+		\captionof*{figure}{$6 \sigma$}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.18]{../diagrams/chapter_2/CH4-S4.png}
+		\captionof*{figure}{$3 S_4$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{All symmetry elements of $\ce{CH4}$ except the identity $E$.}\label{fig:CH4_symmetry_elements}
+	\end{center}
+	
+	For $\ce{CH4}$, not all symmetry operations commute with each other. Now we only list the cases where two different elements commute. 
+	\begin{itemize}
+	
+	\item $E$ commute with other symmetry operations.	
+	
+	\item There are 3 $C_2$-axes, and thus there are 3 $C_2$ symmetry operations, $C_{xy}$, $C_{yz}$ and $C_{xz}$. They are commutative.
+	
+	\item Though there are 4 $C_3$-axes, $C_3(1)$, $C_3(2)$, $C_3(3)$, $C_3(4)$, there are 8 corresponding symmetry operations, $C_3(1)$, $C^2_3(1) = C^{-1}_3(1)$, $C_3(2)$, $C^2_3(2) = C^{-1}_3(2)$, $C_3(3)$, $C^2_3(3) = C^{-1}_3(3)$, $C_3(4)$, $C^2_3(4) = C^{-1}_3(4)$. Only $C_3(i)$ and $C^2_3(i)$ commute, where $i \in \{ 1, 2, 3, 4 \}$.
+	
+	\item Though there are 3 $S_4$-axes, $S_{4x}$, $S_{4y}$, $S_{4z}$, there are 6 $S_4$ symmetry operations (except 3 $C_2$ symmetry operations), $S_{4x}$, $S^3_{4x} = S^{-1}_{4x}$, $S_{4y}$, $S^3_{4y} = S^{-1}_{4y}$, $S_{4z}$, $S^3_{4z} = S^{-1}_{4z}$. Only $S_{4i}$ and $S^3_{4i}$ commute, where $i \in \{ x, y, z \}$.
+	
+	\item $C_{2i}$ and $S_{4i}$ commute, where $i \in \{ x, y, z \}$.
+	
+	\item $\sigma_{xy}$ and $\sigma_{x\bar{y}}$ commute; likewise, $\sigma_{zx}$ and $\sigma_{z\bar{x}}$ commute, as do $\sigma_{yz}$ and $\sigma_{y\bar{z}}$.
+	
+	\item $C_{2x}$ commutes with $\sigma_{yz}$ and $\sigma_{y\bar{z}}$. Likewise, $C_{2y}$ commutes with $\sigma_{zx}$ and $\sigma_{z\bar{x}}$. Moreover, $C_{2z}$ commutes with $\sigma_{xy}$ and $\sigma_{x\bar{y}}$.
+
+	\end{itemize}
+
+	In the next chapter, readers will know that $\ce{CH4}$ belongs to the point group $\mathscr{T}_{\rm d}$, a non-abelian group.		
 		
-		\item $\ce{H2O}$ belongs to the point group $\mathscr{C}_{\rm 2v}$, which has 4 symmetry elements, viz. $E$, $C_2$, $\sigma_{\rm v}(xz)$, $\sigma_{\rm v}(yz)$.
-		
-		\item $\ce{NH3}$ belongs to the point group $\mathscr{C}_{\rm 3v}$, which has 6 symmetry elements, viz. $E$, $C_3$, $C^2_3$, $\sigma_{\rm v1}$, $\sigma_{\rm v2}$, $\sigma_{\rm v3}$.
-		
-		\item $\ce{CH4}$ belongs to the point group $\mathscr{T}_{\rm d}$, which has 24 symmetry elements, viz. $E$, 
-		
-		\end{enumerate}
+	\end{enumerate}
 		
 	\end{solution}
 	
+	\begin{remark}
+	
+	\begin{itemize}
+	
+	\item \Figref{fig:H2O_symmetry_elements}, \Figref{fig:NH3_symmetry_elements} and  \Figref{fig:CH4_symmetry_elements} are sourced from \url{https://symotter.org/gallery}.
+	
+	\item Comprehensive multiplication tables for various groups are available in reference texts such as {\it Elements of Group Theory and Multiplication Tables} (Springer, ISBN: 978-981-19-2802-4). Specifically, the tables for the $\mathscr{C}_{{\rm 2v}}$, $\mathscr{C}_{{\rm 3v}}$, and $\mathscr{T}_{{\rm d}}$ groups are located in the appendices.
+	
+	\item Figures were cropped to a uniform size on \url{https://www.iloveimg.com}.
+	
+	\item Figures was modified by removing the white background using \url{https://www.remove.bg} and setting the background color to transparent.
+	
+	\end{itemize}
+		
+	\end{remark}	
+	
+	% 2.2
 	\begin{exercise}
-		On the basis of symmetry, which of the following molecules cannot have a dipole moment: $\ce{CH4}$, $\ce{CH3Cl}$, $\ce{CH2D2}$, $\ce{H2S}$, $\ce{SF6}$?
+	
+	On the basis of symmetry, which of the following molecules cannot have a dipole moment: $\ce{CH4}$, $\ce{CH3Cl}$, $\ce{CH2D2}$, $\ce{H2S}$, $\ce{SF6}$?
+
 	\end{exercise}
 
 	\begin{solution}
 	
-		\begin{enumerate}[label=(\alph*)]
-		
-		\item $\ce{CH4}$ has no dipole moment.
-		
-		\item $\ce{CH3Cl}$ has a dipole moment.
-		
-		\item $\ce{CH2D2}$ has a dipole moment.
-		
-		\item $\ce{H2S}$ has a dipole moment.
-		
-		\item $\ce{SF6}$ has no dipole moment.
-		
-		\end{enumerate}
+	The diagrams of these molecules can be seen in \Figref{fig:molecules}.	
+	
+	\begin{center}
+	\begin{tabular}{ccccc}
+		\begin{minipage}[t]{0.17\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.075]{../diagrams/chapter_2/CH4.png}
+		\captionof*{figure}{$\ce{CH4}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.17\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.075]{../diagrams/chapter_2/CH3Cl.png}
+		\captionof*{figure}{$\ce{CH3Cl}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.17\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.075]{../diagrams/chapter_2/CH2D2.png}
+		\captionof*{figure}{$\ce{CH2D2}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.17\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.075]{../diagrams/chapter_2/H2S.png}
+		\captionof*{figure}{$\ce{H2S}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.17\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.075]{../diagrams/chapter_2/SF6.png}
+		\captionof*{figure}{$\ce{SF6}$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{Diagrams of $\ce{CH4}$, $\ce{CH3Cl}$, $\ce{CH2D2}$, $\ce{H2S}$ and $\ce{SF6}$.}\label{fig:molecules}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item $\ce{CH4}$ has no dipole moment for its center of symmetry.
+	
+	\item $\ce{CH3Cl}$ has a dipole moment.
+	
+	\item $\ce{CH2D2}$ has a dipole moment.
+	
+	\item $\ce{H2S}$ has a dipole moment.
+	
+	\item $\ce{SF6}$ has no dipole moment for its center of symmetry.
+	
+	\end{enumerate}
 
 	\end{solution}
 
+	% 2.3
 	\begin{exercise}
+	
 	Which of the following molecules cannot be optically active: $\ce{CHFClBr}$, $\ce{H2O2}$, $\ce{[Co(en)3]^{3+}}$, {\it cis}-$\ce{[Co(en)2}$ $\ce{(NH3)2]^{3+}}$, {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$?
 	\end{exercise}
 	
 	\begin{solution}
-		
-		\begin{enumerate}[label=(\alph*)]
-		
-		\item $\ce{CHFClBr}$ belongs to the point group $\mathscr{C}_{\rm 1}$, which is optically active.
-		
-		\item $\ce{H2O2}$ belongs to the point group $\mathscr{C}_{\rm 2}$, which is optically active.
-		
-		\item $\ce{[Co(en)3]^{3+}}$ belongs to the point group $\mathscr{D}_{\rm 3}$, which is optically active.
-		
-		\item {\it cis}-$\ce{[Co(en)2(NH3)2]^{3+}}$ belongs to the point group $\mathscr{C}_{\rm 2}$, which is optically active.
-		
-		\item {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$ belongs to the point group $\mathscr{C}_{\rm 2h}$, which is optically inactive.
-		
-		\end{enumerate}
+	
+	The diagrams of these molecules can be seen in \Figref{fig:CHFClBr_and_H2O2}, \Figref{fig:Co(en)3} and \Figref{fig:Co(en)2(NH3)2}.
+	
+	\begin{center}
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.4\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.12]{../diagrams/chapter_2/CHFClBr.png}
+		\captionof*{figure}{$\ce{CHFClBr}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.4\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.12]{../diagrams/chapter_2/H2O2.png}
+		\captionof*{figure}{$\ce{H2O2}$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Diagrams of $\ce{CHFClBr}$ and $\ce{H2O2}$.}\label{fig:CHFClBr_and_H2O2}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item $\ce{CHFClBr}$ belongs to the point group $\mathscr{C}_{\rm 1}$, which is optically active.
+	
+	\item $\ce{H2O2}$ belongs to the point group $\mathscr{C}_{\rm 2}$, which is optically active.	
+	
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.13]{../diagrams/chapter_2/Co(en)3.png}
+		\end{minipage} 
+	\captionof{figure}{Diagrams of $\ce{[Co(en)3]^{3+}}$.}\label{fig:Co(en)3}
+	\end{center}
+	
+	\item $\ce{[Co(en)3]^{3+}}$ belongs to the point group $\mathscr{D}_{\rm 3}$, which is optically active.	
+	
+	\begin{center}
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.12]{../diagrams/chapter_2/cis-Co(en)2(NH3)2.png}
+		\captionof*{figure}{{\it cis}-$\ce{[Co(en)2(NH3)2]^{3+}}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.12]{../diagrams/chapter_2/trans-Co(en)2(NH3)2.png}
+		\captionof*{figure}{{\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Diagrams of {\it cis}-$\ce{[Co(en)2(NH3)2]^{3+}}$ and {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$.}\label{fig:Co(en)2(NH3)2}
+	\end{center}
+	
+	\item {\it cis}-$\ce{[Co(en)2(NH3)2]^{3+}}$ belongs to the point group $\mathscr{C}_{\rm 2}$, which is optically active.
+	
+	\item {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$ belongs to the point group $\mathscr{D}_{\rm 2}$, which is optically inactive.
+	
+	Importantly, in the equilibrium geometries of these complexes, $\ce{[Co(en)3]^{3+}}$, {\it cis}-$\ce{[Co(en)2(NH3)2]^{3+}}$, and {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$, each ethylenediamine ligand must be considered non‑planar. Thus, for example, {\it trans}-$\ce{[Co(en)2(NH3)2]^{3+}}$ belongs to $\mathscr{D}_{\rm 2}$ rather than $\mathscr{D}_{\rm 2h}$.
+	
+	\end{enumerate}
 		
 	\end{solution}
 
