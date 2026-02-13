@@ -1,4 +1,5 @@
 \documentclass[a4paper]{book}
+%\special{dvipdfmx:config z 0} %取消PDF压缩，加快速度，最终版本生成的时候最好把这句话注释掉
 
 \usepackage{afterpage}
 \usepackage[hypcap=false]{caption}
@@ -27,7 +28,7 @@
 \usepackage{multirow}
 \usepackage{subcaption}
 
-\RequirePackage[many]{tcolorbox}
+\RequirePackage[most]{tcolorbox}
 \tcbset{
     boxed title style={colback=magenta},
 	breakable,
@@ -65,6 +66,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -79,63 +92,620 @@
 
 \begin{document}
 
-	\setcounter{chapter}{3}
+	\setcounter{chapter}{2}
+	
+	\chapter{Point groups}
 
+	% 3.1
 	\begin{exercise}
 		
-		Determine the point groups of the following: (a) \ce{CH2ClF}; (b) \ce{NH3}; (c) \ce{BCl3}; (d) allene; (e) 1,3,5-trichlorobenzene; (f) trans-\ce{Pt(NH3)2Cl2} (considered as square planar); (g) \ce{BFCIBr}.
+	Determine the point groups of the following: (a) \ce{CH2ClF}; (b) \ce{NH3}; (c) \ce{BCl3}; (d) allene; (e) 1,3,5-trichlorobenzene; (f) {\it trans}-\ce{Pt(NH3)2Cl2} (considered as square planar); (g) \ce{BFCIBr}.
 		
 	\end{exercise}
 
 	\begin{solution}
+
+	Molecular structures of \ce{CH2ClF}, \ce{NH3}, \ce{BCl3} and propadiene are illustrated in \Figref{fig:four_molecules}. Since `allene' refers to a general class of compounds rather than a specific molecule, I have used `propadiene' to ensure chemical specificity.
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/CH2ClF.png}
+		\captionof*{figure}{$\ce{CH2ClF}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.19]{../diagrams/chapter_03/NH3.png}
+		\captionof*{figure}{$\ce{NH3}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.17]{../diagrams/chapter_03/BCl3.png}
+		\captionof*{figure}{$\ce{BCl3}$}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.17]{../diagrams/chapter_03/propadiene.png}
+		\captionof*{figure}{propadiene}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Molecular structures of \ce{CH2ClF}, \ce{NH3}, \ce{BCl3} and propadiene.}\label{fig:four_molecules}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item \ce{CH2ClF} belongs to the $\mathscr{C}_{\rm s}$ point group. The only symmetry element present is a single mirror plane ($\sigma_{\rm h}$) that bisects the $\ce{H-C-H}$ angle and contains the $\ce{Cl-C-F}$ atoms.
+	
+	\item \ce{NH3} belongs to the $\mathscr{C}_{\rm 3v}$ point group. It has one $C_3$ axis passing through the $\ce{N}$ atom and 3 vertical mirror planes ($\sigma_{\rm v}$) each containing one $\ce{N-H}$ bond.
+	
+	\item \ce{BCl3} belongs to the $\mathscr{D}_{\rm 3h}$ point group. It has a principal $C_3$ axis perpendicular to the molecular plane, 3 $C_2$ axes along the $\ce{B-Cl}$ bonds, a horizontal mirror plane ($\sigma_{\rm h}$) (the molecular plane), and 3 vertical mirror planes ($3\sigma_v$).
+	
+	\item Propadiene belongs to the $\mathscr{D}_{\rm 2d}$ point group. It has a principal $C_2$ axis along the $\ce{C=C=C}$ chain and two other $C_2$ axes at $45^\circ$ to the $\ce{CH2}$ planes. Crucially, it has two dihedral mirror planes ($\sigma_{\rm d}$) but no $\sigma_h$ or $i$. It also possesses an $S_4$ axis (along the $\ce{C=C=C}$ chain).
+	
+	\end{enumerate}
+	
+	Molecular structures of 1,3,5-trichlorobenzene, {\it trans}-\ce{Pt(NH3)2Cl2}, \ce{BFCIBr} are illustrated in \Figref{fig:there_molecules}.
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/1_3_5-trichlorobenzene.png}
+		\captionof*{figure}{1,3,5-trichlorobenzene}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/trans-Pt(NH3)2Cl2.png}
+		\captionof*{figure}{{\it trans}-$\ce{Pt(NH3)2Cl2}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/BFClBr.png}
+		\captionof*{figure}{$\ce{BFClBr}$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{Molecular structures of 1,3,5-trichlorobenzene, {\it trans}-\ce{Pt(NH3)2Cl2} and \ce{BFCIBr}.}\label{fig:there_molecules}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*), resume]
+	
+	\item 1,3,5-trichlorobenzene belongs to the $\mathscr{D}_{\rm 3h}$ point group. It has a principal $C_3$ axis perpendicular to the ring, 3 $C_2$ axes passing through the $\ce{C-H}$ bonds, a horizontal mirror plane ($\sigma_{\rm h}$) (the ring plane), and 3 vertical planes ($\sigma_{\rm v}$).
+	
+	\item {\it trans}-\ce{Pt(NH3)2Cl2} belongs to the $\mathscr{C}_{\rm 2h}$ point group at most in fact. In a fixed staggered conformation, the 3-fold symmetry of $\ce{NH3}$ breaks the $C_2$ axes that would otherwise lie along the $\ce{Pt-N}$ and $\ce{Pt-Cl}$ bonds. By retaining the center of inversion ($i$) and the horizontal mirror plane ($\sigma_h$), the symmetry is more precisely classified as $\mathscr{C}_{\rm 2h}$.
+	
+	In fact, historically, {\it trans}-\ce{Pt(NH3)2Cl2} is often assigned to the $\mathscr{D}_{\rm 2h}$ point group by treating the $\ce{NH3}$ ligands as single points or freely rotating groups. It has a principal $C_2$ axis perpendicular to the plane, two other $C_2$ axes (one along $\ce{Cl-Pt-Cl}$ and one along $\ce{N-Pt-N}$), a center of inversion ($i$), a horizontal mirror plane ($\sigma_{\rm h}$), and 2 vertical mirror planes ($\sigma_{\rm v}$).
+	
+	\item \ce{BFCIBr} belongs to the $\mathscr{C}_1$ point group. Since all ligands are distinct, there are no rotation axes and no mirror planes. The only symmetry element is the identity ($E$).
+	
+	\end{enumerate}
 	
 	\end{solution}
 	
+	\begin{remark}
+	
+	For {\it trans}-\ce{Pt(NH3)2Cl2}, while the instantaneous conformation of the ammine ligands typically reduces the molecular symmetry to $\mathscr{C}_1$, the low barrier to $\ce{N-H}$ bond rotation ensures that the molecule behaves as a $\mathscr{D}_{\rm 2h}$ species on a time-averaged scale. This statistical symmetry explains the observed lack of a permanent dipole moment and optical inactivity.			
+		
+	\end{remark}
+
+	% 3.2	
 	\begin{exercise}
-		Determine the point groups of the following octahedral compounds: (a) \ce{CoN6}; (b) \ce{CoN5A}; (c) cis-\ce{CoN4A2}; (d) trans-\ce{CoN4A2}; (e) cis-cis-\ce{CoN3A3}; (f) trans-cis-\ce{CoN3A3}.
+	
+	Determine the point groups of the following octahedral compounds: (a) \ce{CoN6}; (b) \ce{CoN5A}; (c) cis-\ce{CoN4A2}; (d) trans-\ce{CoN4A2}; (e) {\it cis}-{\it cis}-$\ce{CoN4A2}$; (f) {\it trans}-{\it cis}-$\ce{CoN4A2}$.
+
 	\end{exercise}
 
 	\begin{solution}
+	
+	Molecular structures of various cobalt complexes are illustrated in \Figref{fig:Co_complexes}. In this analysis, the symmetry of these cobalt complexes is evaluated based on the approximation that ligands A and N are either point charges or freely rotating spheres.
+
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/CoN6.png}
+		\captionof*{figure}{$\ce{CoN6}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/CoN5A.png}
+		\captionof*{figure}{$\ce{CoN5A}$}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/cis-CoN4A2.png}
+		\captionof*{figure}{{\it cis}-$\ce{CoN4A2}$}
+		\end{minipage} \\ 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/trans-CoN4A2.png}
+		\captionof*{figure}{{\it trans}-$\ce{CoN4A2}$}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/cis-cis-CoN3A3.png}
+		\captionof*{figure}{{\it cis}-{\it cis}-$\ce{CoN4A2}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/cis-trans-CoN3A3.png}
+		\captionof*{figure}{{\it trans}-{\it cis}-$\ce{CoN4A2}$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Molecular structures of various cobalt complexes.}\label{fig:Co_complexes}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item $\ce{CoN6}$ belongs to the $\mathscr{O}_{\rm h}$ point group. It possesses 3 $C_4$ axes, $i$ and no $C_5$ axes.
+	
+	\item $\ce{CoN5A}$ belongs to the $\mathscr{C}_{\rm 4v}$ point group. Firstly, it has a $C_4$ axis. Secondly, it has no $C_2 \bot$ to $C_4$. At last, it has no $\sigma_{\rm h}$ and possesses 4 $\sigma_{\rm v}$.
+	
+	\item {\it cis}-$\ce{CoN4A2}$ belongs to the $\mathscr{C}_{\rm 2v}$ point group. Firstly, it has a $C_2$ axis. Secondly, it has no $C_2$ $\bot$ to $C_2$. At last, it has no $\sigma_{\rm h}$ and possesses 2 $\sigma_{\rm v}$.
+	
+	\item {\it trans}-$\ce{CoN4A2}$ belongs to the $\mathscr{D}_{\rm 4h}$ point group. Firstly, it has a $C_4$ axis. Secondly, it has 4 $C_2$ $\bot$ to $C_4$. At last, it has a $\sigma_{\rm h}$.
+	
+	\item {\it cis}-{\it cis}-$\ce{CoN4A2}$ belongs to the $\mathscr{C}_{\rm 3v}$ point group. Firstly, it has a $C_3$ axis. Secondly, it has no $C_2$ $\bot$ to $C_2$. At last, it has no $\sigma_{\rm h}$ and possesses 3 $\sigma_{\rm v}$.
+	
+	\item {\it trans}-{\it cis}-$\ce{CoN4A2}$ belongs to the $\mathscr{C}_{\rm 2v}$ point group. Firstly, it has a $C_2$ axis. Secondly, it has no $C_2$ $\bot$ to $C_2$. At last, it has no $\sigma_{\rm h}$ and possesses 2 $\sigma_{\rm v}$.
+	
+	\end{enumerate}
 
 	\end{solution}
-
+	
+	\begin{remark}
+	
+	In octahedral nomenclature, `{\it cis-cis}' typically refers to the {\it facial} ({\it fac}) isomer, where three $\ce{A}$ ligands occupy one face of the octahedron. while `{\it trans-cis}' typically refers to the {\it meridional} ({\it mer}) isomer, where three $\ce{A}$ ligands are arranged in a `T-shape' or a meridian.	
+	
+	\end{remark}
+	
+	% 3.3
 	\begin{exercise}
+
 	Determine the point groups of the following: (a) chair form of cyclohexane (ignoring the \ce{H}'s); (b) boat form of cyclohexane (ignoring the \ce{H}'s); (c) staggered \ce{C2H6}; (d) eclipsed \ce{C2H6}; (e) between staggered and eclipsed \ce{C2H6}.
+
 	\end{exercise}
 	
-	\begin{solution}
+	\begin{solution}	
+	
+	Front and end views of the cyclohexane chair and boat conformation, shown with and without H's are illustrated in \Figref{fig:chair_form} and \Figref{fig:boat_form}, respectively.
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/chair_form_with_H_front_view.png}
+		\captionof*{figure}{\centering with H's\\(front view)}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/chair_form_without_H_front_view.png}
+		\captionof*{figure}{\centering without H's\\(front view)}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/chair_form_with_H_end_view.png}
+		\captionof*{figure}{\centering with H's\\(end view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/chair_form_without_H_end_view.png}
+		\captionof*{figure}{\centering without H's\\(end view)}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Front and end views of the cyclohexane chair conformation, shown with and without H's.}\label{fig:chair_form}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item Chair form of cyclohexane (ignoring the $\ce{H}$'s) belongs to the $\mathscr{D}_{\rm 3d}$ point group. The carbon ring has a principal $C_3$ axis perpendicular to the average plane of the ring. It also has 3 $C_2$ axes passing through the centers of opposite $\ce{C-C}$ bonds. Moreover, it has no $\sigma_{\rm h}$ but 3 $\sigma_{\rm v}$.
+	
+	\end{enumerate}
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/boat_form_with_H_front_view.png}
+		\captionof*{figure}{\centering with H's\\(front view)}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/boat_form_without_H_front_view.png}
+		\captionof*{figure}{\centering without H's\\(front view)}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/boat_form_with_H_end_view.png}
+		\captionof*{figure}{\centering with H's\\(end view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.16]{../diagrams/chapter_03/boat_form_without_H_end_view.png}
+		\captionof*{figure}{\centering without H's\\(end view)}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Front and end views of the cyclohexane boat conformation, shown with and without H's.}\label{fig:boat_form}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*),resume]
+	
+	\item Boat form of cyclohexane (ignoring the $\ce{H}$'s) belongs to the $\mathscr{C}_{\rm 2v}$ point group. It possesses a single $C_2$ axis that passes through the center of the quadrilateral formed by the four `base' carbons ($\ce{C}_2$, $\ce{C}_3$, $\ce{C}_5$, $\ce{C}_6$) and is perpendicular to their plane. Additionally, there is no $\sigma_{\rm h}$ but 2 $\sigma_{\rm v}$: one passing through the two `prow/stern' carbons ($C_1$ and $C_4$), and the other bisecting the two parallel $\ce{C-C}$ bonds on the sides of the `boat'.
+	
+	\end{enumerate}
+	
+	Front and end views of the $\ce{C2H6}$ staggered, eclipsed, between staggered and eclipsed conformation, shown with and without H's are illustrated in \Figref{fig:ethane}.
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/staggered_front_view.png}
+		\captionof*{figure}{\centering staggered\\(front view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/eclipsed_front_view.png}
+		\captionof*{figure}{\centering eclipsed\\(front view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/between_staggered_and_eclipsed_front_view.png}
+		\captionof*{figure}{\centering between staggered and eclipsed\\(front view)}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/staggered_end_view.png}
+		\captionof*{figure}{\centering staggered\\(end view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/eclipsed_end_view.png}
+		\captionof*{figure}{\centering eclipsed\\(end view)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/between_staggered_and_eclipsed_end_view.png}
+		\captionof*{figure}{\centering between staggered and eclipsed\\(end view)}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Front and end views of the $\ce{C2H6}$ staggered, eclipsed, between staggered and eclipsed conformations, shown with H's.}\label{fig:ethane}
+	\end{center}
+
+	\begin{enumerate}[label=(\alph*),resume]
+	
+	\item Staggered $\ce{C2H6}$ belongs to the $\mathscr{D}_{\rm 3d}$ point group. It has a principal $C_3$ axis along the $\ce{C-C}$ bond, perpendicular to this are three $C_2$ axes. Each $C_2$ axis passes through the midpoint of the $\ce{C-C}$ bond and lies exactly halfway between the staggered $\ce{C-H}$ bonds of the two $\ce{C}$ atoms. Rotating $180^\circ$ around any of these axes interchanges the two $\ce{C}$ atoms and maps each \ce{H} atom onto an equivalent one on the opposite $\ce{C}$ atom. At last, it has no $\sigma_{\rm h}$ but 3 $\sigma_{\rm d}$.
+	
+	\item Eclipsed $\ce{C2H6}$ belongs to the $\mathscr{D}_{\rm 3h}$ point group. It has a principal $C_3$ axis along the $\ce{C-C}$ bond, perpendicular to this are three $C_2$ axes. Each $C_2$ axis passes through the midpoint of the $\ce{C-C}$ bond and lies exactly halfway between the eclipsed $\ce{C-H}$ bonds of the two $\ce{C}$ atoms. In the end, it has a $\sigma_{\rm h}$.
+	
+	\item Between staggered and eclipsed $\ce{C2H6}$ belongs to the $\mathscr{C}_{\rm 3}$ point group. It has a principal $C_3$ axis along the $\ce{C-C}$ bond, perpendicular to this are three $C_2$ axes. Each $C_2$ axis passes through the midpoint of the $\ce{C-C}$ bond and lies exactly halfway between the neither staggered nor eclipsed $\ce{C-H}$ bonds of the two $\ce{C}$ atoms. Finally, there is no $\sigma_{\rm h}$ and $\sigma_{\rm d}$.
+	
+	\end{enumerate}		
 		
 	\end{solution}
 	
+	\begin{remark}
+	
+	\begin{itemize}
+	
+	\item The content of this exercise is actually explained in detail in many classic organic chemistry textbooks (although it may not necessarily include content on symmetry), and you can refer to their stereochemistry chapters for more information.
+	
+	\item The diagrams in this exercise are generated from \url{https://www.chemtube3d.com}.
+	
+	\end{itemize}
+	
+	\end{remark}
+
+	% 3.4	
 	\begin{exercise}
-		Determine the point groups of the following: (a) ivy leaf; (b) iris; (c) starflsh; (d) a right circular cone; (e) twin-bladed propellor; (f) rectangular bar; (g) hexagonal bathroom tile; (h) swastika; (i) tennis ball (with seam); (j) Chinese abacus (counters all in their lowest positions); (k) ying-yang.
+	
+	Determine the point groups of the following: (a) ivy leaf; (b) iris; (c) starflsh; (d) ice crystal; (e) twin-bladed propellor; (f) rectangular bar; (g) hexagonal bathroom tile; (h) swastika; (i) tennis ball (with seam); (j) Chinese abacus (counters all in their lowest positions); (k) ying-yang.
+
 	\end{exercise}
 	
 	\begin{solution}
+	
+	The diagrams of various real-world objects and patterns are illustrated in \Figref{fig:items}. Since some of them have variations, such as the many common varieties of ivy, our analysis of the objects or patterns is based on the examples given in these images. The ice crystal serves as a fascinating exception to standard hexagonal symmetry. I have provided diagrams of both its classic hexagonal morphology and its rare pentagonal variant, analyzing each separately.
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/ivy_leaf.jpg}
+		\captionof*{figure}{ivy leaf}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/iris.jpg}
+		\captionof*{figure}{iris}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/starfish.jpg}
+		\captionof*{figure}{starfish}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/ice_crystal_6.jpg}
+		\captionof*{figure}{\centering ice crystal\\(hexagonal)}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/ice_crystal_5.jpg}
+		\captionof*{figure}{\centering ice crystal\\(pentagonal)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/twin-bladed_propellor.jpg}
+		\captionof*{figure}{twin-bladed propellor}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/rectangular_bar.png}
+		\captionof*{figure}{rectangular bar}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/hexagonal_bathroom_tile.jpg}
+		\captionof*{figure}{\centering bathroom tile\\(hexagonal)}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/swastika.png}
+		\captionof*{figure}{swastika}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/tennis_ball.png}
+		\captionof*{figure}{tennis ball}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/chinese-abacus.jpg}
+		\captionof*{figure}{\centering Chinese abacus\\(counters all in their \\lowest positions)}
+		\end{minipage} &
+		\begin{minipage}[t]{0.22\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.15]{../diagrams/chapter_03/ying-yang.png}
+		\captionof*{figure}{ying-yang}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Diagrams of various real-world objects and patterns.}\label{fig:items}
+	\end{center}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item An ivy leaf belongs to the $\mathscr{C}_{\rm s}$ point group. It has only a $\sigma$, not even a $C_2$ axis or $i$.
+	
+	\item An iris belongs to the $\mathscr{C}_{\rm 3v}$ point group. Firstly, it has a $C_3$ axis and no $C_2$ axes. Then, there is no $\sigma_{\rm h}$ and 3 $\sigma_{\rm v}$.
+	
+	\item A starflsh belongs to the $\mathscr{C}_{\rm 5v}$ point group. It has a $C_5$ axis and 5 $\sigma_{\rm v}$. Since the top (aboral) surface and bottom (oral/tube feet) surface are distinct, it lacks $C_2$ axes or a $\sigma_h$ perpendicular to the principal axis.
+	
+	\item An ideal hexagonal ice crystal belongs to the $\mathscr{D}_{\rm 6h}$ point group. It possesses a $C_6$ principal axis, 6 $C_2$ axes perpendicular to it, and a horizontal mirror plane ($\sigma_{\rm h}$).
+	
+	However, ice crystals have variants. For instance, a pentagonal crystal belongs to the $\mathscr{C}_{\rm 5v}$ point group. While it possesses a $C_5$ principal axis, it lacks $C_2$ axes perpendicular to that axis. Furthermore, there is no $\sigma_{\rm h}$ mirror plane; instead, there are 5 $\sigma_{\rm v}$ planes. This is because the heterogeneity between the front and back surfaces breaks the $\sigma_{\rm h}$ mirror plane, which in turn eliminates the $C_2$ axes.
+	
+	\item A twin-bladed propellor belongs to the $\mathscr{C}_{\rm 2}$ point group. Because the blades are slanted, a mirror plane would flip the `pitch' of the blade, so there are no mirror planes and no $i$.
+	
+	\item A rectangular bar belongs to the $\mathscr{D}_{\rm 2h}$ point group. It has 3 mutually perpendicular $C_2$ axes and $\sigma_{\rm h}$.
+	
+	\item A hexagonal bathroom tile belongs to the $\mathscr{C}_{\rm 6v}$ point group. It has a $C_6$ axis and 6 $\sigma_{\rm v}$. Because the top/bottom are different, it lacks the $\sigma_{\rm h}$ and the 6 $C_2$ axes, compared to a regular hexagonal prism.
+	
+	\item The swastika belongs to the $\mathscr{C}_{\rm 4}$ point group. Because the arms are `bent' in one direction, it lacks mirror planes (a mirror would reverse the direction of the bends).
+	
+	\item A tennis ball (with seam) belongs to the $\mathscr{D}_{\rm 2d}$ point group. Its symmetry is defined not by the sphere itself, but by the undulating, interlocking seam. The seam breaks $C_{\infty}$ and $\sigma_{\rm h}$ due to its 3D `wave' path. The primary symmetry elements are an $S_4$ axis and 3 $C_2$ axes, resulting from the 2 felt pieces being joined at a perpendicular orientation.
+	
+	\item A Chinese abacus belongs to the $\mathscr{C}_{\rm s}$ point group. It has only one mirror plane bisecting the beads and frame. Due to the presence of a functional front side and a solid backplane, the traditional Chinese abacus lacks a $C_2$ axis.
+	
+	\item The ying-yang symbol belongs to the $\mathscr{C}_{\rm 1}$ point group if color is considered a primary attribute, otherwise, ignoring color variations, it belongs to the $\mathscr{C}_{\rm 2}$ point group.
+	
+	\end{enumerate}
 	
 	\end{solution}
 	
+	% 3.5
 	\begin{exercise}
-		Determine the point groups of the following: (a) a square-based pyramid; (b) a right circular cone; (c) a square lamina; (d) a square lamina with the top and bottom sides painted differently; (e) a right circular cylinder; (f) a right circular cylinder with the two ends painted differently; (g) a right circular cylinder with a stripe painted parallel to the axis.
+	
+	Determine the point groups of the following: (a) a square-based pyramid; (b) a right circular cone; (c) a square lamina; (d) a square lamina with the top and bottom sides painted differently; (e) a right circular cylinder; (f) a right circular cylinder with the two ends painted differently; (g) a right circular cylinder with a stripe painted parallel to the axis.
+
 	\end{exercise}
 	
 	\begin{solution}
+	
+	\begin{center}
+	\begin{tabular}{cccc}
+		\begin{minipage}[t]{0.21\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/squared-based_pyramid.png}
+		\captionof*{figure}{\centering squared-based\\pyramid}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.21\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/right_circular_cone.png}
+		\captionof*{figure}{right circular cone}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.23\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/square_lamina.png}
+		\captionof*{figure}{square lamina}
+		\end{minipage} &
+		\begin{minipage}[t]{0.23\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/square_lamina_with_different_sides.png}
+		\captionof*{figure}{\centering square lamina with\\the top and bottom\\sides painted differently}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.21\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/right_circular_cylinder.png}
+		\captionof*{figure}{right circular cylinder}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.21\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/right_circular_cylinder_with_different_sides.png}
+		\captionof*{figure}{\centering right circular cylinder\\with the two ends\\painted differently}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.21\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_03/right_circular_cylinder_with_a_painted_stripe.png}
+		\captionof*{figure}{right circular cylinder\\with a stripe painted\\parallel to the axis}
+		\end{minipage} &
+	\end{tabular}
+	\captionof{figure}{Diagrams of various geometric shapes.}\label{fig:geometric_shapes}
+	\end{center}	
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item The square-based pyramid belongs to the $\mathscr{C}_{\rm 4v}$ point group. It has a $C_4$ axis passing through the apex and the center of the base. There is no $\sigma_{\rm h}$. It also has 4 $\sigma_{\rm v}$: two passing through opposite corners and two bisecting the sides.
+	
+	\item The right circular cone belongs to the $\mathscr{C}_{\rm \infty v}$ point group. It has a $C_\infty$ axis passing through the apex and the center of the base. There is no $\sigma_{\rm h}$ but infinite $\sigma_{\rm v}$.
+	
+	\item The square lamina belongs to the $\mathscr{D}_{\rm 4h}$ point group. It has a $C_4$ axis perpendicular to the face, 4 $C_2$ axes in the plane of the square, and a $\sigma_h$.
+	
+	\item The square lamina with the top and bottom sides painted differently belongs to the $\mathscr{C}_{\rm 4v}$ point group. It has a $C_4$ axis perpendicular to the face but no $C_2$ axes in the plane of the square and no $\sigma_h$. There are 4 $\sigma_{\rm v}$: two passing through opposite corners and two bisecting the sides.
+	
+	\item The right circular cylinder belongs to the $\mathscr{D}_{\rm \infty h}$ point group. It has a $C_{\infty}$ axis, infinite $C_2$ axes perpendicular to the principal axis and a $\sigma_h$,
+	
+	\item The right circular cylinder with the two ends painted differently belongs to the $\mathscr{C}_{\rm \infty v}$ point group. It has a $C_\infty$ axis but no $C_2$ axes perpendicular to the principal axis. There is no $\sigma_{\rm h}$ but infinite $\sigma_{\rm v}$.
+	
+	\item The right circular cylinder with a stripe painted parallel to the axis belongs to the $\mathscr{C}_{\rm 2v}$ point group. There is a $C_2$ axis where the planes intersect and two $\sigma_{\rm v}$.
+	
+	\end{enumerate}
 	
 	\end{solution}
 	
+	% 3.6
 	\begin{exercise}
-		What is the point group for the tris(ethylenediamine)cobalt(III) ion?
+	
+	What is the point group for the tris(ethylenediamine)cobalt(III) ion?
+
 	\end{exercise}
 	
 	\begin{solution}
+	
+	The Molecular structure of tris(ethylenediamine)cobalt(III) ion is illustrated in \Figref{fig:Co(en)3}. It belongs to the $\mathscr{D}_{3}$ point group. It has a $C_3$ axis with 3 $C_2$ axes perpendicular to the principal axis, but it has neither $\sigma_{\rm h}$ nor $\sigma_{\rm d}$.
+	\begin{center}
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.13]{../diagrams/chapter_03/Co(en)3.png}
+		\captionof*{figure}{the obvious $C_3$ axis}
+		\end{minipage} &
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.3]{../diagrams/chapter_03/Co(en)3-symmetry.png}
+		\captionof*{figure}{3 $C_2$ axes}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Molecular structure of $\ce{[Co(en)3]^{3+}}$.}\label{fig:Co(en)3}
+	\end{center}
 	
 	\end{solution}
 	
+	% 3.7
 	\begin{exercise}
-		For which point groups can a molecule (a) have a dipole moment, (b) be optically active?
+	
+	For which point groups can a molecule (a) have a dipole moment, (b) be optically active?
+
 	\end{exercise}
 	
 	\begin{solution}
+	
+	Firstly, we analyse the necessary and sufficient condition for a molecule to have a dipole moment and exhibit optical activity.
+	
+	\begin{itemize}
+
+	\item A molecule has a permanent dipole moment if and only if its centers of positive and negative charges do not coincide. Note that point groups with multiple non-parallel axes of rotation (e.g., the $\mathscr{D}$ group, the octahedral group $\mathscr{O}_{\rm h}$, etc.) must have zero dipole moments. In point group symmetries, only molecules belonging to the following 4 point groups have dipole moments: 
+		\begin{itemize}
+		
+		\item $\mathscr{C}_1$,
+		
+		\item $\mathscr{C}_{\rm s}$,
+		
+		\item $\mathscr{C}_{\rm n}$,
+		
+		\item $\mathscr{C}_{\rm nv}$.
+		
+		\end{itemize}
+		
+	\item A molecule is optically active if and only if it does not coincide with its mirror image. From the perspective of symmetry elements, a molecule cannot contain any inappropriate rotation axis ($S_n$). This includes: 
+		\begin{itemize}
+		
+		\item symmetry plane ($\sigma$): which is equivalent to $S_1$.
+		
+		\item inversion center ($i$): which is equivalent to $S_2$.
+		
+		\end{itemize}
+	Point groups that are chiral (and thus allow for optical activity) include: $\mathscr{C}_{\rm n}$, $\mathscr{D}_{\rm n}$, $\mathscr{T}$, $\mathscr{O}$, and $\mathscr{I}$.
+	
+	\end{itemize}
+	
+	Finally, we take the intersection of these two sets. Thus, the only solution is the $\mathscr{C}_{\rm n}$ (including $\mathscr{C}_1$). 
+		
+	By the way, except the 1,1-dichloroethene in the FIG.3-6-4 in the text book, we list some molecules of $\mathscr{C}_2$, as illustrated in \Figref{fig:C2_molecules}.
+	\begin{center}
+	\begin{tabular}{cc}
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.3]{../diagrams/chapter_03/N2H4.png}
+		\captionof*{figure}{$\ce{N2H4}$}
+		\end{minipage} &
+		\begin{minipage}[t]{0.45\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.3]{../diagrams/chapter_03/H2O2.png}
+		\captionof*{figure}{$\ce{H2O2}$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Molecular structure of $\ce{N2H4}$ and $\ce{H2O2}$.}\label{fig:C2_molecules}
+	\end{center}	
 	
 	\end{solution}
 
