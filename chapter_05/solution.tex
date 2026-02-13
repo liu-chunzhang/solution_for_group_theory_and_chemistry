@@ -86,9 +86,15 @@
 	
 	Consider the following planar symmetric figure.
 	
-	[A diagram needed]
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.0]{../diagrams/chapter_05/two_triangles.png}
+		\end{minipage}\label{fig:two_triangles}
+	\end{center}	
 	
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item Determine the distinct symmetry operations which take it into itself; construct the group multiplication table for these operations, and identify the point group to which this figure belongs.
 	
@@ -99,6 +105,37 @@
 	\end{exercise}
 
 	\begin{solution}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item To identify the symmetry operations, we look for transformations that leave the figure indistinguishable from its original state:
+	
+		\begin{itemize}
+	
+		\item $E$ (Identity): The "do nothing" operation.
+		
+		\item $C_2(z)$: A 180° rotation about the $z$-axis (the axis passing through the center perpendicular to the screen).
+		
+		\item $\sigma_v(xz)$: A mirror plane passing through the horizontal axis of the figure.
+		
+		\item $\sigma_v(yz)$: A mirror plane passing through the vertical center point, bisecting the "bow-tie."
+	
+		\end{itemize}
+			
+	Point Group: Because it has a $C_2$ axis and two vertical mirror planes ($\sigma_v$), the point group is $C_{2v}$.
+	
+	\item 
+	
+	\begin{equation}
+		E \rightarrow \begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} , 			
+	\end{equation}		
+	
+	\end{enumerate}
+	
+	
 	
 	\end{solution}
 	
@@ -119,6 +156,57 @@
 	\end{exercise}
 
 	\begin{solution}
+	
+	\begin{align}
+		&D(E) = \begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix} , 
+		&D(C_4) = \begin{pmatrix}
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+		\end{pmatrix} , \\
+		&D(C^3_4) = \begin{pmatrix}
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix} ,
+		&D(C_2) = \begin{pmatrix}
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0
+		\end{pmatrix} , \\
+		&D(C^\prime_{2a}) = \begin{pmatrix}
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0
+		\end{pmatrix} ,
+		&D(C^\prime_{2b}) = \begin{pmatrix}
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 
+		\end{pmatrix} , \\
+		&D(C^{\prime\prime}_{2a}) = \begin{pmatrix}
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 
+		\end{pmatrix} ,
+		&D(C^{\prime\prime}_{2b}) = \begin{pmatrix}
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 
+		\end{pmatrix} ,
+	\end{align}
 
 	\end{solution}
 
@@ -126,14 +214,105 @@
 	\begin{exercise}
 	
 	Consider a set of base vectors located on the nuclei of the molecule $\ce{SO2}$ as in the figure below (${\bf e}_3$, ${\bf e}_6$, ${\bf e}_9$  are perpendicular to the page).
-	
-	[A diagram needed]
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.0]{../diagrams/chapter_05/SO2.png}
+		\end{minipage}\label{fig:SO2}
+	\end{center}		
 	
 	Construct a nine-dimentional matrix representation for the point group to which $\ce{SO2}$ belongs.
 	
 	\end{exercise}
 	
 	\begin{solution}
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_05/SO2-C2.png}
+		\captionof*{figure}{$C_2$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_05/SO2-sigma_xz.png}
+		\captionof*{figure}{$\sigma_{\rm v}(xz)$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.2]{../diagrams/chapter_05/SO2-sigma_yz.png}
+		\captionof*{figure}{$\sigma_{\rm v}(yz)$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{All symmetry elements of $\ce{SO2}$ except the identity $E$.}\label{fig:SO2_symmetry_elements}
+	\end{center}
+	
+	\begin{center}
+	\begin{tabular}{c|cccc}\hline
+		$R =$ & 	$E$		& $C_2$ & $\sigma_{xz}$ 	& $\sigma_{yz}$ \\ \hline 
+		$e_1$ &	$e_1$	& $-e_1$	&	$-e_1$	&	$e_1$		\\
+		$e_2$ &	$e_2$	& $e_2$	&	$e_2$	&	$e_2$		\\
+		$e_3$ &	$e_3$	& $-e_3$	&	$e_3$	&	$-e_3$		\\
+		$e_4$ &	$e_4$	& $-e_7$	&	$-e_7$	&	$e_4$		\\
+		$e_5$ &	$e_5$	& $e_8$	&	$e_8$	&	$e_5$		\\
+		$e_6$ &	$e_6$	& $-e_9$	&	$e_9$	&	$-e_6$		\\
+		$e_7$ &	$e_7$	& $-e_4$	&	$-e_4$	&	$e_7$		\\
+		$e_8$ &	$e_8$	& $e_5$	&	$e_5$	&	$e_8$		\\
+		$e_9$ &	$e_9$	& $-e_6$	&	$e_6$	&	$-e_9$		\\ \hline
+	\end{tabular}
+	\end{center}
+		
+	\begin{align}
+		D(E) &= \begin{pmatrix}
+			1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1
+		\end{pmatrix} , \\
+		D(C_2) &= \begin{pmatrix}
+			-1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	-1 \\
+			0	&	0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0	&	0
+		\end{pmatrix} , \\
+		D(\sigma_{xz}) &= \begin{pmatrix}
+			-1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1 \\
+			0	&	0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0
+		\end{pmatrix} , \\
+		D(\sigma_{yz}) &= \begin{pmatrix}
+			1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	-1
+		\end{pmatrix} .
+	\end{align}			
 		
 	\end{solution}
 	
@@ -141,7 +320,7 @@
 	\begin{exercise}
 		
 	For the point group $\mathscr{D}_{\rm 2h}$:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item construct a three-dimentional matrix representation using three real p-orbitals as basis functions;
 	
@@ -153,6 +332,116 @@
 	
 	\begin{solution}
 	
+	\begin{enumerate}[label=(\alph*)]
+
+	\item 
+	
+	\begin{align}
+		&D(E) = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix},
+		&D(C_2(z)) = \begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}, \\
+		&D(C_2(y)) = \begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}, 
+		&D(C_2(x)) = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}, \\
+		&D(i) = \begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}, 
+		&D(\sigma(xy)) = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}, \\
+		&D(\sigma(xz)) = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix},
+		&D(\sigma(yz)) = \begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}.
+	\end{align}
+	
+	\item 
+	
+	\begin{align}
+		&D(E) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, 
+		&D(C_2(z)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, \\
+		&D(C_2(y)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, 
+		&D(C_2(x)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, \\
+		&D(i) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, 
+		&D(\sigma(xy)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}, \\
+		&D(\sigma(xz)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix},
+		&D(\sigma(yz)) = \begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix},
+	\end{align}
+	
+	\end{enumerate}
+	
 	\end{solution}
 	
 	% 5.5
@@ -160,13 +449,95 @@
 	
 	Consider the planar trivinylmethyl radical with seven $\pi$-orbitals located as shown below:
 	
-	[A diagram needed]	
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.0]{../diagrams/chapter_05/trivinylmethyl_radical.png}
+		\end{minipage}\label{fig:trivinylmethyl_radical}
+	\end{center}	
 	
-	Using these $pi$-orbitals as basis functions, construct a seven-dimensional representation of the $\mathscr{C}_3$ point group.
+	Using these $\pi$-orbitals as basis functions, construct a seven-dimensional representation of the $\mathscr{C}_3$ point group.
 	
 	\end{exercise}
 	
 	\begin{solution}
+	
+	\begin{center}
+	\begin{tabular}{c|ccc} \hline
+		$R = $ 		&		$E$		&	$C_3$		&	$C^2_3$		\\ \hline
+		$\orbp_1$	&	$\orbp_1$	&	$\orbp_2$	&	$\orbp_3$	\\
+		$\orbp_2$	&	$\orbp_2$	&	$\orbp_3$	&	$\orbp_1$	\\
+		$\orbp_3$	&	$\orbp_3$	&	$\orbp_1$	&	$\orbp_2$	\\
+		$\orbp_4$	&	$\orbp_4$	&	$\orbp_5$	&	$\orbp_6$	\\
+		$\orbp_5$	&	$\orbp_5$	&	$\orbp_6$	&	$\orbp_4$	\\
+		$\orbp_6$	&	$\orbp_6$	&	$\orbp_4$	&	$\orbp_5$	\\
+		$\orbp_7$	&	$\orbp_7$	&	$\orbp_7$	&	$\orbp_7$	\\ \hline
+	\end{tabular}
+	\end{center}
+
+	
+%	\begin{align}
+%		D(E) = \begin{pmatrix}
+%			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 0 & 1
+%		\end{pmatrix} , \\
+%		D(C_3) = \begin{pmatrix}
+%			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+%			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+%			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 0 & 1
+%		\end{pmatrix} , \\
+%		D(C^2_3) = \begin{pmatrix}
+%			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+%			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+%			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+%			0 & 0 & 0 & 0 & 0 & 0 & 1
+%		\end{pmatrix} .
+%	\end{align}
+	
+	\begin{center}
+	\begin{tabular}{cccc} \hline
+		$R$		&	$E$	&	$C_3$		&	$C^2_3$		\\ \hline
+		$D(R)$	& $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
+	
 	
 	\end{solution}	
 

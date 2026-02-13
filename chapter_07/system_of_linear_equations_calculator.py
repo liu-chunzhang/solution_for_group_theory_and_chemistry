@@ -14,7 +14,7 @@ def solve_linear_equation(A_list, b_list):
         # 求解方程
         x = np.linalg.solve(A, b)
         
-        print("--- 求解结果 ---")
+        #print("--- 求解结果 ---")
         print(f"矩阵 A:\n{A.real.astype(float) if not np.iscomplex(A).any() else A}")
         print(f"向量 b: {b.real.astype(float) if not np.iscomplex(b).any() else b}")
         print(f"解 x: {x.real.astype(float) if not np.iscomplex(x).any() else x}")
@@ -22,13 +22,15 @@ def solve_linear_equation(A_list, b_list):
         # 验证结果
         check = np.allclose(np.dot(A, x), b)
         print(f"验证 (Ax=b): {'成功' if check else '失败'}")
+        print("\n")
         return x
         
     except np.linalg.LinAlgError:
         print("错误：矩阵 A 是奇异矩阵，无唯一解。")
         return None
 
-# --- 测试你提供的用例 ---
+# --- exercise 7.1 ---
+print("----------Exercise 7.1 (a)----------")
 
 A_input = [[1, 1, 1, 1], 
            [1, 1, -1, -1], 
@@ -38,7 +40,7 @@ b_input = [4, -2, 0, -2]
 
 solve_linear_equation(A_input, b_input)
 
-print("---------------------------")
+print("----------Exercise 7.1 (b)----------")
 
 varepsilon = -0.5 + (3**0.5 / 2) * 1j
 varepsilon2 = -0.5 - (3**0.5 / 2) * 1j
@@ -52,7 +54,7 @@ b_input = [4, 1, 1, 2, -1, -1]
 
 solve_linear_equation(A_input, b_input)
 
-print("---------------------------")
+print("----------Exercise 7.1 (c)----------")
 
 A_input = [[1, 1, 1, 1, 2], 
            [1, 1, -1, -1, 0], 
@@ -63,7 +65,7 @@ b_input = [4, 0, 0, 0, -2]
 
 solve_linear_equation(A_input, b_input)
 
-print("---------------------------")
+print("----------Exercise 7.1 (d)----------")
 
 A_input = [[1, 1, 2, 3, 3, 1, 1, 2, 3, 3], 
            [1, 1, -1, 0, 0, 1, 1, -1, 0, 0],
@@ -76,5 +78,15 @@ A_input = [[1, 1, 2, 3, 3, 1, 1, 2, 3, 3],
            [1, -1, 0, 1, -1, -1, 1, 0, -1, 1],
            [1, -1, 0, -1, 1, -1, 1, 0, 1, -1]]
 b_input = [15, 0, -1, 1, 1, -3, 0, 5, -1, 3]
+
+solve_linear_equation(A_input, b_input)
+
+print("----------Exercise 7.4----------")
+
+A_input = [[1, 1, 1, 1], 
+           [1, 1, -1, -1], 
+           [1, -1, 1, -1], 
+           [1, -1, -1, 1]]
+b_input = [9, -1, 1, 3]
 
 solve_linear_equation(A_input, b_input)
