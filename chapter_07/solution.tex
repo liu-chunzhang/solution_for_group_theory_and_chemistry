@@ -88,7 +88,7 @@
 	\begin{exercise}
 		
 		Given the characters $\chi$ of a reducible representation $\Gamma$ of the indicated point group $\mathscr{G}$ for the various classes of $\mathscr{G}$ in the order in which these classes appear in the character table, find the number of times irreducible representation occurs in $\Gamma$.
-		\begin{enumerate}
+		\begin{enumerate}[label=(\alph*)]
 		
 		\item $\mathscr{C}_{\rm 2v}$ $\chi = 4, -2, 0, -2$,
 		
@@ -104,6 +104,69 @@
 
 	\begin{solution}
 	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item 1
+	
+	\begin{center}
+	\begin{tabular}{c|cccc} \hline
+		$\mathscr{C}_{\rm 2v}$ & $E$ & $C_2$ & $\sigma_{\rm v}(xz)$ & $\sigma_{\rm v}(yz)$ \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	\\
+		$A_2$	&	1	&	1	&	-1	&	-1	\\
+		$B_1$	&	1	&	-1	&	1	&	-1	\\
+		$B_2$	&	1	&	-1	&	-1	&	1	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\item 2
+	
+	\begin{center}
+	\begin{tabular}{c|cccccc} \hline
+		$\mathscr{C}_{\rm 3h}$ & $E$ & $C_3$ & $C^2_3$ & $\sigma_{\rm h}$ & $S_3$ & $S^5_3$ \\ \hline
+		$A^\prime$	&	1	&	1	&	1	&	1	&	1	&	1	\\
+		\multirow{2}*{$E^\prime$}	&	1	&	$\varepsilon$	&	$\varepsilon^*$	&	1	&	$\varepsilon$	&	$\varepsilon^*$	\\
+					&	1	&	$\varepsilon^*$	&	$\varepsilon$	&	1	&	$\varepsilon^*$	&	$\varepsilon$	\\
+		$A^{\prime\prime}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	\\
+		\multirow{2}*{$E^{\prime\prime}$}	&	1	&	$\varepsilon$	&	$\varepsilon^*$	&	-1	&	$-\varepsilon$	&	$-\varepsilon^*$	\\
+					&	1	&	$\varepsilon^*$	&	$\varepsilon$	&	-1	&	$-\varepsilon^*$	&	$-\varepsilon$	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\item 3
+	
+	\begin{center}
+	\begin{tabular}{c|ccccccc} \hline
+		$\mathscr{D}_{\rm 4d}$ & $E$ & $2S_8$ & $2C_4$ & $2S^3_8$ & $C_2$ & $4C^\prime_2$ & $4 \sigma_{\rm d}$ \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	\\
+		$A_2$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	\\
+		$B_1$	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	\\
+		$B_2$	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	\\
+		$E_1$	&	2	& $\sqrt{2}$	& 0	& $-\sqrt{2}$ & -2 & 0 	&	0	\\
+		$E_2$	&	2	& 	0	& 	-2	& 	0 	& 	2 	& 	0 	&	0	\\
+		$E_3$	&	2	& $-\sqrt{2}$ & 0 & $\sqrt{2}$ & -2 & 0 	&	0	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\item 4
+	
+	\begin{center}
+	\begin{tabular}{c|cccccccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ & $i$ & $8 S_6$ & $3 \sigma_{\rm h}$ & $6S_4$ & $6 \sigma_{\rm d}$ \\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	\\
+		$E_g$	&	2	&	-1	&	2	&	0	&	0	&	2	&	-1	&	2	&	0	&	0	\\
+		$T_{1g}$ &	3	&	0	&	-1	&	1	&	-1	&	3	&	0	&	-1	&	1	&	-1	\\
+		$T_{2g}$ &	3	&	0	&	-1	&	-1	&	1	&	3	&	0	&	-1	&	-1	&	1	\\
+		$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	\\
+		$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	\\
+		$E_g$	&	2	&	-1	&	2	&	0	&	0	&	-2	&	1	&	-2	&	0	&	0	\\
+		$T_{1u}$	 & 	3	&	0	&	-1	&	1	&	-1	&	-3	&	0	&	1	&	-1	&	1	\\
+		$T_{2u}$ &	3	&	0	&	-1	&	-1	&	1	&	-3	&	0	&	1	&	1	&	-1	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\end{enumerate}
+	
 	\end{solution}
 	
 	% 7.2
@@ -114,6 +177,19 @@
 	\end{exercise}
 
 	\begin{solution}
+
+	\begin{center}
+		\setlength{\abovecaptionskip}{0em}
+		\captionof{table}{The character table for the $\mathscr{D}_{\rm 4}$ point group.}\label{tab:chatab_3}
+		\begin{tabular}{cccccc}\hline
+	$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime}_2$ \\ \hline
+			$A_1$	&	1	&	1	&	1	&	1	&	1	\\
+			$A_1$	&	1	&	1	&	1	&	-1	&	-1	\\
+			$B_1$	&	1	&	-1	&	1	&	1	&	-1	\\
+			$B_2$	&	1	&	-1	&	1	&	-1	&	1	\\
+			$E$ 	&	2	&	0	&	-2	&	0	&	0\\ \hline
+		\end{tabular}
+		\end{center}
 
 	\end{solution}
 
@@ -143,6 +219,7 @@
 	\begin{exercise}
 		
 		Consider the group whose group table is
+		\begin{center}
 		\begin{tabular}{c|cccc}\hline
 				&	$E$	&	$A$	&	$B$	&	$C$	\\ \hline
 			$E$	&	$E$	&	$A$	&	$B$	&	$C$	\\
@@ -150,6 +227,8 @@
 			$B$	&	$B$	&	$E$	&	$C$	&	$E$	\\
 			$C$	&	$C$	&	$B$	&	$A$	&	$A$	\\ \hline
 		\end{tabular}
+		\end{center}
+		write out the matrices and characters for the regular representation of this group.
 
 	\end{exercise}
 	
