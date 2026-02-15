@@ -2,6 +2,9 @@
 
 \usepackage{afterpage}
 \usepackage[hypcap=false]{caption}
+\usepackage{cellspace}
+\setlength\cellspacetoplimit{5pt}    % 设置单元格顶部最小间距
+\setlength\cellspacebottomlimit{5pt} % 设置单元格底部最小间距
 \usepackage{enumitem}	% 定制enumerate标号
 \usepackage{geometry}
 \geometry{%
@@ -65,6 +68,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -73,7 +88,10 @@
 \newcommand\Figref[1]{Fig \ref{#1}}
 \newcommand\Tableref[1]{Table \ref{#1}}
 \newcommand{\orb}[1]{{\rm #1}}
+\newcommand{\orbs}{\orb{s}}
 \newcommand{\orbp}{\orb{p}}
+\newcommand{\orbd}{\orb{d}}
+\newcommand{\orbf}{\orb{f}}
 
 \allowdisplaybreaks
 
@@ -86,13 +104,19 @@
 	
 	Consider the following planar symmetric figure.
 	
-	[A diagram needed]
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.5]{../diagrams/chapter_05/bowtie_in_exercises.png}
+		\end{minipage}\label{fig:bowtie_in_exercises}
+	\end{center}	
 	
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item Determine the distinct symmetry operations which take it into itself; construct the group multiplication table for these operations, and identify the point group to which this figure belongs.
 	
-	\item Find a set of two-dimensional matrices which are in one-to-one	
+	\item Find a set of two-dimensional matrices which are in one-to-one correspondence with the above symmetry operations, and verify that they have the same group multiplication table as the symmetry operations.
 	
 	\end{enumerate}
 	
@@ -100,12 +124,86 @@
 
 	\begin{solution}
 	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item It is easy to see that the bowtie-like planar pattern has exactly 4 symmetry operations, which are represented by their corresponding symmetry elements.
+	
+		\begin{itemize}
+	
+		\item $E$: The `do nothing' operation.
+		
+		\item $C_2(z)$: A $180^\circ$ rotation about the $z$-axis (the axis passing through the center perpendicular to the screen).
+		
+		\item $\sigma_{\rm v}(xz)$: A mirror plane passing through the horizontal axis of the figure.
+		
+		\item $\sigma_{\rm v}(yz)$: A mirror plane passing through the vertical center point, bisecting the bowtie.
+	
+		\end{itemize}
+		
+	Due to the $C_2$ axis and 2 $\sigma_{\rm v}$, the bowtie pattern belongs to the $\mathscr{C}_{\rm 2v}$ point group. Moreover, the group multiplication table for these operations can be seen in \Tableref{table:group_multiplication_table_of_c2v}.
+	
+	\begin{center}
+	\captionof{table}{Group multiplication table for $\mathscr{C}_{\rm 2v}$.}\label{table:group_multiplication_table_of_c2v}
+	\begin{tabular}{ccccc} \hline
+		$R$	&	$E$	&	$C_2(z)$	&	$\sigma_{\rm v}(xz)$	&	$\sigma_{\rm v}(yz)$ \\ \hline
+		$E$	&	$E$	&	$C_2(z)$	&	$\sigma_{\rm v}(xz)$	&	$\sigma_{\rm v}(yz)$ \\
+	$C_2(z)$ & $C_2(z)$ & $E$ & $\sigma_{\rm v}(yz)$ & $\sigma_{\rm v}(xz)$  \\
+	$\sigma_{\rm v}(xz)$ & $\sigma_{\rm v}(xz)$ & $\sigma_{\rm v}(yz)$ & $E$ & $C_2$ \\
+	$\sigma_{\rm v}(yz)$ & $\sigma_{\rm v}(yz)$ & $\sigma_{\rm v}(xz)$ & $C_2$ & $E$ \\ \hline
+	\end{tabular}		
+	\end{center}
+	
+	\item We define non-collinear ${\bf e}_1$ and ${\bf e}_2$ as a basis, illustrated in \Figref{fig:bowtie_in_solutions}.
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.5]{../diagrams/chapter_05/bowtie_in_solutions.png}
+		\end{minipage}
+		\captionof{figure}{Definition of basis vectors ${\bf e}_1$ and ${\bf e}_2$ in the bowtie pattern, originating from $O$ to $A$ and $B$ respectively.}\label{fig:bowtie_in_solutions}
+	\end{center}	
+	
+	 The table of the transformation of ${\bf e}_i$ under $\boldsymbol{O}_R$ for the bowtie pattern can be seen in \Tableref{table:transformation_table_of_bowtie}.
+	\begin{center}
+	\captionof{table}{Transformation of ${\bf e}_i$ under $\boldsymbol{O}_R$ for the bowtie pattern.}\label{table:transformation_table_of_bowtie}
+	\begin{tabular}{c|cccc}\hline
+		$R =$ & 	$E$		& $C_2$ & $\sigma_{xz}$ 	& $\sigma_{yz}$ \\ \hline 
+		${\bf e}_1$ &	${\bf e}_1$	& $-{\bf e}_1$	&	${\bf e}_2$	&	$-{\bf e}_2$		\\
+		${\bf e}_2$ &	${\bf e}_2$	& $-{\bf e}_2$	&	${\bf e}_1$	&	$-{\bf e}_1$		\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Under this basis, a set of two-dimentional matrices which are in one-to-one correspondence with the above symmetry operations can be constructed in \Tableref{table:matrix_representation_of_bowtie}.
+	\begin{center}
+	\captionof{table}{A set of two-dimentional matrices which are in one-to-one correspondence with $\mathscr{C}_{\rm 2v}$'s symmetry operations.}\label{table:matrix_representation_of_bowtie}
+	\begin{tabular}{c|ScScScSc} \hline
+		$R$	&	$E$	&	$C_2$	&	$\sigma_{xz}$	&	$\sigma_{yz}$	\\ \hline
+		$D(R)$	& $\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			-1 & 0 \\
+			0 & -1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & -1 \\
+			-1& 0
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}	
+	
+	It is easy for readers to verify that they have the same group multiplication table as the symmetry operations. I supply a Python script under \verb!../scripts/chapter_05/! to rea
+	
+	\end{enumerate}
+	
 	\end{solution}
 	
 	% 5.2
 	\begin{exercise}
 
-	The table below gives the effects of the transformation operator $O_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on four functions $f_1$, $f_2$, $f_3$, and $f_4$. Construct a four-dimentional representation of $\mathscr{D}_4$.
+	The table below gives the effects of the transformation operator $\boldsymbol{O}_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on four functions $f_1$, $f_2$, $f_3$, and $f_4$. Construct a four-dimentional representation of $\mathscr{D}_4$.
 	\begin{center}
 	\begin{tabular}{c|cccccccc}\hline
 	$R =$ & $E$ & $C_4$ & $C^3_4$ & $C_2$ & $C^\prime_{2a}$ & $C^\prime_{2b}$ & $C^{\prime\prime}_{2a}$ & $C^{\prime\prime}_{2b}$ \\ \hline 
@@ -119,21 +217,170 @@
 	\end{exercise}
 
 	\begin{solution}
+	
+	It is easy to construct a four-dimentional representation of $\mathscr{D}_4$. For example, we find that
+	\begin{align*}
+		D(C_4)(f_1, f_2, f_3, f_4) &= (D(C_4)f_1, D(C_4)f_2, D(C_4)f_3, D(C_4)f_4) \\
+			&= (f_2, f_3, f_4, f_1) \\
+			&= (f_1,f_2,f_3,f_4) \begin{pmatrix}
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+		\end{pmatrix} .
+	\end{align*}
+
+	In this way, a four-dimentional representation of $\mathscr{D}_4$ has been constructed in \Tableref{table:matrix_representation_of_d4}.
+	\begin{center}
+	\captionof{table}{A four-dimentional representation of $\mathscr{D}_4$.}\label{table:matrix_representation_of_d4}
+	\begin{tabular}{c|ScScScSc} \hline
+		$R$	&	$E$	&	$C_4$	&	$C^\prime_{2a}$	&	$C^\prime_{2b}$	\\ \hline
+		$D(R)$	& $\begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0
+		\end{pmatrix}$ &
+		$\begin{pmatrix}
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 
+		\end{pmatrix}$ \\ \hline
+		$R$	&	$C^3_4$	&	$C_2$	&	$C^{\prime\prime}_{2a}$	&	$C^{\prime\prime}_{2b}$	\\ \hline
+		$D(R)$ & $\begin{pmatrix}
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0
+		\end{pmatrix}$ & 
+		$\begin{pmatrix}
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0
+		\end{pmatrix}$ &
+		$\begin{pmatrix}
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 \\
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 
+		\end{pmatrix}$ &
+		$\begin{pmatrix}
+			0 & 0 & -1 & 0 \\
+			0 & -1 & 0 & 0 \\
+			-1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & -1 
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
 
 	\end{solution}
+	
+	\begin{remark}
+		In fact, I think that eqn (5-4.2) is hard to remember directly. Compared to eqn (5-2.16), it is easier to remember eqn (5-4.2) by rewriting it as
+		\[
+			R ( {\bf e}_1 , {\bf e}_2, \ldots, {\bf e}_n ) = ( {\bf e}_1 , {\bf e}_2, \ldots, {\bf e}_n ) D(R).
+		\]
+	\end{remark}
 
 	% 5.3
 	\begin{exercise}
 	
 	Consider a set of base vectors located on the nuclei of the molecule $\ce{SO2}$ as in the figure below (${\bf e}_3$, ${\bf e}_6$, ${\bf e}_9$  are perpendicular to the page).
-	
-	[A diagram needed]
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=0.85]{../diagrams/chapter_05/SO2.png}
+		\end{minipage}\label{fig:SO2}
+	\end{center}		
 	
 	Construct a nine-dimentional matrix representation for the point group to which $\ce{SO2}$ belongs.
 	
 	\end{exercise}
 	
 	\begin{solution}
+	
+	Similar to $\ce{H2O}$, $\ce{SO2}$ belongs to the $\mathscr{C}_{\rm 2v}$. Firstly, we demonstrate the effects of the transformation operators $\boldsymbol{O}_R$ for $\mathscr{C}_{\rm 2v}$, as shown in \Tableref{table:transformation_table_of_so2}.
+	
+	\begin{center}
+	\captionof{table}{Transformation of ${\bf e}_i$ under $\boldsymbol{O}_R$ for the $\mathscr{C}_{\rm 2v}$ point group.}\label{table:transformation_table_of_so2}
+	\begin{tabular}{c|cccc}\hline
+		$R =$ & 	$E$		& $C_2$ & $\sigma_{xz}$ 	& $\sigma_{yz}$ \\ \hline 
+		${\bf e}_1$ &	${\bf e}_1$	& $-{\bf e}_1$	&	$-{\bf e}_1$	&	${\bf e}_1$		\\
+		${\bf e}_2$ &	${\bf e}_2$	& ${\bf e}_2$	&	${\bf e}_2$	&	${\bf e}_2$		\\
+		${\bf e}_3$ &	${\bf e}_3$	& $-{\bf e}_3$	&	${\bf e}_3$	&	$-{\bf e}_3$		\\
+		${\bf e}_4$ &	${\bf e}_4$	& $-{\bf e}_7$	&	$-{\bf e}_7$	&	${\bf e}_4$		\\
+		${\bf e}_5$ &	${\bf e}_5$	& ${\bf e}_8$	&	${\bf e}_8$	&	${\bf e}_5$		\\
+		${\bf e}_6$ &	${\bf e}_6$	& $-{\bf e}_9$	&	${\bf e}_9$	&	$-{\bf e}_6$		\\
+		${\bf e}_7$ &	${\bf e}_7$	& $-{\bf e}_4$	&	$-{\bf e}_4$	&	${\bf e}_7$		\\
+		${\bf e}_8$ &	${\bf e}_8$	& ${\bf e}_5$	&	${\bf e}_5$	&	${\bf e}_8$		\\
+		${\bf e}_9$ &	${\bf e}_9$	& $-{\bf e}_6$	&	${\bf e}_6$	&	$-{\bf e}_9$		\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Then, we construct the nine-dimentional matrix representation of $\mathscr{C}_{\rm 2v}$, shown in \Tableref{table:matrix_representation_of_so2}.
+	\begin{center}
+	\captionof{table}{A nine-dimentional matrix representation for the $\mathscr{C}_{\rm 2v}$ point group.}\label{table:matrix_representation_of_so2}
+	\begin{tabular}{c|ScSc} \hline
+		$R$		&	$E$	&	$C_2$	\\ \hline
+		$D(R)$	&	$\begin{pmatrix}
+			1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			-1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	-1 \\
+			0	&	0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0	&	0
+		\end{pmatrix}$ \\ \hline
+		$R$		&	$\sigma_{xz}$	&	$\sigma_{yz}$	\\ \hline
+		$D(R)$	&	$\begin{pmatrix}
+			-1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	1 \\
+			0	&	0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	1	&	0	&	0	&	0
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	1	&	0	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	-1	&	0	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	1	&	0	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	1	&	0	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	-1	&	0	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	1	&	0	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	1	&	0 \\
+			0	&	0	&	0	&	0	&	0	&	0	&	0	&	0	&	-1
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	
+	\end{center}	
 		
 	\end{solution}
 	
@@ -141,7 +388,7 @@
 	\begin{exercise}
 		
 	For the point group $\mathscr{D}_{\rm 2h}$:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item construct a three-dimentional matrix representation using three real p-orbitals as basis functions;
 	
@@ -153,20 +400,275 @@
 	
 	\begin{solution}
 	
+	\begin{enumerate}[label=(\alph*)]
+
+	\item It is easy to summarize the transformation of $\orbp_i$ under $\boldsymbol{O}_R$ for the $\mathscr{D}_{\rm 2h}$ point group, demonstrated in \Tableref{table:transformation_table_of_d2h_p_orbitals}.
+	\begin{center}
+	\captionof{table}{Transformation of $\orbp_i$ under $\boldsymbol{O}_R$ for the $\mathscr{D}_{\rm 2h}$ point group.}\label{table:transformation_table_of_d2h_p_orbitals}
+	\begin{tabular}{c|cccccccc}\hline
+		$R =$ & 	$E$	& $C_2(z)$ & $C_2(y)$ & $C_2(x)$ & $i$ & $\sigma_{xy}$ & $\sigma_{xz}$ & $\sigma_{yz}$ \\ \hline 
+		$\orbp_1 \equiv \orbp_{x}$ &	$\orbp_1$ & 	$-\orbp_1$ & $-\orbp_1$ & $\orbp_1$ & $-\orbp_1$ & $\orbp_1$ & $\orbp_1$ & $-\orbp_1$  \\
+		$\orbp_2 \equiv \orbp_{y}$ &	$\orbp_2$ & 	$-\orbp_2$ & $\orbp_2$ & $-\orbp_2$ & $-\orbp_2$ & $\orbp_2$ & $-\orbp_2$ & $\orbp_2$	\\
+		$\orbp_3 \equiv \orbp_{z}$ &	$\orbp_3$ & 	$\orbp_3$ & $-\orbp_3$ & $-\orbp_3$ & $-\orbp_3$ & $-\orbp_3$ & $\orbp_3$ & $\orbp_3$	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Then, a three-dimentional matrix representation for the $\mathscr{D}_{\rm 2h}$ point group can be constructed in the same way as exercise 5.2.
+	\begin{center}
+	\captionof{table}{A three-dimentional matrix representation for the $\mathscr{D}_{\rm 2h}$ point group.}\label{table:matrix_representation_of_d2h_p_orbitals}
+	\begin{tabular}{c|ScScScSc}\hline
+		$R$ & $E$ & $C_2(z)$ & $C_2(y)$ & $C_2(x)$ \\ \hline
+		$D(R)$& $\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}$ \\ \hline
+		$R$ & $i$ & $\sigma(xy)$ & $\sigma(xz)$ & $\sigma(yz)$ \\ \hline
+		$D(R)$ & $\begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & -1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & -1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			-1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	By the way, taking the 2p orbitals as an example, the shapes of the three p orbitals can be seen in \Figref{fig:p_orbitals}.
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_1.png}
+		\captionof*{figure}{$\orbp_1$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_2.png}
+		\captionof*{figure}{$\orbp_2$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_3.png}
+		\captionof*{figure}{$\orbp_3$}
+		\end{minipage}
+	\end{tabular}
+	\captionof{figure}{Diagrams of three 2p-orbitals.}\label{fig:p_orbitals}
+	\end{center}
+	
+	\item It is also easy to summarize the transformation of $\orbd_i$ under $\boldsymbol{O}_R$ for the $\mathscr{D}_{\rm 2h}$ point group, demonstrated in \Tableref{table:transformation_table_of_d2h_d_orbitals}.
+	\begin{center}
+	\captionof{table}{Transformation of $\orbd_i$ under $\boldsymbol{O}_R$ for the $\mathscr{D}_{\rm 2h}$ point group.}\label{table:transformation_table_of_d2h_d_orbitals}
+	\begin{tabular}{c|cccccccc}\hline
+		$R =$ & 	$E$	& $C_2(z)$ & $C_2(y)$ & $C_2(x)$ & $i$ & $\sigma_{xy}$ & $\sigma_{xz}$ & $\sigma_{yz}$ \\ \hline 
+		$\orbd_1 \equiv \orbd_{x^2 - y^2}$ &	$\orbd_1$ & 	$\orbd_1$ & $\orbd_1$ & $\orbd_1$ & $\orbd_1$ & $\orbd_1$ & $\orbd_1$ & $\orbd_1$ \\
+		$\orbd_2 \equiv \orbd_{xy}$ & $\orbd_2$ & 	$\orbd_2$ & $-\orbd_2$ & $-\orbd_2$ & $\orbd_2$ & $\orbd_2$ & $-\orbd_2$ & $-\orbd_2$		\\
+		$\orbd_3 \equiv \orbd_{xz}$ & $\orbd_3$ & 	$-\orbd_3$ & $\orbd_3$ & $-\orbd_3$ & $\orbd_3$ & $-\orbd_3$ & $\orbd_3$ & $-\orbd_3$		\\
+		$\orbd_4 \equiv \orbd_{yz}$ & $\orbd_4$ & 	$-\orbd_4$ & $-\orbd_4$ & $\orbd_4$ & $\orbd_4$ & $-\orbd_4$ & $-\orbd_4$ & $\orbd_4$			\\
+		$\orbd_5 \equiv \orbd_{z^2}$ & $\orbd_5$ & 	$\orbd_5$ & $\orbd_5$ & $\orbd_5$ & $\orbd_5$ & $\orbd_5$ & $\orbd_5$ & $\orbd_5$	\\ \hline
+	\end{tabular}
+	\end{center}	
+	
+	Then, a five-dimentional matrix representation for the $\mathscr{D}_{\rm 2h}$ point group can be constructed.
+	\begin{center}
+	\captionof{table}{A five-dimentional matrix representation for the $\mathscr{D}_{\rm 2h}$ point group.}\label{table:matrix_representation_of_d2h_d_orbitals}
+	\begin{tabular}{c|ScScSc}\hline
+		$R$ & $E$ & $C_2(z)$ & $C_2(y)$ \\ \hline
+		$D(R)$& $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ \\ \hline 
+		$R$ & $C_2(x)$ &  $i$ & $\sigma(xy)$ \\ \hline
+		$D(R)$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ \\ \hline
+		$R$ & $\sigma(xz)$ & $\sigma(yz)$ & \\ \hline
+		$D(R)$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & -1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & -1 & 0 & 0 & 0 \\
+			0 & 0 & -1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Finally, taking the 3d orbitals as an example, their shapes can be seen in \Figref{fig:d_orbitals}.
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_1.png}
+		\captionof*{figure}{$\orbd_1$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_2.png}
+		\captionof*{figure}{$\orbd_2$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_3.png}
+		\captionof*{figure}{$\orbd_3$}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.27]{../diagrams/chapter_05/orbital_d_4.png}
+		\captionof*{figure}{$\orbd_4$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.27]{../diagrams/chapter_05/orbital_d_5.png}
+		\captionof*{figure}{$\orbd_5$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{Diagrams of three 3d-orbitals.}\label{fig:d_orbitals}
+	\end{center}
+	
+	\end{enumerate}
+	
 	\end{solution}
+	
+	\begin{remark}
+
+	In this exercise, it is evident that for molecules belonging to a point group containing an $i$, if a certain symmetry operation $A=Bi=iB$, then $A$ and $B$ share the same matrix representation in a basis including only gerade orbitals due to $D(i)=I_n$ under this basis, as seen in part (b). Conversely, for a basis of only ungerade orbitals, $D(i)=-I_n$, which implies $D(A)=-D(B)$, as in part (a).
+	
+	\end{remark}
 	
 	% 5.5
 	\begin{exercise}
 	
 	Consider the planar trivinylmethyl radical with seven $\pi$-orbitals located as shown below:
 	
-	[A diagram needed]	
+	\begin{center}
+		\begin{minipage}[t]{0.6\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{0.5em}
+		\includegraphics[scale=1.0]{../diagrams/chapter_05/trivinylmethyl_radical.png}
+		\end{minipage}\label{fig:trivinylmethyl_radical}
+	\end{center}	
 	
-	Using these $pi$-orbitals as basis functions, construct a seven-dimensional representation of the $\mathscr{C}_3$ point group.
+	Using these $\pi$-orbitals as basis functions, construct a seven-dimensional representation of the $\mathscr{C}_3$ point group.
 	
 	\end{exercise}
 	
 	\begin{solution}
+	
+	We summarize the transformation of $\orbp_i$ under $\boldsymbol{O}_R$ for the $\mathscr{C}_3$ point group, demonstrated in \Tableref{table:transformation_table_of_c3}.
+	\begin{center}
+	\captionof{table}{Transformation of $\orbp_i$ under $\boldsymbol{O}_R$ for the $\mathscr{C}_3$ point group.}\label{table:transformation_table_of_c3}
+	\begin{tabular}{c|ccc} \hline
+		$R = $ 		&		$E$		&	$C_3$		&	$C^2_3$		\\ \hline
+		$\orbp_1$	&	$\orbp_1$	&	$\orbp_2$	&	$\orbp_3$	\\
+		$\orbp_2$	&	$\orbp_2$	&	$\orbp_3$	&	$\orbp_1$	\\
+		$\orbp_3$	&	$\orbp_3$	&	$\orbp_1$	&	$\orbp_2$	\\
+		$\orbp_4$	&	$\orbp_4$	&	$\orbp_5$	&	$\orbp_6$	\\
+		$\orbp_5$	&	$\orbp_5$	&	$\orbp_6$	&	$\orbp_4$	\\
+		$\orbp_6$	&	$\orbp_6$	&	$\orbp_4$	&	$\orbp_5$	\\
+		$\orbp_7$	&	$\orbp_7$	&	$\orbp_7$	&	$\orbp_7$	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Then, a seven-dimentional matrix representation for the $\mathscr{C}_3$ point group can be constructed.
+	\begin{center}
+	\captionof{table}{A seven-dimentional matrix representation for the $\mathscr{C}_3$ point group.}\label{table:matrix_representation_of_c3}
+	\begin{tabular}{c|ScScSc} \hline
+		$R$		&	$E$	&	$C_3$		&	$C^2_3$		\\ \hline
+		$D(R)$	& $\begin{pmatrix}
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 1 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 & 0 & 1
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
 	
 	\end{solution}	
 
