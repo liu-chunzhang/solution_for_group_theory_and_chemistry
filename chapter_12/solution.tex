@@ -65,6 +65,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -77,6 +89,7 @@
 \newcommand{\orbp}{\orb{p}}
 \newcommand{\orbd}{\orb{d}}
 \newcommand{\orbf}{\orb{f}}
+\newcommand{\varparallel}{/ \! /}
 
 \allowdisplaybreaks
 
@@ -93,6 +106,92 @@
 
 	\begin{solution}
 	
+	Similar to the section 12.2, we reduce $\Gamma^{\rm AO}$ (the reducible representation using $1 \times 9+4\times3=21$ atomic orbitals) to the form:
+	\begin{equation}
+		\Gamma^{\rm AO} = \Gamma^{\ce{Ni}} \oplus \Gamma^{\ce{CN}}.
+	\end{equation}
+	where $\Gamma^{\ce{Ni}}$ is a reducible representation using all $3\orbd$, $4\orbs$, $4\orbp$ atomic orbitals of $\ce{Ni}$ as basis functions and $\Gamma^{\ce{CN}}$ is a reducible representation using the 12 atomic orbitals of the 4 $\ce{CN}$ ligands as basis functions. 
+	
+	By checking the character table for $\mathscr{D}_{\rm 4h}$, viz., \Tableref{table:character_table_for_d4h}, we realize that	
+	\begin{equation}\label{eq:reduction_of_Ni_representation}
+		\Gamma^{\rm Ni} = 2\Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{E_u} . 
+	\end{equation}
+	
+	\begin{center}
+	\captionof{table}{Character table for $\mathscr{D}_{\rm 4h}$.}\label{table:character_table_for_d4h}
+	\begin{tabular}{c|cccccccccccc}\hline
+		$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{h}$	&	$2\sigma_{v}$ &	$2\sigma_{d}$	&		&\\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&		&	$x^2+y^2$; $z^2$\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	& $R_z$	&	\\
+		$B_{1g}$	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&		&	$x^2-y^2$\\
+		$B_{2g}$ 	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&		&	$xy$	\\
+		$E_g$ 		&	2	&	0	&	-2	&	0	&	0	&	2	&	0	&	-2	&	0	&	0	& ($R_x$, $R_y$) & ($xz$, $yz$)\\ 
+		$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&		&	\\
+		$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&	$z$	&	\\
+		$B_{1u}$	&	1	&	-1	&	1	&	1	&	-1	&	-1	&	1	&	-1	&	-1	&	1	&		&	\\
+		$B_{2u}$ 	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&		&	\\
+		$E_u$ 		&	2	&	0	&	-2	&	0	&	0	&	-2	&	0	&	2	&	0	&	0	& ($x$, $y$)	&\\ \hline
+	\end{tabular}
+	\end{center}	
+	
+	Due to the different chemical nature of $\sigma$ and $\pi$ orbitals, we further reduce $\Gamma^{\rm CN}$ to the form:		
+	\begin{equation}
+		 \Gamma^{\ce{CN}} = \Gamma^\sigma \oplus \Gamma^\pi = \Gamma^\sigma \oplus \Gamma^{\pi_\bot} \oplus \Gamma^{\pi_{\varparallel}} ,
+	\end{equation}
+	where $\Gamma^\sigma$ is the reducible representation using all $\ce{Ni}-\ce{C}$ bonds while 	$\Gamma^\pi$ is the reducible representation using all $\pi$ orbitals of $\ce{CN}$ ligands. Furthermore, the representation $\Gamma^\pi$ can be decomposed into two distinct components based on their spatial orientation: $\Gamma^{\pi_\bot}$, which comprises the $\pi$ orbitals perpendicular to the molecular plane (pointing along the $z$-axis), and $\Gamma^{\pi_{\varparallel}}$, which consists of the $\pi$ orbitals residing within the molecular plane (orthogonal to the $\ce{Ni-CN}$ $\sigma$-bond axis but within the $xy$-plane).
+	
+	Then, the characters for the ligand representations in $\mathscr{D}_{\rm 4h}$ are:
+	\begin{center}
+	\captionof{table}{Characters for the $\Gamma^{\ce{CN}}$ of the $\mathscr{D}_{\rm 4h}$ point group.}\label{table:subrepresentation_for_d4h}
+	\begin{tabular}{c|cccccccccc}\hline
+		$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{h}$	&	$2\sigma_{v}$ &	$2\sigma_{d}$	\\ \hline
+		$\chi^\sigma(C_i)$	&	4	&	0	&	0	&	2	&	0	&	0	&	0	&	4	&	2	&	0	\\
+		$\chi^{\pi_\bot}(C_i)$	&	4	&	0	&	0	&	-2	&	0	&	0	&	0	&	-4	&	2	&	0	\\
+		$\chi^{\pi_{\varparallel}}(C_i)$	&	4	&	0	&	0	&	-2	&	0	&	0	&	0	&	4	&	-2	&	0	\\ \hline
+	\end{tabular}
+	\end{center}
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain 	
+	\begin{align}
+		\Gamma^\sigma &= \Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{E_u} , \\
+		\Gamma^{\pi_{\varparallel}} &= \Gamma^{A_{2g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_u} , \\
+		\Gamma^{\pi_\bot} &= \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}}.
+	\end{align}
+	Thus, we know that
+	\begin{align}
+		\Gamma^{\ce{CN}} &= \Gamma^\sigma \oplus \Gamma^{\pi_\bot} \oplus \Gamma^{\pi_{\varparallel}} \notag \\
+		&= \left[ \Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{E_u} \right] \oplus \left[ \Gamma^{A_{2g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_u} \right] \oplus \left[ \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \right] \notag \\
+		&= \Gamma^{A_{1g}} \oplus \Gamma^{A_{2g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \oplus 2 \Gamma^{E_u} .
+	\end{align}
+	
+	Summing these contributions, the total representation $\Gamma^{\rm AO}$ decomposes as:
+	\begin{align}
+		\Gamma^{\rm AO} &= \Gamma^{\rm Ni} \oplus \Gamma^{\ce{CN}} \notag \\
+		&= \left[ 2\Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{E_u} \right] \notag \\
+		&\hspace{4em} \oplus \left[ \Gamma^{A_{1g}} \oplus \Gamma^{A_{2g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \oplus 2 \Gamma^{E_u} \right] \notag \\
+		&= 3 \Gamma^{A_{1g}} \oplus \Gamma^{A_{2g}} \oplus 2 \Gamma^{B_{1g}} \oplus 2 \Gamma^{B_{2g}} \oplus 2 \Gamma^{E_g} \oplus 2\Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \oplus 3 \Gamma^{E_u} .
+	\end{align}
+	
+	The total basis set generates the following molecular orbitals (MO):
+	\begin{itemize}
+	
+	\item $\Gamma^{A_{1g}}$: 3 non-degenerate MOs. These result from the interaction between the $\ce{Ni}$ $4\orbs$, $3\orbd_{z^2}$ orbitals and the $a_{1g}$ $\sigma$-symmetry-adapted linear combinations (SALC) of the $\ce{CN}$ ligands.
+	
+	\item $\Gamma^{A_{2g}}$: 1 non-degenerate MO. A pure ligand-based MO from the $a_{2g}$ $\pi_{\varparallel}$-SALC.
+	
+	\item $\Gamma^{B_{1g}}$: 2 non-degenerate MOs. Mixtures of the Ni $3\orbd_{x^2-y^2}$ and the $b_{1g}$ $\sigma$-SALC.
+	
+	\item $\Gamma^{B_{2g}}$: 2 non-degenerate MOs. Mixtures of the Ni $3\orbd_{xy}$ and the $b_{2g}$ $\pi_{\varparallel}$-SALC.
+	
+	\item $\Gamma^{E_g}$: 2 pairs of doubly degenerate MOs. Each set is a linear combination of the Ni ($3\orbd_{xz}$, $3\orbd_{yz}$) orbital pair and the corresponding $e_g$ $\pi_\bot$-SALCs.
+	
+	\item $\Gamma^{A_{2u}}$: 2 non-degenerate MOs. Mixtures of the Ni $4\orbp_z$ and the $a_{2u}$ $\pi_\bot$-SALC.
+	
+	\item $\Gamma^{B_{2u}}$: 1 non-degenerate MO. A pure ligand-based MO from the $b_{2u}$ $\pi_\perp$-SALC.
+	
+	\item $\Gamma^{E_u}$: 3 pairs of doubly degenerate MOs. Each set is a linear combination of the \ce{Ni} ($4\orbp_x$, $4\orbp_y$) orbital pair, and the $e_u$ $\sigma$-SALCs, and $e_u$ $\pi_{\varparallel}$-SALCs.
+	
+	\end{itemize}
+	
 	\end{solution}
 	
 	% 12.2
@@ -108,6 +207,92 @@
 
 	\begin{solution}
 
+	Similar to the section 12.2, we reduce $\Gamma^{\rm AO}$ (the reducible representation using $1 \times 6 + 4 \times 3 = 18$ atomic orbitals) to the form:
+	\begin{equation}
+		\Gamma^{\rm AO} = \Gamma^{\rm Mn} \oplus \Gamma^{\ce{O}}.
+	\end{equation}
+	where $\Gamma^{\ce{Mn}}$ is a reducible representation using all $3\orbd$, $4\orbs$ atomic orbitals of $\ce{Mn}$ as basis functions and $\Gamma^{\ce{O}}$ is a reducible representation using the 12 atomic orbitals of the 4 $\ce{O}$ ligands as basis functions. 
+	
+	By checking the character table for $\mathscr{T}_{\rm d}$, viz., \Tableref{table:character_table_for_td}, we realize that	
+	\begin{equation}\label{eq:reduction_of_Mn_representation}
+		\Gamma^{\rm Mn} = \Gamma^{A_1} \oplus \Gamma^E \oplus \Gamma^{T_2} . 
+	\end{equation}
+	\begin{center}
+	\captionof{table}{Character table for $\mathscr{T}_{\rm d}$.}\label{table:character_table_for_td}
+	\begin{tabular}{c|ccccccc}\hline
+		$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_{\rm d}$ & & \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	& & $x^2+y^2+z^2$ \\
+		$A_2$	&	1	&	1	&	1	&	-1	&	-1  & & 	\\
+		$E$		&	2	&	-1	&	2	&	0	&	0	& & ($2z^2-x^2-y^2$, $x^2-y^2$)\\
+		$T_1$	&	3	&	0	&	-1	&	1	&	-1  & ($R_x$, $R_y$, $R_z$) & 	\\
+		$T_2$	&	3	&	0	&	-1	&	-1	&	1 & ($x$, $y$, $z$) & ($xy$, $xz$, $yz$) \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Due to the different chemical nature of $\sigma$ and $\pi$ orbitals, we further reduce $\Gamma^{\rm O}$ to the form:
+	\begin{equation}
+		 \Gamma^{\ce{O}} = \Gamma^\sigma \oplus \Gamma^\pi .
+	\end{equation}
+	where $\Gamma^\sigma$ is the reducible representation using all $\ce{Mn}-\ce{O}$ bonds while 	$\Gamma^\pi$ is the reducible representation using all $\pi$ orbitals of $\ce{O}$ ligands. Then, the characters for these ligand representations in $\mathscr{T}_{\rm d}$ are:
+	\begin{center}
+	\captionof{table}{Characters for the $\Gamma^{\ce{O}}$ of the $\mathscr{T}_{\rm d}$ point group.}
+	\begin{tabular}{c|ccccc}\hline
+		$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_{\rm d}$ \\ \hline
+		$\chi^\sigma(C_i)$	 &	4	&	1	&	0	&	0	&	2	\\
+		$\chi^\pi(C_i)$	&	8	&	-1	&	0	&	0	&	0	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Though the solution of the character of $\Gamma^\sigma$ is rather easy. However, here's a difficult point, or rather, a less intuitive one: how to calculate the characters for $\pi$ orbitals orthogonal to the corresponding $\ce{Mn}-\ce{O}$ bonds. Now I demonstrate the whole process.
+	
+	\begin{itemize}
+	
+	\item For $E$, it is obvious that its character is $8$.
+	
+	\item For $8 C_3$ class, readers can understand in this way. Except for the $\ce{O}$ atom through which this axis passes, the $\pi$ orbitals on other $\ce{O}$ atoms will not coincide with themselves, and the $\pi$ orbitals on this atom, after rotation, are still a linear combination of the original $\pi$ orbitals. We can take this axis as a new z-axis, and the two orthogonal $\pi$ orbitals span a new plane. Using the method for handling the $\mathscr{C}_{\rm 3v}$ point group, the corresponding character is
+	\[
+		2 \cos \frac{2\pi}{3} = 2 \times \left( - \frac{1}{2} \right) = -1 .
+	\]
+	
+	\item For $3 C_2$ and $6 S_4$ classes, it is evident that after rotations (and reflections), no $\pi$ orbitals will coincide with themselves. Thus both their characters are 0.
+	
+	\item For the $6\sigma_{\rm d}$ class, as with the $8C_3$ class, we only consider the 2 $\pi$ orbitals on the atoms lying within $\sigma_{\rm d}$. Under this reflection, one $\pi$ orbital remains invariant (character of $+1$), while the other is antisymmetric and changes sign (character of $-1$). Consequently, the total character is
+	\[
+		-1 + 1 = 0 .
+	\]
+	
+	\end{itemize}
+	
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain 
+	\begin{align}
+		\Gamma^\sigma &= \Gamma^{A_1} \oplus \Gamma^{T_2} , \\
+		\Gamma^\pi &= \Gamma^E \oplus \Gamma^{T_1} \oplus \Gamma^{T_2} .
+	\end{align}
+	These equations are mentioned in the exercise and thus we are on the right way.	 Now, we know that
+	\begin{equation}
+		\Gamma^{\ce{O}} = \Gamma^\sigma \oplus \Gamma^\pi = \left[ \Gamma^{A_1} \oplus \Gamma^{T_2} \right] \oplus \left[ \Gamma^E \oplus \Gamma^{T_1} \oplus \Gamma^{T_2} \right] = \Gamma^{A_1} \oplus \Gamma^E \oplus \Gamma^{T_1} \oplus 2 \Gamma^{T_2} .
+	\end{equation}
+	
+	Summing these contributions, the total representation $\Gamma^{\rm AO}$ decomposes as:
+	\begin{align}
+		\Gamma^{\rm AO} &= \Gamma^{\rm Mn} \oplus \Gamma^{\ce{O}} \notag \\
+		&= \left[ \Gamma^{A_1} \oplus \Gamma^E \oplus \Gamma^{T_2} \right] \oplus \left[ \Gamma^{A_1} \oplus \Gamma^E \oplus \Gamma^{T_1} \oplus 2 \Gamma^{T_2} \right] = 2 \Gamma^{A_1} \oplus 2 \Gamma^E \oplus \Gamma^{T_1} \oplus 3 \Gamma^{T_2} .
+	\end{align}
+	
+	The total basis set generates the following molecular orbitals (MO):	
+	
+	\begin{itemize}
+	
+	\item $\Gamma^{A_1}$: 2 non-degenerate MOs. These result from the interaction between the $\ce{Mn}$ $4\orbs$ orbital and the $a_1$ $\sigma$-symmetry-adapted linear combinations (SALC) of the $\ce{O}$ ligands.
+	
+	\item $\Gamma^E$: 2 pairs of doubly degenerate MOs. These result from the interaction between the $\ce{Mn}$ ($3\orbd_{z^2}$, $3\orbd_{x^2-y^2}$) orbital pair and the $e$ $\pi$-SALC.
+	
+	\item $\Gamma^{T_1}$: 1 set of triply-degenerate MOs. These are purely ligand-based non-bonding orbitals derived from only the $t_1$ $\pi$-SALC.
+	
+	\item $\Gamma^{T_2}$: 3 sets of triply-degenerate MOs. Each set is a linear combination of the $\ce{Mn}$ ($3\orbd_{xy}$, $3\orbd_{xz}$ and $3\orbd_{yz}$) orbitals, and the $t_2$ $\sigma$-SALCs, and $t_2$ $\pi$-SALCs.
+	
+	\end{itemize}
+
 	\end{solution}
 
 	% 12.3
@@ -118,7 +303,75 @@
 	\end{exercise}
 	
 	\begin{solution}
-		
+	
+	Similar to the section 12.2, we reduce $\Gamma^{\rm AO}$ (the reducible representation using $1 \times 9 + 2 \times 5 = 19$ atomic orbitals) to the form:
+	\begin{equation}
+		\Gamma^{\rm AO} = \Gamma^{\rm Fe} \oplus \Gamma^{\ce{C}}.
+	\end{equation}
+	where $\Gamma^{\ce{Fe}}$ is a reducible representation using all $3\orbd$, $4\orbs$ and $4\orbp$ atomic orbitals of $\ce{Fe}$ as basis functions and $\Gamma^{\ce{C}}$ is a reducible representation using the 10 $\pi$ orbitals from 2 carbon rings as basis functions. 
+	
+	By checking the character table for $\mathscr{T}_{\rm d}$, viz., \Tableref{table:character_table_for_d5h}, we realize that	
+	\begin{equation}\label{eq:reduction_of_Fe_representation}
+		\Gamma^{\rm Fe} = 2\Gamma^{A^\prime_1} \oplus \Gamma^{E^\prime_1} \oplus \Gamma^{E^\prime_2} \oplus \Gamma^{A^{\prime\prime}_2} \oplus \Gamma^{E^{\prime\prime}_1} . 
+	\end{equation}
+	\begin{center}
+	\captionof{table}{Character table for $\mathscr{D}_{\rm 5h}$, where $\alpha = 72^\circ$.}\label{table:character_table_for_d5h}
+	\begin{tabular}{c|cccccccccc}\hline
+		$\mathscr{D}_{\rm 5h}$ & $E$ & $2C_5$ & $2C^2_5$ & $5C_2$ & $\sigma_{\rm h}$ & $2S_5$ & $2S^3_5$ & $5\sigma_{\rm v}$ \\ \hline
+		$A^\prime_1$	&	1	&	1	&	1	&	1	&	1	&	1	& 	1	&	1	&	&	$x^2+y^2$; $z^2$  \\
+		$A^\prime_2$	&	1	&	1	&	1	&	-1	&	1  	& 	1	&	1	&	-1	& $R_z$	&	\\
+		$E^\prime_1$	&	2	&$2\cos\alpha$	& $2\cos 2\alpha$	&	0	&	2	& $2 \cos \alpha$ & $2\cos 2\alpha$ & 0	&	($x$, $y$)	& \\
+		$E^\prime_2$	&	2	&$2\cos 2\alpha$	& $2\cos \alpha$	&	0	&	2	& $2 \cos 2\alpha$ & $2\cos \alpha$ & 0	&		&	($x^2-y^2$, $xy$)	\\
+		$A^{\prime\prime}_1$	&	1	&	1	&	1	&	1	&	-1	&	-1	& 	-1	&	-1 &			&	 \\
+		$A^{\prime\prime}_2$	&	1	&	1	&	1	&	-1	&	-1  	& 	-1	&	-1	& 1 	&	$z$	&	\\
+		$E^{\prime\prime}_1$	&	2	&$2\cos\alpha$	& $2\cos 2\alpha$	&	0	&	-2	& $-2 \cos \alpha$ & $-2\cos 2\alpha$ & 0 & ($R_x$, $R_y$)	&	($xz$, $yz$) \\
+		$E^{\prime\prime}_2$	&	2	&$2\cos 2\alpha$	& $2\cos \alpha$	&	0	&	-2	& $-2 \cos 2\alpha$ & $-2\cos \alpha$ & 0		&		&	 \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Moreover, due to the same chemical nature of 10 $\pi$ orbitals of $C$ atoms, we have 
+	\begin{equation}
+		 \Gamma^{\ce{C}} = \Gamma^\pi .
+	\end{equation}
+	Then, the characters for these ligand representations in $\mathscr{D}_{\rm 5h}$ are:	
+	\begin{center}
+	\captionof{table}{Characters for the $\Gamma^\pi$ of the $\mathscr{D}_{\rm 5h}$ point group.}
+	\begin{tabular}{c|cccccccc}\hline
+		$\mathscr{D}_{\rm 5h}$ & $E$ & $2C_5$ & $2C^2_5$ & $5C_2$ & $\sigma_{\rm h}$ & $2S_5$ & $2S^3_5$ & $5\sigma_{\rm v}$ \\ \hline
+		$\chi^\pi(C_i)$	&	10	&	0	&	0	&	0	&	0	&	0	&	0	&	2	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain
+	\begin{equation}
+		\Gamma^{\ce{C}} = \Gamma^\pi = \Gamma^{A^\prime_1} \oplus \Gamma^{E^\prime_1} \oplus \Gamma^{E^\prime_2} \oplus \Gamma^{A^{\prime\prime}_2} \oplus \Gamma^{E^{\prime\prime}_1} \oplus \Gamma^{E^{\prime\prime}_2} .
+	\end{equation}
+	
+	Summing these contributions, the total representation $\Gamma^{\rm AO}$ decomposes as:
+	\begin{align}
+		\Gamma^{\rm AO} &= \Gamma^{\rm Fe} \oplus \Gamma^{\ce{C}} = \left[ 2 \Gamma^{A^\prime_1} \oplus \Gamma^{E^\prime_1} \oplus \Gamma^{E^\prime_2} \oplus \Gamma^{A^{\prime\prime}_2} \oplus \Gamma^{E^{\prime\prime}_1} \right] \oplus \left[ \Gamma^{A^\prime_1} \oplus \Gamma^{E^\prime_1} \oplus \Gamma^{E^\prime_2} \oplus \Gamma^{A^{\prime\prime}_2} \oplus \Gamma^{E^{\prime\prime}_1} \oplus \Gamma^{E^{\prime\prime}_2} \right] \notag \\
+		&= 3 \Gamma^{A^\prime_1} \oplus 2 \Gamma^{E^\prime_1} \oplus 2 \Gamma^{E^\prime_2} \oplus 2\Gamma^{A^{\prime\prime}_2} \oplus 2 \Gamma^{E^{\prime\prime}_1} \oplus \Gamma^{E^{\prime\prime}_2} .
+	\end{align}
+	
+	The total basis set generates the following molecular orbitals (MO):	
+	\begin{itemize}
+	
+	\item $\Gamma^{A^\prime_1}$:	 3 non-degenerate MOs. These result from the interaction between the $\ce{Fe}$ $4\orbs$, $3\orbd_{z^2}$ orbitals and the $a^\prime_1$ $\pi$-symmetry-adapted linear combinations (SALC) of the $\ce{C5H5}$ ligands.
+	
+	\item $\Gamma^{E^\prime_1}$: 2 pairs of doubly degenerate MOs. These result from the interaction between the $\ce{Fe}$ ($4\orbp_x$, $4\orbp_y$) orbital pair and the $e^\prime_1$ $\pi$-SALC.
+	
+	\item $\Gamma^{E^\prime_2}$: 2 pairs of doubly degenerate MOs. These result from the interaction between the $\ce{Fe}$ ($3\orbd_{x^2-y^2}$, $3\orbd_{xy}$) orbital pair and the $e^\prime_2$ $\pi$-SALC.
+	
+	\item $\Gamma^{A^{\prime\prime}_2}$: 2 non-degenerate MOs. These result from the interaction between the $\ce{Fe}$ $4\orbp_z$ orbital and the $a^{\prime\prime}_2$ $\pi$-SALC.
+	
+	\item $\Gamma^{E^{\prime\prime}_1}$: 1 pair of doubly degenerate MOs. These result from the interaction between the $\ce{Fe}$ ($3\orbd_{xz}$, $3\orbd_{yz}$) orbital pair and the $e^{\prime\prime}_1$ $\pi$-SALC.
+	
+	\item $\Gamma^{E^{\prime\prime}_2}$: 2 pairs of doubly degenerate MOs. These are purely ligand-based non-bonding orbitals derived from only the $e^{\prime\prime}_2$ $\pi$-SALC.
+	
+	\end{itemize}	
+	
+	In summary, the qualitative forms of the MOs are derived by matching the symmetry of the $\ce{Fe}$ atomic orbitals with the corresponding $\ce{C5H5}$ SALCs. While their exact energy ordering requires numerical calculations, this $\mathscr{D}_{\rm 5h}$ symmetry analysis defines the fundamental mixing rules and the nodal structure of the electronic framework.
+	
 	\end{solution}
 	
 	% 12.4
@@ -129,6 +382,21 @@
 	\end{exercise}
 	
 	\begin{solution}
+	
+	If readers only care about the final result, the solution is listed in the table 12-5.1 in the textbook. State D will be split into 4 irreducible representation $\Gamma^{A_{1g}}$, $\Gamma^{B_{1g}}$, $\Gamma^{B_{2g}}$ and $\Gamma^{E_g}$.
+	
+	Here, I just want to supply another view. The splitting of $d$-orbitals in a square-planar environment ($\mathscr{D}_{\rm 4h}$) can be derived by treating it as a limiting case of an octahedral field ($\mathscr{O}_{\rm h}$) with the two axial ligands removed. Using the descent in symmetry approach:
+	
+	\begin{itemize}
+	
+	\item The $e_g$ set ($\orbd_{x^2-y^2}$, $\orbd_{z^2}$) loses its degeneracy as the $z$-axis becomes unique. From the \Tableref{table:character_table_for_d4h}, it is evident that now the $\orbd_{x^2-y^2}$ belongs to $b_{1g}$, maintaining high energy due to direct overlap in the $xy$-plane, while the $\orbd_{z^2}$ orbital transforms as $a_{1g}$, with its energy decreasing significantly due to the absence of axial ligands.
+	
+	\item The $t_{2g}$ set ($\orbd_{xy}$, $\orbd_{xz}$, $\orbd_{yz}$) splits into a non-degenerate $b_{2g}$ ($\orbd_{xy}$) and a doubly-degenerate $e_g$ pair ($\orbd_{xz}$, $\orbd_{yz}$). The $e_g$ pair remains lower in energy as these orbitals extend into the vacant axial regions.
+	\end{itemize}
+			
+	Thus, the five-fold degenerate $\orbd$-orbitals in a spherical field, which split into $\Gamma^{E_g}$ and $\Gamma^{T_{2g}}$ in an octahedral environment, further split into $\Gamma^{A_{1g}}$, $\Gamma^{B_{1g}}$, $\Gamma^{B_{2g}}$, $\Gamma^{E_g}$ in a square-planar environment.
+	
+	By the way, however, the relative energy level of $\Gamma^{A_{1g}}$ and $\Gamma^{B_{2g}}$ are uncertain. In other words, while the descent in symmetry determines the irreducible representations, the relative energy between $\Gamma^{A_{1g}}$ ($\orbd_{z^2}$) and $\Gamma^{B_{2g}}$ ($\orbd_{xy}$) depends on the specific nature of the ligands and the metal-ligand distance.
 	
 	\end{solution}
 	
@@ -141,7 +409,378 @@
 	
 	\begin{solution}
 	
+	Firstly, I will directly deliver all $\orbd^3$ free-ion terms. In fact, the acquisition of these terms involves angular momentum addition and $L$-$S$ couplings, which are not covered in this textbook, so I will not go into detail about them here. Only the results are listed in \Tableref{table:free-ion_terms}.
+	
+	\begin{center}
+	\captionof{table}{All $\orbd^3$ free-ion terms and their irreducible representations (irreps). The numbers in parentheses following the irreps are the number of their basis functions. For example, for ${}^4 F$, the number is $4 \times (1+3+3)=28$. Note that there are two independent ${}^2 D$, which are distinguished by adding new subscripts.}\label{table:free-ion_terms}
+	{
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{c|c|c|c|c} \hline
+		States & ${}^4 F$ (28) & ${}^4 P$ (12) & ${}^2 G$ (18) & ${}^2 H$ (22) \\ \hline
+		Irreps & ${}^4 A_{2g}$, ${}^4 T_{1g}$, ${}^4 T_{2g}$ & ${}^4 T_{1g}$ & ${}^2 A_{1g}$, ${}^2 E_g$, ${}^2 T_{1g}$, ${}^2 T_{2g}$ & ${}^2 E_g$, ${}^2 T_{1g}(2)$,  ${}^2 T_{2g}$ \\ \hline
+		States & ${}^2 P$ (6) & ${}^2 D_1$ (10) & ${}^2 F$ (14) & ${}^2 D_2$ (10) \\ \hline
+		Irreps & ${}^2 T_{1g}$ & ${}^2 E_g$, ${}^2 T_{2g}$ & ${}^2 A_{2g}$, ${}^2 T_{1g}$, ${}^2 T_{2g}$ & ${}^2 E_g$, ${}^2 T_{2g}$ \\ \hline
+	\end{tabular}
+	}
+	\end{center}
+	
+	From \Tableref{table:free-ion_terms}, there are in total 20 irreducible representations, and $28 + 12 + 18 + 22 + 6 + 10 + 14 + 10 = 120$ basis functions.
+	
+	Secondly, there are totally $\binom{10}{3} = \frac{10!}{3!7!} = 120$ basis functions in the strong-field configurations, coincidence with the free-ion terms. Moreover, there 4 cases to be discussed separately: $t^3_{2g}$, $t^2_{2g}e^1_g$, $t^1_{2g}e^2_g$, and $e^3_g$. The partial product table needed for calculating the direct products between two irreps are:	
+	\begin{center}
+	\captionof{table}{Partial product table for $\mathscr{O}_{\rm h}$ point group.}\label{table:partial_product_table_for_oh}
+	{
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $\Gamma^{A_{1g}}$ & $\Gamma^{A_{2g}}$ & $\Gamma^{E_g}$ & $\Gamma^{T_{1g}}$ & $\Gamma^{T_{2g}}$ \\ \hline 
+		$\Gamma^{A_{1g}}$ & $\Gamma^{A_{1g}}$ & $\Gamma^{A_{2g}}$ & $\Gamma^{E_g}$ & $\Gamma^{T_{1g}}$ & $\Gamma^{T_{2g}}$ \\
+		$\Gamma^{A_{2g}}$ & $\Gamma^{A_{2g}}$ & $\Gamma^{A_{1g}}$ & $\Gamma^{E_g}$ & $\Gamma^{T_{2g}}$ & $\Gamma^{T_{1g}}$ \\
+		$\Gamma^{E_g}$ & $\Gamma^{E_g}$ & $\Gamma^{E_g}$ & $\Gamma^{A_{1g}} \oplus \Gamma^{A_{2g}} \oplus \Gamma^{E_g}$ & $\Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ & $\Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ \\
+		$\Gamma^{T_{1g}}$ & $\Gamma^{T_{1g}}$ & $\Gamma^{T_{2g}}$ & $\Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ & $\Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ & $\Gamma^{A_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$\\
+		$\Gamma^{T_{2g}}$ & $\Gamma^{T_{2g}}$ & $\Gamma^{T_{1g}}$ & $\Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ & $\Gamma^{A_{2g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ & $\Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}}$ \\ \hline
+	\end{tabular}
+	}
+	\end{center}		
+	
+	Now we start to discuss various situations. Their handling goes far beyond the scope of this textbook. But I will continue to document them. The methodology for determining multiplet terms of equivalent and non-equivalent configurations is listed below:
+	\begin{itemize}
+	
+	\item For equivalent configurations, where electrons occupy the same irrep: 
+	
+		\begin{enumerate}
+		
+		\item Space Construction: Determine the direct product result of the $m$-dimensional irrep. The number of direct product calculations equals the total number of electrons $n$, resulting in a tensor space of dimension $m^n$.
+		
+		\item Permutational Symmetry Decomposition: Decompose this $m^n$-dimensional representation according to the partitions (Young diagrams) of the symmetric group $S_n$. 
+		
+		\item Character Calculation via Schur Polynomials: For a specific partition $[\lambda]$, the character $\chi^{[\lambda]}(R)$ for a point group operation $R$ is equivalent to the Schur polynomial $s_{[\lambda]}(x_1, \dots, x_m)$, where $\{x_1, \dots, x_m\}$ are the eigenvalues of the point group operation $R$ acting on the $m$-dimensional irrep basis. This is calculated by summing the weights of all possible Semi-Standard Young Tableaux (SSYT) for that partition.
+		
+		\item Reduction to Point Group: Using the derived character, decompose the representation into the irreducible representations of the point group.
+		
+		\end{enumerate}
+		
+		Here, the Pauli Exclusion Principle makes sense. Crucially, the choice of the partition $[\lambda]$ for the spatial part must be the conjugate of the spin part's partition to ensure the total wave function is totally antisymmetric.
+		
+	\item For non-equivalent configurations, where electrons occupy different irreps):
+	
+		\begin{enumerate}
+		
+		\item Partial Symmetry Treatment: For each subset of $k$ electrons occupying the same irrep ($k \ge 2$), first perform the $S_k$ decomposition as described above to find the valid terms for that specific sub-shell.
+		
+		\item Inter-shell Coupling: For electrons in different irreps, since they are spatially distinct, perform a simple direct product of their respective resulting irreps (coupling of irreducible representations) to find the final states.
+		
+		\end{enumerate}
+	
+	\end{itemize}
+	
+	After introducing the methods, I will treat 4 situations.	
+	
+	\begin{enumerate}
+	
+	\item $t^3_{2g}$: It is an equivalent configuration, including two multiplicity. One corresponds to the quartet state, and the other to the doublet state. Moreover, $\Gamma^{T_{2g}} \otimes \Gamma^{T_{2g}} \otimes \Gamma^{T_{2g}}$ is a $3^3 = 27$ dimensional representation. However, it generates all 5 {\it gerade} irreps from \Tableref{table:partial_product_table_for_oh}. What is more, $S_3$ has 3 partitions, $[3]$, $[2,1]$ and $[1^3]$, which are 10, 16, 1-dimensional, respectively, calculated by the hook content formula. Due to no anti-symmetric spin states, the representation $[3]$ makes nonsense.
+		
+		\begin{itemize}
+		
+		\item The quartet state requires the representation $[1^3]$, whose character is $x_1 x_2 x_3$ for its only SSYT. Due to
+		\[
+			x_1 x_2 x_3 = \frac{1}{6} \left[ ( x_1 + x_2 + x_3 )^3 - 3 ( x_1 + x_2 + x_3 )( x_1^2 + x_2^2 + x_3^2 ) + 2( x^3_1 + x^3_2 + x^3_3 ) \right] ,
+		\]
+		we have convert the character of $[1^3]$ to the power sums of eigenvalues. An important truth is that for any $n$-dimensional square matrix $A$ with eigenvalues $a_1, a_2, \ldots, a_n$, the matrix power $A^m$ has eigenvalues $a^n_1, a^n_2, \ldots, a^m_n$. Thus, we have
+		\begin{align}
+			\chi^{ [1^3] }(R) &= x_1 x_2 x_3 \notag \\
+			&= \frac{1}{6} \left[ ( x_1 + x_2 + x_3 )^3 - 3 ( x_1 + x_2 + x_3 )( x_1^2 + x_2^2 + x_3^2 ) + 2( x^3_1 + x^3_2 + x^3_3 ) \right] \notag \\
+			&= \frac{1}{6} \left[ \chi^{T_{2g}}(R)^3 - 3 \chi^{T_{2g}}(R) \chi^{T_{2g}}(R^2) + 2 \chi^{T_{2g}}(R^3) \right] .
+		\end{align}
+		By this equation, we obtain the character of $[1^3]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[1^3]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[1^3]}(C_i)$ & 1 & 1 & 1 & -1 & -1 \\ \hline
+		\end{tabular}
+		\end{center}
+		Compared to the partial character table of $\mathscr{O}_{\rm h}$, viz.\Tableref{table:partial_character_table_for_oh}, it is evident that
+		\begin{equation}
+			\Gamma^{[1^3]} = \Gamma^{A_{2g}} .
+		\end{equation}
+		\begin{center}
+		\captionof{table}{Partial character table for $\mathscr{O}_{\rm h}$.}\label{table:partial_character_table_for_oh}
+	\begin{tabular}{c|ccccc}\hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1 	\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1  	\\
+		$E_g$	&	2	&	-1	&	2	&	0	&	0	\\
+		$T_{1g}$	&	3	&	0	&	-1	&	1	&	-1  	\\
+		$T_{2g}$	&	3	&	0	&	-1	&	-1	&	1 	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+		Thus, we know that there is only one quartet strong-field term, ${}^4 A_{2g}$.
+		
+		\item The doublet state requires the representation $[2,1]$, whose character is $s_{[2,1]}(x_1, x_2, x_3)$. Using Jacobi-Trudi Identity, we obtain
+		\[
+			s_{[2,1]}(x_1, x_2, x_3) = \begin{vmatrix}
+				h_2 & h_3 & h_4 \\
+				1 & h_1 & h_2 \\
+				0 & 0 & 1
+			\end{vmatrix} = h_1 h_2 - h_3 ,
+		\]
+		where $h_n(x_1, x_2, x_3)$ is the complete homogeneous symmetric polynomial,
+		\[
+			h_n \equiv h_n(x_1, x_2, x_3) \equiv \sum_{m_1 + m_2 + m_3 = n} \prod_{j=1}^3 x^{m_j} .
+		\]
+		With Newton Identity about $h_n$ and power sums $p_n = \sum_{j=1}^3 x^n_j$, we have
+		\begin{align*}
+			h_1 &= p_1 , \\
+			2 h_2 &= h_1 p_1 + p_2 , \\
+			3 h_3 &= h_2 p_1 + h_1 p_2 + p_3 .
+		\end{align*}
+		Then we can express $h_3$ as various combinations of $p_n$.
+		\begin{align*}
+			h_1 &= p_1 , \\
+			h_2 &= \frac{1}{2} \left( h_1 p_1 + p_2 \right) = \frac{1}{2} \left( p_1 p_1 + p_2 \right) = \frac{1}{2} \left( p_2 + p^2_1 \right) , \\
+			h_3 &= \frac{1}{3} \left( h_2 p_1 + h_1 p_2 + p_3 \right) = \frac{1}{3} \left[ \frac{1}{2} \left( p_2 + p^2_1 \right) p_1 + p_1 p_2 + p_3 \right] = \frac{1}{3} p_3 + \frac{1}{2} p_1 p_2 + \frac{1}{6} p^3_1 .
+		\end{align*}				
+		And now we can express $s_{[2,1]}(x_1, x_2, x_3)$ as
+		\begin{align*}
+			s_{[2,1]}(x_1, x_2, x_3) &= h_1 h_2 - h_3 \\
+			&= \frac{1}{2} \left( p_2 + p^2_1 \right) p_1 - \left( \frac{1}{3} p_3 + \frac{1}{2} p_1 p_2 + \frac{1}{6} p^3_1 \right) \\
+			&= \frac{1}{3} p^3_1 - \frac{1}{3} p_3 = \frac{1}{3} \left( p^3_1 - p_3 \right) . 
+		\end{align*}
+		Thus, we have
+		\begin{equation}
+			\chi^{[2,1]}(R) = s_{[2,1]}(x_1, x_2, x_3) = \frac{1}{3} \left( p^3_1 - p_3 \right) = \frac{1}{3} \left( \chi^{T_{2g}}(R)^3 - \chi^{T_{2g}}(R^3) \right) . 
+		\end{equation}
+		By this equation, we obtain the character of $[2,1]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[2,1]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[2,1]}(C_i)$ & 8 & -1 & 0 & 0 & 0 \\ \hline
+		\end{tabular}
+		\end{center}
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		\begin{equation}
+			\Gamma^{[2,1]} = \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}} .
+		\end{equation}
+		
+		Therefore, we know that there are only three doublet strong-field terms, ${}^2 E_g$, ${}^2 T_{1g}$, and ${}^2 T_{2g}$.
+		
+		\end{itemize}
+		
+		Summing these terms, the total representation of $t^3_{2g}$ decomposes as:
+		\begin{equation}
+			\Gamma^{t^3_{2g}} = \Gamma^{{}^4 A_{2g}} \oplus \Gamma^{{}^2 E_g} \oplus \Gamma^{{}^2 T_{1g}} \oplus \Gamma^{{}^2 T_{2g}}.
+		\end{equation}
+	
+	\item $t^2_{2g}e^1_g$: It is a non-equivalent configuration, including two multiplicity. One corresponds to the quartet state, and the other to the doublet state. However, these arise from the coupling between the $t^2_{2g}$ parent term and the $e^1_g$ electron: the quartet stems from the coupling of the $t^2_{2g}$ triplet state with the $e^1_g$ doublet, while the doublet involves the $t^2_{2g}$ singlet or triplet states.
+	
+	For the $t^2_{2g}$ part, the $3^2=9$-dimensional spatial part has 4 kinds of irreps from \Tableref{table:partial_product_table_for_oh}.
+	\[
+		\Gamma^{T_{2g}} \otimes \Gamma^{T_{2g}} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}} .
+	\]
+	Moreover, the spatial wavefunctions are classified by the $S_2$ partitions $[2]$ and $[1^2]$. Using the hook content formula for $N=3$ (the degeneracy of $t_{2g}$), these yield 6-dimensional (symmetric) and 3-dimensional (antisymmetric) orbital spaces respectively. Following the principle of parentage, we first determine the irreducible representations of the $t^2_{2g}$ configuration and then perform the direct product with the $\Gamma^{E_g}$ representation.
+	
+		\begin{itemize}
+		
+		\item The triplet state requires the representation $[1^2]$, whose character is $s_{[1^2]}(x_1, x_2, x_3)$. Using Jacobi-Trudi Identity, we also obtain
+		\[
+			s_{[1^2]}(x_1, x_2, x_3) = \begin{vmatrix}
+				h_1 & h_2 \\
+				 1	& h_1 \\
+			\end{vmatrix} = h^2_1 - h_2 = p^2_1 - \frac{1}{2} \left( p_2 + p^2_1 \right) = \frac{1}{2} \left( - p_2 + p^2_1 \right) .
+		\]
+		Therefore,
+		we have
+		\begin{equation}
+			\chi^{[1^2]}(R) = s_{[1^2]}(x_1, x_2, x_3) = \frac{1}{2} \left( - p_2 + p^2_1 \right) = \frac{1}{2} \left( - \chi^{T_{2g}}(R^2) + \chi^{T_{2g}}(R)^2 \right) .
+		\end{equation}
+		By this equation, we obtain the character of $[1^2]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[1^2]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[1^2]}(C_i)$ & 3 & 0 & -1 & 1 & -1 \\ \hline
+		\end{tabular}
+		\end{center}
+		Compared to the partial character table of $\mathscr{O}_{\rm h}$, viz., \Tableref{table:partial_character_table_for_oh}, it is evident that
+		\begin{equation}
+			\Gamma^{[1^2]} = \Gamma^{T_{1g}} .
+		\end{equation}
+		Therefore, we know that there is only one triplet strong-field terms, ${}^3 T_{1g}$.
+		
+		\item The singlet state requires the representation $[2]$, whose character is $s_{[2]}(x_1, x_2, x_3)$. Using Jacobi-Trudi Identity, we also obtain
+		\[
+			s_{[2]}(x_1, x_2, x_3) = \begin{vmatrix}
+				h_2
+			\end{vmatrix} = h_2 = \frac{1}{2} \left( p_2 + p^2_1 \right) .
+		\]
+		Therefore,
+		we have
+		\begin{align}
+			\chi^{[2]}(R) = s_{[2]}(x_1, x_2, x_3) = \frac{1}{2} \left( p_2 + p^2_1 \right) = \frac{1}{2} \left( \chi^{T_{2g}}(R^2) + \chi^{T_{2g}}(R)^2 \right) .
+		\end{align}
+		By this equation, we obtain the character of $[2]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[2]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[2]}(C_i)$ & 6 & 0 & 2 & 0 & 2 \\ \hline
+		\end{tabular}
+		\end{center}
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		\begin{equation}
+			\Gamma^{[2]} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{2g}} .
+		\end{equation}
+		
+		Therefore, we know that there are only three singlet strong-field terms, ${}^1 A_{1g}$, ${}^1 E_g$, and ${}^1 T_{2g}$.
+		
+		\end{itemize}
+		
+		It is turn to calculate the couplings of states of $t^2_{2g}$ and $e_g$ parts. With \Tableref{table:partial_product_table_for_oh}, finally we obtain results:
+		\begin{center}
+		\captionof{table}{Couplings between $t^2_{2g}$ and $e_g$ parts.}
+		{
+		\renewcommand\arraystretch{1.3}
+		\begin{tabular}{c|c|c} \hline
+			Irreps' direct product & Vector addition & Result \\ \hline
+			${}^3 T_{1g} \otimes {}^2 E_g$ & $1+\frac{1}{2} = \frac{3}{2}$ & ${}^4 T_{1g}$, ${}^4 T_{2g}$ \\ \hline
+			${}^3 T_{1g} \otimes {}^2 E_g$ & $1-\frac{1}{2} = \frac{1}{2}$ & ${}^2 T_{1g}$, ${}^2 T_{2g}$ \\ \hline
+			${}^1 A_{1g} \otimes {}^2 E_g$ & $0+\frac{1}{2} = \frac{1}{2}$ & ${}^2 E_g$ \\ \hline
+			${}^1 E_g \otimes {}^2 E_g$ & $0+\frac{1}{2} = \frac{1}{2}$ & ${}^2 A_{1g}$, ${}^2 A_{2g}$, ${}^2 E_g$ \\ \hline
+			${}^1 T_{2g} \otimes {}^2 E_g$ & $0+\frac{1}{2} = \frac{1}{2}$ & ${}^2 T_{1g}$, ${}^2 T_{2g}$ \\ \hline
+		\end{tabular}
+		}		
+		\end{center}	
+		
+		Summing these terms, the total representation of $t^2_{2g}e_g$ decomposes as:
+		\begin{equation}
+			\Gamma^{t^2_{2g}e_g} = \Gamma^{{}^4 T_{1g}} \oplus \Gamma^{{}^4 T_{2g}} \oplus \Gamma^{{}^2 A_{1g}} \oplus \Gamma^{{}^2 A_{2g}} \oplus 2 \Gamma^{{}^2 E_g} \oplus 2 \Gamma^{{}^2 T_{1g}} \oplus 2 \Gamma^{{}^2 T_{2g}} . 
+		\end{equation}
+	
+		\item $t^1_{2g}e^2_g$:  It is also a non-equivalent configuration, including two multiplicity. One corresponds to the quartet state, and the other to the doublet state. However, these arise from the coupling between the $e^2_g$ parent term and the $t^1_{2g}$ electron: the quartet stems from the coupling of the $e^2_g$ triplet state with the $t^1_{2g}$ doublet, while the doublet involves the $e^2_g$ singlet or triplet states.
+	
+		For the $e^2_g$ part, the $2^2=4$-dimensional spatial part has 3 kinds of irreps from \Tableref{table:partial_product_table_for_oh}.
+		\[
+			\Gamma^{E_g} \otimes \Gamma^{E_g} = \Gamma^{A_{1g}} \oplus \Gamma^{A_{2g}} \oplus \Gamma^{E_g} .
+		\]
+		Moreover, the spatial wavefunctions are also classified by the $S_2$ partitions $[2]$ and $[1^2]$. Using the hook content formula for $N=2$ (the degeneracy of $e_g$), these yield 3-dimensional (symmetric) and 1-dimensional (antisymmetric) orbital spaces respectively. Following the principle of parentage, we first determine the irreducible representations of the $e^2_g$ configuration and then perform the direct product with the $\Gamma^{T_{2g}}$ representation.
+	
+		\begin{itemize}
+		
+		\item The triplet state requires the representation $[1^2]$, whose character is $s_{[1^2]}(x_1, x_2, x_3)$. Similarly, we can obtain the equation of characters of $[1^2]$:
+		\begin{equation}
+			\chi^{[1^2]}(R) = \frac{1}{2} \left( - \chi^{E_g}(R^2) + \chi^{E_g}(R)^2 \right) .
+		\end{equation}
+		By this equation, we obtain the character of $[1^2]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[1^2]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[1^2]}(C_i)$ & 1 & 1 & 1 & -1 & -1 \\ \hline
+		\end{tabular}
+		\end{center}
+		Compared to the partial character table of $\mathscr{O}_{\rm h}$, viz., \Tableref{table:partial_character_table_for_oh}, it is evident that
+		\begin{equation}
+			\Gamma^{[1^2]} = \Gamma^{A_{2g}} .
+		\end{equation}
+		Therefore, we know that there is only one triplet strong-field terms, ${}^3 A_{1g}$.
+		
+		\item The singlet state requires the representation $[2]$, whose character is $s_{[2]}(x_1, x_2, x_3)$. Similarly, we can obtain the equation of characters of $[2]$:
+		\begin{align}
+			\chi^{[2]}(R) = \frac{1}{2} \left( \chi^{T_{2g}}(R^2) + \chi^{T_{2g}}(R)^2 \right) .
+		\end{align}
+		By this equation, we obtain the character of $[2]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[2]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[2]}(C_i)$ & 3 & 0 & 3 & 1 & 1 \\ \hline
+		\end{tabular}
+		\end{center}
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		\begin{equation}
+			\Gamma^{[2]} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} .
+		\end{equation}
+		
+		Therefore, we know that there are only two singlet strong-field terms, ${}^1 A_{1g}$, ${}^1 E_g$.
+		
+		\end{itemize}
+		
+		It is turn to calculate the couplings of states of $t_{2g}$ and $e^2_g$ parts. With \Tableref{table:partial_product_table_for_oh}, finally we obtain results:
+		\begin{center}
+		\captionof{table}{Couplings between $t_{2g}$ and $e^2_g$ parts.}
+		{
+		\renewcommand\arraystretch{1.3}
+		\begin{tabular}{c|c|c} \hline
+			Irreps' direct product & Vector addition & Result \\ \hline
+			${}^2 T_{2g} \otimes {}^3 A_{2g}$ & $1+\frac{1}{2} = \frac{3}{2}$ & ${}^4 T_{1g}$ \\ \hline
+			${}^2 T_{2g} \otimes {}^3 A_{2g}$ & $1-\frac{1}{2} = \frac{1}{2}$ & ${}^2 T_{1g}$ \\ \hline
+			${}^2 T_{2g} \otimes {}^1 A_{1g}$ & $0+\frac{1}{2} = \frac{1}{2}$ & ${}^2 T_{2g}$ \\ \hline
+			${}^2 T_{2g} \otimes {}^1 E_g$ & $0+\frac{1}{2} = \frac{1}{2}$ & ${}^2 T_{1g}$, ${}^2 T_{2g}$ \\ \hline
+		\end{tabular}
+		}		
+		\end{center}	
+		
+		Summing these terms, the total representation of $t_{2g}e^2_g$ decomposes as:
+		\begin{equation}
+			\Gamma^{t^2_{2g}e_g} = \Gamma^{{}^4 T_{1g}} \oplus 2 \Gamma^{{}^2 T_{1g}} \oplus 2 \Gamma^{{}^2 T_{2g}} . 
+		\end{equation}
+	
+	\item $e^3_g$: It is also an equivalent configuration but including only doublet. Moreover, $\Gamma^{E_g} \otimes \Gamma^{E_g} \otimes \Gamma^{E_g}$ is a $2^3 = 8$ dimensional representation. Luckily, it generates only 3 {\it gerade} irreps, $\Gamma^{A_{1g}}$, $\Gamma^{A_{2g}}$ and $\Gamma^{E_g}$, from \Tableref{table:partial_product_table_for_oh}. What is more, $S_3$ has 3 partitions, $[3]$, $[2,1]$ and $[1^3]$, which are 10, 16, 1-dimensional, respectively, calculated by the hook content formula. Because currently only doublet states are needed, it is enough to calculate the partition $[2,1]$ only. Its character is $s_{[2,1]}(x_1, x_2, x_3)$ and similarly, we can obtain the equation of characters of $[2,1]$:
+		\begin{equation}
+			\chi^{[2,1]}(R) = \frac{1}{3} \left( \chi^{T_{2g}}(R)^3 - \chi^{T_{2g}}(R^3) \right) . 
+		\end{equation}
+		
+		By this equation, we obtain the character of $[2,1]$:
+		\begin{center}
+		\captionof{table}{Characters of the $\Gamma^{[2,1]}$ of the $\mathscr{O}_{\rm h}$ point group.}
+		\begin{tabular}{c|ccccc} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ \\ \hline
+		$\chi^{[2,1]}(C_i)$ & 2 & -1 & 2 & 0 & 0 \\ \hline
+		\end{tabular}
+		\end{center}
+		Compared to the partial character table of $\mathscr{O}_{\rm h}$, viz., \Tableref{table:partial_character_table_for_oh}, it is evident that
+		\begin{equation}
+			\Gamma^{[2,1]} = \Gamma^{E_g} .
+		\end{equation}
+		Therefore, we know that there is only one doublet strong-field terms, ${}^2 E_g$, and thus
+		\begin{equation}
+			\Gamma^{e^3_g} = \Gamma^{E_g} .
+		\end{equation}
+			
+	\end{enumerate}
+	
+	Now, summing these information, the belonging of strong-field terms is clear:
+	\begin{center}
+	{
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{c|c|c} \hline
+		Strong-field configurations & Dimension & Strong-field terms \\ \hline
+			$t^3_{2g}$	& 20 & ${}^4 A_{2g}$, ${}^2 E_g$, ${}^2 T_{1g}$, ${}^2 T_{2g}$\\ \hline
+			$t^2_{2g}e_g$ & 60 & ${}^4 T_{1g}$, ${}^4 T_{2g}$, ${}^2 A_{1g}$, ${}^2 A_{2g}$, ${}^2 E_g(2)$, ${}^2 T_{1g}(2)$, ${}^2 T_{2g}(2)$  \\ \hline
+			$t_{2g}e^2_{2g}$ & 36 & ${}^4 T_{1g}$, ${}^2 T_{1g}(2)$, ${}^2 T_{2g}(2)$ \\  \hline
+			$e^3_{2g}$ & 4 & ${}^2 E_g$ \\ \hline
+	\end{tabular}
+	}
+	\end{center}
+	
+	Finally, the correlation diagram for a $\orbd^3$ ion in an octahedral environment can be painted. However, the relative position of various terms are uncertain.
+	
+	\begin{center}
+	\centering
+	\setlength{\abovecaptionskip}{0.5em}
+	\includegraphics[scale=0.8]{../diagrams/chapter_12/d3_configuration_in_octahedral_environment.png}
+	\captionof{figure}{Correlation diagram (not to scale) for a $\orbd^3$ ion in an octahedral environment. The position of the left and right terms connected by green lines is also confirmed by B. N. Figgis {\it Introduction to ligand fields} but the position of the left and right terms connected by orange lines is uncertain.}\label{fig:C2_molecules}
+	\end{center}		
+	
 	\end{solution}
+	
+	\begin{remark}
+	
+		The diagram 3.2 in B. N. Figgis {\it Introduction to ligand fields} has an error. From the top to the bottom, the third term should be ${}^2 D$ rather than ${}^2 P$. The contents can be borrowed from \url{https://archive.org}.
+	
+	\end{remark}
 
 
 \end{document}
