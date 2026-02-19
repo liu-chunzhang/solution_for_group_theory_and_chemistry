@@ -65,6 +65,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -90,13 +102,13 @@
 		Given the characters $\chi$ of a reducible representation $\Gamma$ of the indicated point group $\mathscr{G}$ for the various classes of $\mathscr{G}$ in the order in which these classes appear in the character table, find the number of times irreducible representation occurs in $\Gamma$.
 		\begin{enumerate}[label=(\alph*)]
 		
-		\item $\mathscr{C}_{\rm 2v}$ $\chi = 4, -2, 0, -2$,
+		\item $\mathscr{C}_{\rm 2v}$ $\chi =$ 4, -2, 0, -2,
 		
-		\item $\mathscr{C}_{\rm 3h}$ $\chi = 4, 1, 1, 2, -1, -1$,
+		\item $\mathscr{C}_{\rm 3h}$ $\chi =$ 4, 1, 1, 2, -1, -1,
 		
-		\item $\mathscr{D}_{\rm 4d}$ $\chi = 6, 0, -2, 0, -2, 0, 0$,
+		\item $\mathscr{D}_{\rm 4d}$ $\chi =$ 6, 0, -2, 0, -2, 0, 0,
 		
-		\item $\mathscr{O}_{\rm h}$ $\chi = 15, 0, -1, 1, 1, -3, 0, 5, -1 , 3$.
+		\item $\mathscr{O}_{\rm h}$ $\chi =$ 15, 0, -1, 1, 1, -3, 0, 5, -1 , 3.
 		
 		\end{enumerate}				
 		
@@ -104,10 +116,11 @@
 
 	\begin{solution}
 	
+	There are two methods. I will show both for the first issue and treat the others in the same way.
+		
 	\begin{enumerate}[label=(\alph*)]
 	
-	\item 1
-	
+	\item Firstly, we show the character table of the point group $\mathscr{C}_{\rm 2v}$:
 	\begin{center}
 	\captionof{table}{The character table for the $\mathscr{C}_{\rm 2v}$ point group.}\label{table:character_table_of_c2v}
 	\begin{tabular}{c|cccc} \hline
@@ -118,9 +131,61 @@
 		$B_2$	&	1	&	-1	&	-1	&	1	\\ \hline
 	\end{tabular}
 	\end{center}
+	With (7-4.1), if we assume
+	\begin{equation*}
+		\Gamma^{\rm red} = a_1 \Gamma^{A_1} \oplus a_2 \Gamma^{A_2} \oplus b_1 \Gamma^{B_1} \oplus b_2 \Gamma^{B_2} ,
+	\end{equation*}				
+	where $a_1$, $a_2$, $b_1$ and $b_2$ are variables to be solved, then for class $\{E\}$,
+	\begin{equation*}
+		\chi^{\rm red}(E) = a_1 \chi^{A_1}(E) + a_2 \chi^{A_2}(E) + b_1 \chi^{B_1}(E) + b_2 \chi^{B_2}(E) ,
+	\end{equation*}
+	it will be
+	\begin{equation*}
+		1 \times a_1 + 1 \times a_2 + 1 \times b_1 + 1 \times b_2 = 4.
+	\end{equation*}
+	Similarly, for classes $\{C_2\}$, $\{ \sigma_{\rm v}(xz)\}$ and $\{ \sigma_{\rm v}(yz)\}$, we obtain
+	\begin{align*}
+		a_1 + a_2 - b_1 - b_2 &= -2 , \\
+		a_1 - a_2 + b_1 - b_2 &= 0 , \\
+		a_1 - a_2 - b_1 + b_2 &= -2 .
+	\end{align*}
+	Solve the group of linear equations in $Ax=b$ form, viz.
+	\begin{equation*}
+		\begin{pmatrix}
+			1 & 1 & 1 & 1\\
+			1 & 1 & -1 & -1 \\
+			1 & -1 & 1 & -1 \\
+			1 & -1 & -1 & 1
+		\end{pmatrix}
+		\begin{pmatrix}
+			a_1 \\ a_2 \\ b_1 \\ b_2
+		\end{pmatrix} =
+		\begin{pmatrix}
+			4 \\ -2 \\ 0 \\ -2
+		\end{pmatrix},
+	\end{equation*}
+	it is easy to find
+	\begin{equation*}
+		a_1 = 0 , \quad a_2 = 1 , \quad b_1 = 2 , \quad b_2 = 1.
+	\end{equation*}
+	Thus,
+	\begin{equation}
+		\Gamma^{\rm red} = \Gamma^{A_2} \oplus 2 \Gamma^{B_1} \oplus \Gamma^{B_2} .
+	\end{equation}
 	
-	\item 2
-	
+	Secondly, we can calculate reduction coefficients of the reducible representation $\Gamma^{\rm red}$ via (7-4.2). For instance, for the irreducible representation $A_1$,
+	\[
+		a_1 = \frac{1}{4} \left[ 1 \times 4 \times 1 + 1 \times (-2) \times 1 + 1 \times 0 \times 1 + 1 \times (-2) \times 1 \right] = \frac{1}{12} \times ( 4 - 2 + 0 - 2 ) = 0.
+	\]
+	In the same way, we can calculate others' reduction coefficients.
+	\begin{align*}
+		a_2 &= \frac{1}{4} ( 4 - 2 - 0 + 2 )= 1, \\
+		b_1 &= \frac{1}{4} ( 4 + 2 + 0 + 2 )= 2, \\
+		b_2 &= \frac{1}{4} ( 4 + 2 - 0 - 2 )= 1. 
+	\end{align*}
+	The final result is the same.
+
+	\item We show the character table of the point group $\mathscr{C}_{\rm 3h}$:
 	\begin{center}
 	\captionof{table}{The character table for the $\mathscr{C}_{\rm 3h}$ point group.}\label{table:character_table_of_c3h}
 	\begin{tabular}{c|cccccc} \hline
@@ -133,9 +198,18 @@
 					&	1	&	$\varepsilon^*$	&	$\varepsilon$	&	-1	&	$-\varepsilon^*$	&	$-\varepsilon$	\\ \hline
 	\end{tabular}
 	\end{center}
+	The similar calculation process is omitted. However, using the first method, we will find that 
+	\[
+		a^\prime = 1, e^\prime = 1, e^\prime_* = 1 , a^{\prime\prime} = 1. 
+	\]
+	If the physical system of your interest has time-reversal symmetry, then the reduction coefficients of the $E$ and $E^*$ must be equal.
 	
-	\item 3
+	The final result is
+	\begin{equation}
+		\Gamma^{\rm red} = \Gamma^{A^\prime} \oplus \Gamma^{E^\prime} \oplus \Gamma^{A^{\prime\prime}} .
+	\end{equation}
 	
+	\item We show the character table of the point group $\mathscr{D}_{\rm 4d}$:
 	\begin{center}
 	\captionof{table}{The character table for the $\mathscr{D}_{\rm 4d}$ point group.}\label{table:character_table_of_d4d}
 	\begin{tabular}{c|ccccccc} \hline
@@ -149,9 +223,12 @@
 		$E_3$	&	2	& $-\sqrt{2}$ & 0 & $\sqrt{2}$ & -2 & 0 	&	0	\\ \hline
 	\end{tabular}
 	\end{center}
+	The similar calculation process is omitted. The final result is
+	\begin{equation}
+		\Gamma^{\rm red} = \Gamma^{E_1} \oplus \Gamma^{E_2} \oplus \Gamma^{E_3} .
+	\end{equation}
 	
-	\item 4
-	
+	\item We show the character table of the point group $\mathscr{O}_{\rm h}$:
 	\begin{center}
 	\captionof{table}{The character table for the $\mathscr{O}_{\rm h}$ point group.}\label{table:character_table_of_oh}
 	\begin{tabular}{c|cccccccccc} \hline
@@ -168,11 +245,47 @@
 		$T_{2u}$ &	3	&	0	&	-1	&	-1	&	1	&	-3	&	0	&	1	&	1	&	-1	\\ \hline
 	\end{tabular}
 	\end{center}
-	
+	The similar calculation process is omitted. The final result is
+	\begin{equation}
+		\Gamma^{\rm red} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{2g}} \oplus 2 \Gamma^{T_{1u}} \oplus \Gamma^{T_{2u}} .
+	\end{equation}
+
 	\end{enumerate}
-	
+
 	\end{solution}
 	
+	\begin{remark}
+	
+	I think that the solution of the system of linear equations is better than the application of reduction formula, viz., (7-4.2) in the textbook. There are two aspects.
+	
+	\begin{itemize}
+	
+	\item Algorithm Efficiency: In group representation theory, assume the number of (conjugate) classes of a group is $n$ (which is also equal to the number of irreducible representations). We analyse the calculation complexity of these two methods firstly.
+		\begin{itemize}
+		
+		\item Reduction formula: You need to calculate $\frac{1}{g}\sum g_i \chi^{\rm red}(g)\chi^i(g)$ once for each irreducible representation $\Gamma^i$. For all irreducible representations, the total complexity is approximately $O(n^2)$.
+		
+		\item Solution of the system of linear equations: Essentially, it solves $Ax = b$, where $A$ is the feature table matrix ($n \times n$). Using the Gauss-Jordan method or LU decomposition, the complexity is $O(n^3)$.
+		
+		\end{itemize}
+	   Theoretically, $O(n^2)$ is better than $O(n^3)$. However, in practice, the $n$ of a point group is extremely small (usually $< 20$), and $20^3$ can be completed in microseconds for a modern computer. On the contrary, because the solution of the system of linear equations can solve for all coefficients at once, the engineering overhead is actually smaller when calling mature linear algebra libraries (such as \verb!numpy.linalg.solve! in Python language).
+	   
+	\item Engineering Implementation: When writing scripts, the solution of the system of linear equations has several significant engineering advantages.
+	
+		\begin{itemize}
+		
+		\item Code conciseness: There is no need to write complex loops for weighted summation; a single line of \verb!numpy.linalg.solve(A, b)! does the trick.
+		
+		\item Robustness check: The solved coefficients $a_i$ must be non-negative integers. In programming, you can use this for validation: if the solution has components like 0.333333 or -1, the program can immediately report an error, reminding you that at least one of $A$ and $b$ is incorrect.
+		
+		\item Matrix reuse: If multiple different representations of the same point group (such as vibration representation, rotation representation, orbital representation) are decomposed, the matrix $A$ remains unchanged. You can invert or decompose $A$ beforehand, and the subsequent reduction becomes pure matrix multiplication, instantly boosting efficiency.
+		
+		\end{itemize}
+	
+	\end{itemize}
+		
+	\end{remark}
+
 	% 7.2
 	\begin{exercise}
 	
@@ -181,19 +294,34 @@
 	\end{exercise}
 
 	\begin{solution}
-
+	
+	We show the character table of the point group $\mathscr{D}_{\rm 4}$:
 	\begin{center}
-		\setlength{\abovecaptionskip}{0em}
-		\captionof{table}{The character table for the $\mathscr{D}_{\rm 4}$ point group.}\label{tab:chatab_3}
-		\begin{tabular}{cccccc}\hline
-	$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime}_2$ \\ \hline
-			$A_1$	&	1	&	1	&	1	&	1	&	1	\\
-			$A_1$	&	1	&	1	&	1	&	-1	&	-1	\\
-			$B_1$	&	1	&	-1	&	1	&	1	&	-1	\\
-			$B_2$	&	1	&	-1	&	1	&	-1	&	1	\\
-			$E$ 	&	2	&	0	&	-2	&	0	&	0\\ \hline
-		\end{tabular}
-		\end{center}
+	\setlength{\abovecaptionskip}{0em}
+	\captionof{table}{The character table for the $\mathscr{D}_{\rm 4}$ point group.}\label{tab:character_table_of_d4}
+	\begin{tabular}{cccccc}\hline
+$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime}_2$ \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	\\
+		$A_1$	&	1	&	1	&	1	&	-1	&	-1	\\
+		$B_1$	&	1	&	-1	&	1	&	1	&	-1	\\
+		$B_2$	&	1	&	-1	&	1	&	-1	&	1	\\
+		$E$ 	&	2	&	0	&	-2	&	0	&	0\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	From the matrix representation of Problem 5.2, we obtain the character for the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{C}_{\rm 4v}$ point group:
+	\begin{center}
+	\captionof{table}{Characters for the $\Gamma^{\ce{CN}}$ of the $\mathscr{D}_{\rm 4h}$ point group.}\label{table:subrepresentation_for_d4}
+	\begin{tabular}{c|ccccc}\hline
+		$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$ 	\\ \hline
+		$\chi^{\rm red}(C_i)$&	4	&	0	&	0	&	0	&	-2  \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Immediately, we obtain
+	\begin{equation}
+		\Gamma^{\rm red} = \Gamma^{A_2} \oplus \Gamma^{B_1} \oplus \Gamma^{E_g} .
+	\end{equation}
 
 	\end{solution}
 
@@ -205,7 +333,22 @@
 	\end{exercise}
 	
 	\begin{solution}
-		
+	
+	The direct validity of eqns (7.3-5) and (A.7-3.10) is boring and tedious. Therefore, I have designed a Python script to finish this Problem. This script lies on \verb!../scripts/chapter_07! and is called \verb!check_two_equations.py!. More than the $\mathscr{C}_{\rm 4v}$ point group, these equations on the $\mathscr{T}_{\rm d}$ point group are also checked in this script as another example. The character tables for the $\mathscr{C}_{\rm 4v}$ and $\mathscr{T}_{\rm d}$ are shown in \Tableref{table:character_table_of_c4v} and \Tableref{table:character_table_of_td}, respectively.
+	
+	\begin{center}
+	\captionof{table}{The character table for the $\mathscr{C}_{\rm 4v}$ point group.}\label{table:character_table_of_c4v}
+	\begin{tabular}{c|ccccc} \hline
+		$\mathscr{C}_{\rm 4v}$ & $E$ & $2C_4$ & $C_2$ & $2\sigma_{\rm v}$ & $\sigma_{\rm d}$ \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	\\
+		$A_2$	&	1	&	1	&	1	&	-1	&	-1	\\
+		$B_1$	&	1	&	-1	&	1	&	1	&	-1	\\
+		$B_2$	&	1	&	-1	&	1	&	-1	&	1	\\
+		$E$		&	2	&	0	&	-2	&	0	&	0  	\\ \hline
+	\end{tabular}
+	\end{center}	
+	
+	
 	\end{solution}
 	
 	% 7.4
@@ -216,6 +359,11 @@
 	\end{exercise}
 	
 	\begin{solution}
+	
+		The character table of $\mathscr{C}_{\rm 2v}$ is illustrated in \Tableref{table:character_table_of_c2v}. Using the solution of the system of linear equations, we immediately obtain
+		\begin{equation}
+			\Gamma^{\rm red} = 3 \Gamma^{A_1} \oplus \Gamma^{A_2} \oplus 2 \Gamma^{B_1} \oplus 3 \Gamma^{B_2} .
+		\end{equation}
 	
 	\end{solution}
 	
@@ -254,11 +402,23 @@
 		
 		\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{T}_{\rm d}$.
 		
-		\end{enumerate}				
+		\end{enumerate}	
 		
 	\end{exercise}
 	
 	\begin{solution}
+	
+		\begin{center}
+		\captionof{table}{The character table for the $\mathscr{T}_{\rm d}$ point group.} \label{table:character_table_of_td}
+		\begin{tabular}{cccccc}\hline
+	$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$ \\ \hline
+			$A_1$	&	1	&	1	&	1	&	1	&	1	\\
+			$A_2$	&	1	&	1	&	1	&	-1	&	-1	\\
+			$E$		&	2	&	-1	&	2	&	0	&	0	\\
+			$T_1$	&	3	&	0	&	-1	&	1	&	-1	\\
+			$T_2$	&	3	&	0	&	-1	&	-1	&	1\\ \hline
+		\end{tabular}
+		\end{center}
 	
 	\end{solution}
 
