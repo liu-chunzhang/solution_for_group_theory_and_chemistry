@@ -26,6 +26,7 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -79,9 +80,18 @@
 
 \allowdisplaybreaks
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
-	\setcounter{chapter}{4}
+	\setcounter{chapter}{3}
+	
+	\chapter{Matrices}
 
 	% 4.1
 	\begin{exercise}

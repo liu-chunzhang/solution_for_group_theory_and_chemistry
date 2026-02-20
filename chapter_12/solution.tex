@@ -26,6 +26,7 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -93,9 +94,18 @@
 
 \allowdisplaybreaks
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
-	\setcounter{chapter}{12}
+	\setcounter{chapter}{11}
+	
+	\chapter{Transition-Metal Chemistry}
 	
 	% 12.1
 	\begin{exercise}
@@ -150,7 +160,7 @@
 		$\chi^{\pi_{\varparallel}}(C_i)$	&	4	&	0	&	0	&	-2	&	0	&	0	&	0	&	4	&	-2	&	0	\\ \hline
 	\end{tabular}
 	\end{center}
-	By calculating the systems of linear equations, like in Problem 7.1, we obtain 	
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain 	
 	\begin{align}
 		\Gamma^\sigma &= \Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{E_u} , \\
 		\Gamma^{\pi_{\varparallel}} &= \Gamma^{A_{2g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_u} , \\
@@ -263,12 +273,12 @@
 	
 	\end{itemize}
 	
-	By calculating the systems of linear equations, like in Problem 7.1, we obtain 
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain 
 	\begin{align}
 		\Gamma^\sigma &= \Gamma^{A_1} \oplus \Gamma^{T_2} , \\
 		\Gamma^\pi &= \Gamma^E \oplus \Gamma^{T_1} \oplus \Gamma^{T_2} .
 	\end{align}
-	These equations are mentioned in the Problem and thus we are on the right way.	 Now, we know that
+	These equations are mentioned in the exercise and thus we are on the right way.	 Now, we know that
 	\begin{equation}
 		\Gamma^{\ce{O}} = \Gamma^\sigma \oplus \Gamma^\pi = \left[ \Gamma^{A_1} \oplus \Gamma^{T_2} \right] \oplus \left[ \Gamma^E \oplus \Gamma^{T_1} \oplus \Gamma^{T_2} \right] = \Gamma^{A_1} \oplus \Gamma^E \oplus \Gamma^{T_1} \oplus 2 \Gamma^{T_2} .
 	\end{equation}
@@ -342,7 +352,7 @@
 	\end{tabular}
 	\end{center}
 	
-	By calculating the systems of linear equations, like in Problem 7.1, we obtain
+	By calculating the systems of linear equations, like in exercise 7.1, we obtain
 	\begin{equation}
 		\Gamma^{\ce{C}} = \Gamma^\pi = \Gamma^{A^\prime_1} \oplus \Gamma^{E^\prime_1} \oplus \Gamma^{E^\prime_2} \oplus \Gamma^{A^{\prime\prime}_2} \oplus \Gamma^{E^{\prime\prime}_1} \oplus \Gamma^{E^{\prime\prime}_2} .
 	\end{equation}
@@ -559,7 +569,7 @@
 		$\chi^{[2,1]}(C_i)$ & 8 & -1 & 0 & 0 & 0 \\ \hline
 		\end{tabular}
 		\end{center}
-		By calculating the systems of linear equations, like in Problem 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
 		\begin{equation}
 			\Gamma^{[2,1]} = \Gamma^{E_g} \oplus \Gamma^{T_{1g}} \oplus \Gamma^{T_{2g}} .
 		\end{equation}
@@ -628,7 +638,7 @@
 		$\chi^{[2]}(C_i)$ & 6 & 0 & 2 & 0 & 2 \\ \hline
 		\end{tabular}
 		\end{center}
-		By calculating the systems of linear equations, like in Problem 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
 		\begin{equation}
 			\Gamma^{[2]} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{2g}} .
 		\end{equation}
@@ -698,7 +708,7 @@
 		$\chi^{[2]}(C_i)$ & 3 & 0 & 3 & 1 & 1 \\ \hline
 		\end{tabular}
 		\end{center}
-		By calculating the systems of linear equations, like in Problem 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
+		By calculating the systems of linear equations, like in exercise 7.1, with \Tableref{table:partial_character_table_for_oh}, we obtain
 		\begin{equation}
 			\Gamma^{[2]} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} .
 		\end{equation}

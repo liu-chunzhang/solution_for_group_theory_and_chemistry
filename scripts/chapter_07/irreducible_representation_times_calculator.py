@@ -31,8 +31,6 @@ def solve_linear_equation(A_list, b_list):
         print("error：Matrix A is a singular one without a unique solution。")
         return None
 
-# --- exercise 12.1 ---
-
 print("----------Exercise 7.1----------")
 
 print("----------Exercise 7.1 (a)----------")
@@ -109,5 +107,30 @@ A_input = [[1, 1, 1, 1],
            [1, -1, 1, -1], 
            [1, -1, -1, 1]]
 b_input = [9, -1, 1, 3]
+
+solve_linear_equation(A_input, b_input)
+
+print("----------Exercise 7.6----------")
+
+print("----------Exercise 7.6 (a)----------")
+
+A_input = [[1, 1, 1, 1, 2], 
+           [1, 1, -1, -1, 0], 
+           [1, 1, 1, 1, -2], 
+           [1, -1, 1, -1, 0], 
+           [1, -1, -1, 1, 0]]
+b_input = [3, 1, -1, -1, -1]
+
+solve_linear_equation(A_input, b_input)
+
+A_input = [[1, 1, 1, 1, 1, 1, 1, 1],
+           [1, 1, -1, -1, 1, 1, -1, -1],
+           [1, -1, 1, -1, 1, -1, 1, -1],
+           [1, -1, -1, 1, 1, -1, -1, 1],
+           [1, 1, 1, 1, -1, -1, -1, -1],
+           [1, 1, -1, -1, -1, -1, 1, 1],
+           [1, -1, 1, -1, -1, 1, -1, 1],
+           [1, -1, -1, 1, -1, 1, 1, -1]]
+b_input = [3, -1, -1, -1, -3, 1, 1, 1]
 
 solve_linear_equation(A_input, b_input)

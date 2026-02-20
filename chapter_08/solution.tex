@@ -19,6 +19,7 @@
 }
 \usepackage[none]{hyphenat}	% 阻止长单词分在两行
 \usepackage{mathrsfs}	% 提供\mathscr字体
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -70,9 +71,18 @@
     }
 }
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
-	\setcounter{chapter}{8}
+	\setcounter{chapter}{7}
+	
+	\chapter{Representations and Quantum Mechanics}
 
 	\begin{exercise}
 		To what irreducible representations can the following direct product representations be reduced for the specified point group?

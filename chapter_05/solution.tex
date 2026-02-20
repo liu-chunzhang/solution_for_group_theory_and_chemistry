@@ -29,6 +29,7 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -95,9 +96,18 @@
 
 \allowdisplaybreaks
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
-	\setcounter{chapter}{5}
+	\setcounter{chapter}{4}
+	
+	\chapter{Matrix Representations}
 	
 	% 5.1
 	\begin{exercise}
@@ -108,7 +118,7 @@
 		\begin{minipage}[t]{0.6\linewidth}
 		\centering
 		\setlength{\abovecaptionskip}{0.5em}
-		\includegraphics[scale=1.5]{../diagrams/chapter_05/bowtie_in_exercises.png}
+		\includegraphics[scale=1.2]{../diagrams/chapter_05/bowtie_in_exercises.png}
 		\end{minipage}\label{fig:bowtie_in_exercises}
 	\end{center}	
 	
@@ -158,7 +168,7 @@
 		\begin{minipage}[t]{0.6\linewidth}
 		\centering
 		\setlength{\abovecaptionskip}{0.5em}
-		\includegraphics[scale=1.5]{../diagrams/chapter_05/bowtie_in_solutions.png}
+		\includegraphics[scale=1.2]{../diagrams/chapter_05/bowtie_in_solutions.png}
 		\end{minipage}
 		\captionof{figure}{Definition of basis vectors ${\bf e}_1$ and ${\bf e}_2$ in the bowtie pattern, originating from $O$ to $A$ and $B$ respectively.}\label{fig:bowtie_in_solutions}
 	\end{center}	

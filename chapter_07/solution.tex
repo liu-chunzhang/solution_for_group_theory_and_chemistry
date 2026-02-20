@@ -2,6 +2,9 @@
 
 \usepackage{afterpage}
 \usepackage[hypcap=false]{caption}
+\usepackage{cellspace}
+\setlength\cellspacetoplimit{5pt}    % 设置单元格顶部最小间距
+\setlength\cellspacebottomlimit{5pt} % 设置单元格底部最小间距
 \usepackage{enumitem}	% 定制enumerate标号
 \usepackage{geometry}
 \geometry{%
@@ -26,6 +29,7 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -92,9 +96,18 @@
 
 \allowdisplaybreaks
 
-\begin{document}
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
 
-	\setcounter{chapter}{7}
+\begin{document}
+	
+	\setcounter{chapter}{6}
+	
+	\chapter{Irreducible Representations and Character Tables}
 	
 	% 7.1
 	\begin{exercise}
@@ -231,20 +244,21 @@
 	\item We show the character table of the point group $\mathscr{O}_{\rm h}$:
 	\begin{center}
 	\captionof{table}{The character table for the $\mathscr{O}_{\rm h}$ point group.}\label{table:character_table_of_oh}
-	\begin{tabular}{c|cccccccccc} \hline
-		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ & $i$ & $8 S_6$ & $3 \sigma_{\rm h}$ & $6S_4$ & $6 \sigma_{\rm d}$ \\ \hline
-		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	\\
-		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	\\
-		$E_g$	&	2	&	-1	&	2	&	0	&	0	&	2	&	-1	&	2	&	0	&	0	\\
-		$T_{1g}$ &	3	&	0	&	-1	&	1	&	-1	&	3	&	0	&	-1	&	1	&	-1	\\
-		$T_{2g}$ &	3	&	0	&	-1	&	-1	&	1	&	3	&	0	&	-1	&	-1	&	1	\\
+	\begin{tabular}{c|ccccccccccl@{\hspace{-8mm}}c} \hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ & $3C_2$ & $6C_4$ & $6C^\prime_2$ & $i$ & $8 S_6$ & $3 \sigma_{\rm h}$ & $6S_4$ & $6 \sigma_{\rm d}$ &	& \\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	&	$x^2+y^2+z^2$	\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	&	&	\\
+		$E_g$	&	2	&	-1	&	2	&	0	&	0	&	2	&	-1	&	2	&	0	&	0	&	&	($2z^2-x^2-y^2$, $x^2-y^2$)	\\
+		$T_{1g}$ &	3	&	0	&	-1	&	1	&	-1	&	3	&	0	&	-1	&	1	&	-1	&	($R_x$, $R_y$, $R_z$)	&	\\
+		$T_{2g}$ &	3	&	0	&	-1	&	-1	&	1	&	3	&	0	&	-1	&	-1	&	1	&	&	($xy$, $xz$, $yz$)		\\
 		$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	\\
 		$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	\\
 		$E_g$	&	2	&	-1	&	2	&	0	&	0	&	-2	&	1	&	-2	&	0	&	0	\\
-		$T_{1u}$	 & 	3	&	0	&	-1	&	1	&	-1	&	-3	&	0	&	1	&	-1	&	1	\\
+		$T_{1u}$	 & 	3	&	0	&	-1	&	1	&	-1	&	-3	&	0	&	1	&	-1	&	1	&	($x$, $y$, $z$)\\
 		$T_{2u}$ &	3	&	0	&	-1	&	-1	&	1	&	-3	&	0	&	1	&	1	&	-1	\\ \hline
 	\end{tabular}
 	\end{center}
+
 	The similar calculation process is omitted. The final result is
 	\begin{equation}
 		\Gamma^{\rm red} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{2g}} \oplus 2 \Gamma^{T_{1u}} \oplus \Gamma^{T_{2u}} .
@@ -298,32 +312,118 @@
 	We show the character table of the point group $\mathscr{D}_{\rm 4}$:
 	\begin{center}
 	\setlength{\abovecaptionskip}{0em}
-	\captionof{table}{The character table for the $\mathscr{D}_{\rm 4}$ point group.}\label{tab:character_table_of_d4}
-	\begin{tabular}{cccccc}\hline
-$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime}_2$ \\ \hline
-		$A_1$	&	1	&	1	&	1	&	1	&	1	\\
-		$A_1$	&	1	&	1	&	1	&	-1	&	-1	\\
-		$B_1$	&	1	&	-1	&	1	&	1	&	-1	\\
-		$B_2$	&	1	&	-1	&	1	&	-1	&	1	\\
-		$E$ 	&	2	&	0	&	-2	&	0	&	0\\ \hline
+	\captionof{table}{The character table for the $\mathscr{D}_{\rm 4}$ point group.}\label{table:character_table_of_d4}
+	\begin{tabular}{c|ccccccc}\hline
+$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime}_2$ & & \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	&	&	$x^2+y^2$; $z^2$ \\
+		$A_2$	&	1	&	1	&	1	&	-1	&	-1	&	$z$; $R_z$	&	\\
+		$B_1$	&	1	&	-1	&	1	&	1	&	-1	&	&	$x^2-y^2$	\\
+		$B_2$	&	1	&	-1	&	1	&	-1	&	1	&	&	$xy$		\\
+		$E$ 		&	2	&	0	&	-2	&	0	&	0	&	($x$, $y$); ($R_x$, $R_y$)	&	($xz$, $yz$)		\\ \hline
 	\end{tabular}
 	\end{center}
 	
-	From the matrix representation of Problem 5.2, we obtain the character for the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{C}_{\rm 4v}$ point group:
+	From the matrix representation of Problem 5.2, we obtain the character for the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{D}_4$ point group:
 	\begin{center}
-	\captionof{table}{Characters for the $\Gamma^{\ce{CN}}$ of the $\mathscr{D}_{\rm 4h}$ point group.}\label{table:subrepresentation_for_d4}
+	\captionof{table}{Characters for the $\Gamma^{\ce{CN}}$ of the $\mathscr{D}_4$ point group.}\label{table:characters_for_d4}
 	\begin{tabular}{c|ccccc}\hline
-		$\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$ 	\\ \hline
+		$\mathscr{D}_4$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$ 	\\ \hline
 		$\chi^{\rm red}(C_i)$&	4	&	0	&	0	&	0	&	-2  \\ \hline
 	\end{tabular}
 	\end{center}
 	
 	Immediately, we obtain
 	\begin{equation}
-		\Gamma^{\rm red} = \Gamma^{A_2} \oplus \Gamma^{B_1} \oplus \Gamma^{E_g} .
+		\Gamma^{\rm red} = \Gamma^{A_2} \oplus \Gamma^{B_1} \oplus \Gamma^E .
 	\end{equation}
-
+	
+	Then, we show the effects of the transformation operators $\boldsymbol{O}_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on four functions $f_1$, $f_2$, $f_3$, and $f_4$:
+	\begin{center}
+	\captionof{table}{Effects of the transformation operators $\boldsymbol{O}_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on four functions $f_1$, $f_2$, $f_3$, and $f_4$.}
+	\begin{tabular}{c|cccccccc}\hline
+	$R =$ & $E$ & $C_4$ & $C^3_4$ & $C_2$ & $C^\prime_{2a}$ & $C^\prime_{2b}$ & $C^{\prime\prime}_{2a}$ & $C^{\prime\prime}_{2b}$ \\ \hline 
+	$f_1$ & $f_1$ & $f_2$ & $f_4$ & $f_3$ & $-f_4$ & $-f_2$ & $-f_1$ & $-f_3$ \\
+	$f_2$ & $f_2$ & $f_3$ & $f_1$ & $f_4$ & $-f_3$ & $-f_1$ & $-f_4$ & $-f_2$ \\
+	$f_3$ & $f_3$ & $f_4$ & $f_2$ & $f_1$ & $-f_2$ & $-f_4$ & $-f_3$ & $-f_1$ \\
+	$f_4$ & $f_4$ & $f_1$ & $f_3$ & $f_2$ & $-f_1$ & $-f_3$ & $-f_2$ & $-f_4$ \\ \hline
+	\end{tabular}
+	\end{center}
+	Thus, using eqn (7-6.6), the only basis function in $\Gamma^{A_2}$ is
+	\begin{align*}
+		f^{A_2} &= \left[ \sum_R \chi^{A_2}(R)^* \boldsymbol{O}_R \right] f_1 \\
+				&= \left[ \chi^{A_2}(E)^* \boldsymbol{O}_E + \chi^{A_2}(C_4)^* \boldsymbol{O}_{C_4} + \chi^{A_2}(C_2)^* \boldsymbol{O}_{C_2} + \chi^{A_2}(C^3_4)^* \boldsymbol{O}_{C^3_4} \right. \\
+				&\hspace{4em} \left. + \chi^{A_2}(C^\prime_{2a})^* \boldsymbol{O}_{C^\prime_{2a}} + \chi^{A_2}(C^\prime_{2b})^* \boldsymbol{O}_{C^\prime_{2b}} + \chi^{A_2}(C^{\prime\prime}_{2a})^* \boldsymbol{O}_{C^{\prime\prime}_{2a}} + \chi^{A_2}(C^{\prime\prime}_{2b})^* \boldsymbol{O}_{C^{\prime\prime}_{2b}} \right]  f_1 \\
+				&= \left( \boldsymbol{O}_E + \boldsymbol{O}_{C_4} + \boldsymbol{O}_{C_2} + \boldsymbol{O}_{C^3_4} - \boldsymbol{O}_{C^\prime_{2a}} - \boldsymbol{O}_{C^\prime_{2b}} - \boldsymbol{O}_{C^{\prime\prime}_{2a}} - \boldsymbol{O}_{C^{\prime\prime}_{2b}} \right) f_1 \\
+				&= \boldsymbol{O}_E f_1 + \boldsymbol{O}_{C_4} f_1 + \boldsymbol{O}_{C_2} f_1 + \boldsymbol{O}_{C^3_4} f_1 - \boldsymbol{O}_{C^\prime_{2a}} f_1 - \boldsymbol{O}_{C^\prime_{2b}} f_1 - \boldsymbol{O}_{C^{\prime\prime}_{2a}} f_1 - \boldsymbol{O}_{C^{\prime\prime}_{2b}} f_1 \\
+				&= f_1 + f_2 + f_3 + f_4 - (-f_4) - (-f_2) - (-f_1) - (-f_3) \\
+				&= 2 ( f_1 + f_2 + f_3 + f_4 ) .
+	\end{align*}
+	The inner product of $\Gamma^{A_2}$ is
+	\begin{equation*}
+		( f^{A_2} | f^{A_2} ) = \left( 2 \sum^4_{i=1} f_i \middle| 2 \sum^4_{j=1} f_j \right) = 4 \sum^4_{i=1} \sum^4_{j=1} ( f_i | f_j ) = 4 \sum^4_{i=1} \sum^4_{j=1}  \delta_{ij} = 4 \sum^4_{i=1} 1 = 4 \times 4 = 16 .
+	\end{equation*}
+	Therefore, the normalized basis function $f^{A_2}$ is
+	\begin{equation*}
+		f^{A_2 \prime} = \frac{1}{ \sqrt{ ( f^{A_2} | f^{A_2} ) } } f^{A_2} = \frac{1}{4} \times 2 ( f_1 + f_2 + f_3 + f_4 ) = \frac{1}{2} ( f_1 + f_2 + f_3 + f_4 ) .
+	\end{equation*}
+	
+	Similarly, we obtain
+	\begin{equation*}
+		f^{B_1 \prime} = \frac{1}{ \sqrt{ ( f^{B_1} | f^{B_1} ) } } f^{B_1} = \frac{1}{4} \times 2 ( f_1 - f_2 + f_3 - f_4 ) = \frac{1}{2} ( f_1 - f_2 + f_3 - f_4 ) .
+	\end{equation*}
+	
+	For the two-dimentional irreducible representation $\Gamma^E$, we have
+	\begin{align*}
+		f^E_1 &= 2 \boldsymbol{O}_E f_1 - 2 \boldsymbol{O}_{C_2} f_1 = 2 f_1 - 2 f_3 = 2 ( f_1 - f_3 ) , \\
+		f^E_2 &= 2 \boldsymbol{O}_E f_2 - 2 \boldsymbol{O}_{C_2} f_4 = 2 f_2 - 2 f_4 = 2 ( f_2 - f_4 ) .
+	\end{align*}
+	In fact, $f^E_1$ has been perpendicular to $f^{E_2}$:
+	\begin{align*}
+		( f^E_1 | f^E_2 ) &= ( 2 (f_1 - f_3) | 2(f_2 - f_4) ) = 4 \left[ ( f_1 | f_2 ) - ( f_1 | f_4 ) - ( f_3 | f_2 ) + ( f_3 | f_4 ) \right] = 4 \times 0 = 0 , \\
+		( f^E_2 | f^E_1 ) &= ( 2 (f_2 - f_4) | 2(f_1 - f_3) ) = 4 \left[ ( f_2 | f_1 ) - ( f_2 | f_3 ) - ( f_4 | f_1 ) + ( f_4 | f_3 ) \right] = 4 \times 0 = 0 .		
+	\end{align*}
+	Thus we just normalize $f^{E_1}$ and $f^{E_2}$:
+	\begin{align*}
+		f^{E \prime}_1 = \frac{1}{ \sqrt{ ( f^E_1 | f^E_1 ) } } f^E_1 = \frac{1}{2\sqrt{2}} \times 2 ( f_1 - f_3 ) = \frac{1}{ \sqrt{2} } ( f_1 - f_3 ) , \\
+		f^{E \prime}_2 = \frac{1}{ \sqrt{ ( f^E_2 | f^E_2 ) } } f^E_2 = \frac{1}{2\sqrt{2}} \times 2 ( f_2 - f_4 ) = \frac{1}{ \sqrt{2} } ( f_2 - f_4 ) .
+	\end{align*}
+	
+	Summing these contributions, we get the four orthonormal basis functions which reduce $\Gamma$:
+	\begin{align}
+		f^{A_2 \prime} &= \frac{1}{2} ( f_1 + f_2 + f_3 + f_4 ) , \\
+		f^{B_1 \prime} &= \frac{1}{2} ( f_1 - f_2 + f_3 - f_4 ) , \\
+		f^{E \prime}_1 &= \frac{1}{ \sqrt{2} } ( f_1 - f_3 ) , \\
+		f^{E \prime}_2 &= \frac{1}{ \sqrt{2} } ( f_2 - f_4 ) .
+	\end{align}
 	\end{solution}
+	
+	\begin{remark}
+	
+	For multi-dimensional irreducible representations, the projection operators typically generate a set of basis functions that are linearly independent but not necessarily orthogonal. Various orthogonalization methods can be employed; a robust approach is the symmetric (L{\"o}wdin) orthogonalization. In this approach, after obtaining $n_\nu$ basis functions, $f^\nu_1$, $f^\nu_2$, $\ldots$, $f^\nu_{n_\nu}$, we first construct their overlap matrix $S^\nu$:
+		\begin{equation}
+			S^\nu_{ij} \equiv (\langle f^\nu_i | f^\nu_j \rangle)_{n_\nu \times n_\nu} = \begin{pmatrix}
+			\langle f^\nu_1 | f^\nu_1 \rangle & \langle f^\nu_1 | f^\nu_2 \rangle & \ldots & \langle f^\nu_1 | f^\nu_{n_\nu} \rangle \\
+			\langle f^\nu_2 | f^\nu_1 \rangle & \langle f^\nu_2 | f^\nu_2 \rangle & \ldots & \langle f^\nu_2 | f^\nu_{n_\nu} \rangle \\
+			\vdots & \vdots & \ddots & \vdots \\ 
+			\langle f^\nu_{n_\nu} | f^\nu_1 \rangle & \langle f^\nu_{n_\nu} | f^\nu_2 \rangle & \ldots & \langle f^\nu_{n_\nu} | f^\nu_{n_\nu} \rangle\end{pmatrix}
+			\end{equation}
+		Then, the orthonormal basis functions $\{f^{\nu\prime}_i\}$ are generated via:
+		\begin{equation}
+			f^{\nu\prime}_i = \sum_{j=1}^{n_\nu} f^\nu_j [(S^\nu)^{-1/2}]_{ji}.
+		\end{equation}
+		
+		Compared to the Schmidt orthogonalization, there are two merits for symmetric orthogonalization.
+		\begin{itemize}
+		
+		\item Minimum Deviation (Least-Squares Property): It can be mathematically proven that the symmetric orthogonalization minimizes the sum of squared differences between the orthonormal basis $\{f'_i\}$ and the original basis $\{f_i\}$. Consequently, it maximizes the preservation of the physical characteristics and spatial symmetry of the original basis functions.
+		
+		\item Equivalence (Order Independence): Unlike the Gram-Schmidt process shown in the A.6-2 section in the textbook, which is inherently sequential and dependent on the ordering of the basis set, the symmetric method treats all original basis functions equivalently (i.e., it is a democratic orthogonalization).
+		
+		\end{itemize}
+		
+	Thus, this method is particularly well-suited for constructing Symmetry-Adapted Linear Combinations (SALCs) based on these two advantages.
+	
+	\end{remark}
 
 	% 7.3
 	\begin{exercise}
@@ -348,13 +448,12 @@ $\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime
 	\end{tabular}
 	\end{center}	
 	
-	
 	\end{solution}
 	
 	% 7.4
 	\begin{exercise}
 		
-		How many times does each irreducible representation of the $\mathscr{C}_{\rm 2v}$ point group occur in the nine-dimentional representation found in Problem 5.3?
+	How many times does each irreducible representation of the $\mathscr{C}_{\rm 2v}$ point group occur in the nine-dimentional representation found in Problem 5.3?
 		
 	\end{exercise}
 	
@@ -370,56 +469,197 @@ $\mathscr{D}_{\rm 4}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$ & $2C^{\prime\prime
 	% 7.5
 	\begin{exercise}
 		
-		Consider the group whose group table is
-		\begin{center}
-		\begin{tabular}{c|cccc}\hline
-				&	$E$	&	$A$	&	$B$	&	$C$	\\ \hline
-			$E$	&	$E$	&	$A$	&	$B$	&	$C$	\\
-			$A$	&	$A$	&	$C$	&	$E$	&	$B$	\\
-			$B$	&	$B$	&	$E$	&	$C$	&	$E$	\\
-			$C$	&	$C$	&	$B$	&	$A$	&	$A$	\\ \hline
-		\end{tabular}
-		\end{center}
-		write out the matrices and characters for the regular representation of this group.
+	Consider the group whose group table is
+	\begin{center}
+	\begin{tabular}{c|cccc}\hline
+			&	$E$	&	$A$	&	$B$	&	$C$	\\ \hline
+		$E$	&	$E$	&	$A$	&	$B$	&	$C$	\\
+		$A$	&	$A$	&	$C$	&	$E$	&	$B$	\\
+		$B$	&	$B$	&	$E$	&	$C$	&	$A$	\\
+		$C$	&	$C$	&	$B$	&	$A$	&	$E$	\\ \hline
+	\end{tabular}
+	\end{center}
+	write out the matrices and characters for the regular representation of this group.
 
 	\end{exercise}
 	
 	\begin{solution}
+	
+	Firstly, we need to rearrange the group multiplication table to ensure that the identity element E is always on its diagonal:
+	\begin{center}
+	\begin{tabular}{c|cccc}\hline
+					&	$E$	&	$A$	&	$B$	&	$C$	\\ \hline
+		$E^{-1}=E$	&	$E$	&	$A$	&	$B$	&	$C$	\\
+		$A^{-1}=B$	&	$B$	&	$E$	&	$C$	&	$A$	\\
+		$B^{-1}=A$	&	$A$	&	$C$	&	$E$	&	$B$	\\
+		$C^{-1}=C$	&	$C$	&	$B$	&	$A$	&	$E$	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	According to its definition, it is easy to construct the regular representation of this group, summing as follows.
+	\begin{center}
+	\captionof{table}{The regular representation of the group in current Problem. The order of the basis is $E$, $A$, $B$ and $C$.}
+	\begin{tabular}{c|ScScScSc}\hline
+		$R=$ 	& $E$	&	$A$		&	$B$	&	$C$	\\ \hline
+		$D(R)$	& $\begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 \\
+			1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 1 & 0 \\
+			1 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 1 \\
+			0 & 1 & 0 & 0
+		\end{pmatrix}$ & $\begin{pmatrix}
+			0 & 0 & 0 & 1 \\
+			0 & 0 & 1 & 0 \\
+			0 & 1 & 0 & 0 \\
+			1 & 0 & 0 & 0
+		\end{pmatrix}$ \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	At last, we know the characters for the regular representation of this group.
+	\begin{center}
+	\captionof{table}{The characters for the regular representation of this group.}
+	\begin{tabular}{c|cccc}\hline
+		 			& $E$	&	$A$	&	$B$	&	$C$	\\ \hline
+		$\chi^{\rm reg}(R)$	&	4	&	0	&	0	&	0	\\ \hline
+	\end{tabular}
+	\end{center}
 	
 	\end{solution}
 	
 	% 7.6
 	\begin{exercise}
 		
-		Determine the irreducible representation to which the following real orbitals belong for the indicated point group:
-		\begin{enumerate}
-		
-		\item $\orbp_1$, $\orbp_2$, $\orbp_3$ in $\mathscr{D}_4$ and $\mathscr{D}_{\rm 2h}$ ,
-		
-		\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{O}_{\rm h}$,
-		
-		\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{D}_{\rm 3h}$,
-		
-		\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{T}_{\rm d}$.
-		
-		\end{enumerate}	
+	Determine the irreducible representation to which the following real orbitals belong for the indicated point group:
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item $\orbp_1$, $\orbp_2$, $\orbp_3$ in $\mathscr{D}_4$ and $\mathscr{D}_{\rm 2h}$ ,
+	
+	\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{O}_{\rm h}$,
+	
+	\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{D}_{\rm 3h}$,
+	
+	\item $\orbd_1$, $\orbd_2$, $\orbd_3$, $\orbd_4$, $\orbd_5$ in $\mathscr{T}_{\rm d}$.
+	
+	\end{enumerate}	
 		
 	\end{exercise}
 	
 	\begin{solution}
 	
+	If readers only care about the final result, it will be enough to check the character tables. Here, I will show the solution processes, taking only the Problem 7.6 (a) as an instance. And then list all results, omitting others' solution processes.
+	
+	\begin{enumerate}[label=(\alph*)]
+
+	\item The character table of the $\mathscr{D}_{\rm 4}$ and $\mathscr{D}_{\rm 2h}$ can be seen in \Tableref{table:character_table_of_d4} and \Tableref{table:character_table_of_d2h}, respectively.
 		\begin{center}
-		\captionof{table}{The character table for the $\mathscr{T}_{\rm d}$ point group.} \label{table:character_table_of_td}
-		\begin{tabular}{cccccc}\hline
-	$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$ \\ \hline
-			$A_1$	&	1	&	1	&	1	&	1	&	1	\\
-			$A_2$	&	1	&	1	&	1	&	-1	&	-1	\\
-			$E$		&	2	&	-1	&	2	&	0	&	0	\\
-			$T_1$	&	3	&	0	&	-1	&	1	&	-1	\\
-			$T_2$	&	3	&	0	&	-1	&	-1	&	1\\ \hline
+		\captionof{table}{The character table for the $\mathscr{D}_{\rm 2h}$ point group.} \label{table:character_table_of_d2h}
+		\begin{tabular}{c|cccccccccc}\hline
+	$\mathscr{D}_{\rm 2h}$ & $E$ & $C_2(z)$ & $C_2(y)$ & $C_2(x)$ & $i$ & $\sigma(xy)$ & $\sigma(xz)$ & $\sigma(yz)$	&	&	 \\ \hline
+			$A_g$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	&	$x^2$; $y^2$; $z^2$	\\
+			$B_{1g}$	&	1	&	1	&	-1	&	-1	&	1	&	1	&	-1	&	-1	&	$R_z$	&	$xy$		\\
+			$B_{2g}$	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	$R_y$	&	$xz$		\\
+			$B_{3g}$	&	1	&	-1	&	-1	&	1	&	1	&	-1	&	-1	&	1	&	$R_x$	&	$yz$	\\
+			$A_u$	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	&	\\
+			$B_{1u}$	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&	$z$	&	\\
+			$B_{2u}$	&	1	&	-1	&	1	&	-1	&	-1	&	1	&	-1	&	1	&	$y$	&	\\
+			$B_{3u}$	&	1	&	-1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&	$x$	&	\\ \hline
 		\end{tabular}
 		\end{center}
+		
+		The characters for the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{D}_4$ is:
+		\begin{center}
+		\captionof{table}{Characters for the $\Gamma^{\rm red}$ of the $\mathscr{D}_4$ point group.}
+		\begin{tabular}{c|ccccc}\hline
+			$\mathscr{D}_4$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$ 	\\ \hline
+			$\chi^{\rm red}(C_i)$&	3	&	1	&	-1	&	-1	&	-1  \\ \hline
+		\end{tabular}
+		\end{center}
+		And then we decompose the reducible representation:
+		\begin{equation}
+			\Gamma^{\rm red} = \Gamma^{A_2} \oplus \Gamma^E .
+		\end{equation}
+		Then, we test the effects of the transformation operators $\boldsymbol{O}_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on two functions $\orbp_1$, and $\orbp_3$. At this time, $\orbp_1$ and $\orbp_2$ are equivalent in chemists' view and thus we do not test $\orbp_2$.
+		\begin{center}
+		\captionof{table}{Effects of the transformation operators $\boldsymbol{O}_R$ for the symmetry operation $R$ of the point group $\mathscr{D}_4$ on four functions $\orbp_1$, and $\orbp_3$.}
+		\begin{tabular}{c|cccccccc}\hline
+		$R =$ & $E$ & $C_4$ & $C^3_4$ & $C_2$ & $C^\prime_{2a}$ & $C^\prime_{2b}$ & $C^{\prime\prime}_{2a}$ & $C^{\prime\prime}_{2b}$ \\ \hline 
+		$\orbp_1$ & $\orbp_1$ & $-\orbp_2$ & $-\orbp_1$ & $\orbp_2$ & $\orbp_1$ & $-\orbp_1$ & $\orbp_2$ & $-\orbp_2$ \\
+		$\orbp_3$ & $\orbp_3$ & $\orbp_3$ & $\orbp_3$ & $\orbp_3$ & $-\orbp_3$ & $-\orbp_3$ & $-\orbp_3$ & $-\orbp_3$  \\ \hline
+		\end{tabular}
+		\end{center}
+		
+		Similar to Problem 7.2, we check whether $\orbp_1$ is a basis function for $\Gamma^{A_2}$:
+		\begin{align*}
+		&\hspace{1.3em} \left[ \sum_R \chi^{A_2}(R)^* \boldsymbol{O}_R \right] \orbp_1 \\
+		&= \left[ \chi^{A_2}(E)^* \boldsymbol{O}_E + \chi^{A_2}(C_4)^* \boldsymbol{O}_{C_4} + \chi^{A_2}(C_2)^* \boldsymbol{O}_{C_2} + \chi^{A_2}(C^3_4)^* \boldsymbol{O}_{C^3_4} \right. \\
+		&\hspace{4em} \left. + \chi^{A_2}(C^\prime_{2a})^* \boldsymbol{O}_{C^\prime_{2a}} + \chi^{A_2}(C^\prime_{2b})^* \boldsymbol{O}_{C^\prime_{2b}} + \chi^{A_2}(C^{\prime\prime}_{2a})^* \boldsymbol{O}_{C^{\prime\prime}_{2a}} + \chi^{A_2}(C^{\prime\prime}_{2b})^* \boldsymbol{O}_{C^{\prime\prime}_{2b}} \right]  \orbp_1 \\
+		&= \left( \boldsymbol{O}_E + \boldsymbol{O}_{C_4} + \boldsymbol{O}_{C_2} + \boldsymbol{O}_{C^3_4} - \boldsymbol{O}_{C^\prime_{2a}} - \boldsymbol{O}_{C^\prime_{2b}} - \boldsymbol{O}_{C^{\prime\prime}_{2a}} - \boldsymbol{O}_{C^{\prime\prime}_{2b}} \right) \orbp_1 \\
+		&= \boldsymbol{O}_E \orbp_1 + \boldsymbol{O}_{C_4} \orbp_1 + \boldsymbol{O}_{C_2} \orbp_1 + \boldsymbol{O}_{C^3_4} \orbp_1 - \boldsymbol{O}_{C^\prime_{2a}} \orbp_1 - \boldsymbol{O}_{C^\prime_{2b}} \orbp_1 - \boldsymbol{O}_{C^{\prime\prime}_{2a}} \orbp_1 - \boldsymbol{O}_{C^{\prime\prime}_{2b}} \orbp_1 \\
+		&= \orbp_1 - \orbp_2 - \orbp_1 + \orbp_2 - \orbp_1 - (-\orbp_1) - \orbp_2 - (-\orbp_2) = 0 .
+		\end{align*}
+		It is clear that $\orbp_1$ is not a basis function of $\Gamma^{A_2}$. In the same way, we can find 
+		\begin{equation*}
+			\left[ \sum_R \chi^{A_2}(R)^* \boldsymbol{O}_R \right] \orbp_3 = 8 \orbp_3 .
+		\end{equation*}
+		Thus, we ensure that $\orbp_3$ belongs to $\Gamma^{A_2}$ for the $\mathscr{D}_4$ point group, and the $\orbp_1$ and $\orbp_2$ should belong to the only other $\Gamma^E$ for the $\mathscr{D}_4$ point group.
+		
+		In the same way, we calculate the characters for the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{D}_{\rm 2h}$:
+		\begin{center}
+		\captionof{table}{Characters for the $\Gamma^{\rm red}$ of the $\mathscr{D}_{\rm 2h}$ point group.}
+		\begin{tabular}{c|cccccccc}\hline
+			$\mathscr{D}_{\rm 2h}$ & $E$ & $C_2(z)$ & $C_2(y)$ & $C_2(x)$ & $i$ & $\sigma(xy)$ & $\sigma(xz)$ & $\sigma(yz)$ \\ \hline
+			$\chi^{\rm red}(C_i)$&	3	&	-1	&	-1	&	-1	&	-3	&	1	&	1	&	1  \\ \hline
+		\end{tabular}
+		\end{center}
+		And then we decompose the reducible representation:
+		\begin{equation}
+			\Gamma^{\rm red} = \Gamma^{B_{1u}} \oplus \Gamma^{B_{2u}} \oplus \Gamma^{B_{3u}} .
+		\end{equation}
+		In the same way, we ensure that $\orbp_1$, $\orbp_2$ and $\orbp_3$ belongs to  $\Gamma^{B_{3u}}$, $\Gamma^{B_{2u}}$, and $\Gamma^{B_{1u}}$ for the $\mathscr{D}_{\rm 2h}$, respectively.
+		
+	\item The character table of the $\mathscr{O}_{\rm h}$ can be seen in \Tableref{table:character_table_of_oh}. From this table, we ensure that both $\orbd_1$ and $\orbd_5$ belong to $\Gamma^{E_g}$, and all $\orbd_2$, $\orbd_3$ and $\orbd_4$ belong to $\Gamma^{T_{2g}}$.
 	
+	\item The character table of the $\mathscr{D}_{\rm 3h}$ can be seen in \Tableref{table:character_table_of_d3h}. From this table, we ensure that $\orbd_5$ belongs to the $\Gamma^{A^\prime_1}$, both $\orbd_1$ and $\orbd_2$ belong to $\Gamma^{E^\prime}$, and both $\orbd_3$ and $\orbd_4$ belong to $\Gamma^{E^{\prime\prime}}$.
+	
+	\begin{center}
+	\captionof{table}{The character table for the $\mathscr{D}_{\rm 3h}$ point group.} \label{table:character_table_of_d3h}
+	\begin{tabular}{c|cccccccc}\hline
+$\mathscr{D}_{\rm 3h}$ & $E$ & $2C_3$ & $3C_2$ &	$\sigma_{\rm h}$	& $2S_3$ & $3\sigma_{\rm v}$	&	& \\ \hline
+		$A^\prime_1$	&	1	&	1	&	1	&	1	&	1	&	1	&	&$x^2+y^2$; $z^2$	\\
+		$A^\prime_2$	&	1	&	1	&	-1	&	1	&	1	&	-1	&	$R_z$	&	\\
+		$E^\prime$	&	2	&	-1	&	0	&	2	&	-1	&	0	& ($x$, $y$)	&	($x^2-y^2$, $xy$)\\
+		$A^{\prime\prime}_1$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	&	\\
+		$A^{\prime\prime}_2$	&	1	&	1	&	-1	&	-1	&	-1	&	1	&	$z$	&	\\
+		$E^{\prime\prime}$	&	2	&	-1	&	0	&	-2	&	1	&	0	&	($R_x$, $R_y$)	&	($xz$, $yz$)	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\item The character table of the $\mathscr{T}_{\rm d}$ can be seen in \Tableref{table:character_table_of_td}. From this table, we ensure that both $\orbd_1$ and $\orbd_5$ belong to $\Gamma^E$, and all $\orbd_2$, $\orbd_3$ and $\orbd_4$ belong to $\Gamma^{T_2}$.
+	
+	\begin{center}
+	\captionof{table}{The character table for the $\mathscr{T}_{\rm d}$ point group.} \label{table:character_table_of_td}
+	\begin{tabular}{c|ccccccc}\hline
+$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$	&	& \\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	&	&	$x^2+y^2+z^2$\\
+		$A_2$	&	1	&	1	&	1	&	-1	&	-1	&	&	\\
+		$E$		&	2	&	-1	&	2	&	0	&	0	&	&	($2z^2-x^2-y^2$, $x^2-y^2$)\\
+		$T_1$	&	3	&	0	&	-1	&	1	&	-1	&	($R_x$, $R_y$, $R_z$)	&	\\
+		$T_2$	&	3	&	0	&	-1	&	-1	&	1	&	($x$, $y$, $z$)	&	($xy$, $xz$, $yz$)	\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	\end{enumerate}
+		
 	\end{solution}
 
 \end{document}

@@ -27,6 +27,7 @@
 \usepackage[version=4]{mhchem}
 \usepackage{multirow}
 \usepackage{subcaption}
+\usepackage{titlesec}
 
 \RequirePackage[most]{tcolorbox}
 \tcbset{
@@ -90,11 +91,18 @@
 
 \allowdisplaybreaks
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
 	\setcounter{chapter}{2}
 	
-	\chapter{Point groups}
+	\chapter{Point Groups}
 
 	% 3.1
 	\begin{exercise}

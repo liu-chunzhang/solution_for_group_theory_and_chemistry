@@ -13,6 +13,7 @@
 \usepackage[none]{hyphenat}	% 阻止长单词分在两行
 \usepackage{mathrsfs}	% 提供\mathscr字体
 \usepackage[version=4]{mhchem}
+\usepackage{titlesec}
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -66,10 +67,19 @@
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.1}
 
+\titleformat{\chapter}[display]
+  {\bfseries\Large}
+  {\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}
+  {1ex}
+  {\titlerule\vspace{1ex}\filleft}
+  [\vspace{1ex}\titlerule]
+
 \begin{document}
 
-	\setcounter{chapter}{11}
-
+	\setcounter{chapter}{10}
+	
+	\chapter{Hybrid Orbitals}
+	
 	\begin{exercise}
 		Determine the irreducible representations of $\mathscr{T}_{\rm d}$ to which f-orbitals belong.
 	\end{exercise}
