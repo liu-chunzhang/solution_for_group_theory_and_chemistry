@@ -1,0 +1,95 @@
+import numpy as np
+
+def solve_linear_equation(A_list, b_list):
+    """
+    求解线性方程组 Ax = b
+    :param A_list: 嵌套列表形式的矩阵 A
+    :param b_list: 列表形式的向量 b
+    """
+    # 转换为 numpy 数组，支持复数类型
+    A = np.array(A_list, dtype=complex)
+    b = np.array(b_list, dtype=complex)
+    
+    print(f"matrix A:\n{A.real.astype(float) if not np.iscomplex(A).any() else A}")
+    print(f"vector b: {b.real.astype(float) if not np.iscomplex(b).any() else b}")
+    
+    try:
+        # 求解方程
+        x = np.linalg.solve(A, b)
+        
+        #print("--- result ---")
+        
+        print(f"solution x: {x.real.astype(float) if not np.iscomplex(x).any() else x}")
+        
+        # 验证结果
+        check = np.allclose(np.dot(A, x), b)
+        print(f"check (Ax=b): {'success' if check else 'failure'}")
+        print("\n")
+        return x
+        
+    except np.linalg.LinAlgError:
+        print("error：Matrix A is a singular one without a unique solution。")
+        return None
+
+print("----------Exercise 11.1----------")
+
+A_input = [[1, 1, 2, 3, 3],
+           [1, 1, -1, 0, 0],
+           [1, 1, 2, -1, -1],
+           [1, -1, 0, 1, -1],
+           [1, -1, 0, -1, 1]]
+b_input = [7, 1, -1, 1, 1]
+
+solve_linear_equation(A_input, b_input)
+
+print("----------Exercise 11.2----------")
+
+A_input = [[1, 1, 2, 3, 3, 1, 1, 2, 3, 3], 
+           [1, 1, -1, 0, 0, 1, 1, -1, 0, 0],
+           [1, 1, 2, -1, -1, 1, 1, 2, -1, -1],
+           [1, -1, 0, 1, -1, 1, -1, 0, 1, -1],
+           [1, -1, 0, -1, 1, 1, -1, 0, -1, 1],
+           [1, 1, 2, 3, 3, -1, -1, -2, -3, -3],
+           [1, 1, -1, 0, 0, -1, -1, 1, 0, 0],
+           [1, 1, 2, -1, -1, -1, -1, -2, 1, 1],
+           [1, -1, 0, 1, -1, -1, 1, 0, -1, 1],
+           [1, -1, 0, -1, 1, -1, 1, 0, 1, -1]]
+b_input = [6, 0, 2, 2, 0, 0, 0, 4, 0, 2]
+
+solve_linear_equation(A_input, b_input)
+
+print("----------Exercise 11.3----------")
+
+A_input = [[1, 1, 1, 1, 2, 1, 1, 1, 1, 2], 
+           [1, 1, -1, -1, 0, 1, 1, -1, -1, 0],
+           [1, 1, 1, 1, -2, 1, 1, 1, 1, -2],
+           [1, -1, 1, -1, 0, 1, -1, 1, -1, 0],
+           [1, -1, -1, 1, 0, 1, -1, -1, 1, 0], 
+           [1, 1, 1, 1, 2, -1, -1, -1, -1, -2], # i
+           [1, 1, -1, -1, 0, -1, -1, 1, 1, 0],
+           [1, 1, 1, 1, -2, -1, -1, -1, -1, 2],
+           [1, -1, 1, -1, 0, -1, 1, -1, 1, 0],
+           [1, -1, -1, 1, 0, -1, 1, 1, -1, 0]]
+b_input = [4, 0, 0, -2, 0, 0, 0, -4, 2, 0]
+
+solve_linear_equation(A_input, b_input)
+
+b_input = [4, 0, 0, -2, 0, 0, 0, 4, -2, 0]
+
+solve_linear_equation(A_input, b_input)
+
+print("----------Exercise 11.4----------")
+
+A_input = [[1, 1, 1, 1, 2, 1, 1, 1, 1, 2], 
+           [1, 1, -1, -1, 0, 1, 1, -1, -1, 0],
+           [1, 1, 1, 1, -2, 1, 1, 1, 1, -2],
+           [1, -1, 1, -1, 0, 1, -1, 1, -1, 0],
+           [1, -1, -1, 1, 0, 1, -1, -1, 1, 0], 
+           [1, 1, 1, 1, 2, -1, -1, -1, -1, -2], # i
+           [1, 1, -1, -1, 0, -1, -1, 1, 1, 0],
+           [1, 1, 1, 1, -2, -1, -1, -1, -1, 2],
+           [1, -1, 1, -1, 0, -1, 1, -1, 1, 0],
+           [1, -1, -1, 1, 0, -1, 1, 1, -1, 0]]
+b_input = [4, 0, 0, 2, 0, 0, 0, 4, 2, 0]
+
+solve_linear_equation(A_input, b_input)

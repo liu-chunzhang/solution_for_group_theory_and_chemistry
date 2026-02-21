@@ -1,7 +1,7 @@
 \documentclass[a4paper]{book}
 
-\usepackage{bm}
-\usepackage{caption}
+\usepackage{afterpage}
+\usepackage[hypcap=false]{caption}
 \usepackage{enumitem}	% 定制enumerate标号
 \usepackage{geometry}
 \geometry{%
@@ -9,11 +9,25 @@
 	right=2cm,%
 	top=2cm,%
 	bottom=2cm,%
-	bindingoffset=0cm}
+	bindingoffset=0cm
+}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=blue,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
 \usepackage[none]{hyphenat}	% 阻止长单词分在两行
+\usepackage{longtable}
 \usepackage{mathrsfs}	% 提供\mathscr字体
 \usepackage[version=4]{mhchem}
+\usepackage{multirow}
+\usepackage{subcaption}
 \usepackage{titlesec}
+
 
 \RequirePackage[many]{tcolorbox}
 \tcbset{
@@ -28,8 +42,8 @@
 
 \definecolor{skyblue}{rgb}{0.54, 0.81, 0.94}
 
-\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{exercise}[1][]{
-    title={Exercise~\thetcbcounter},
+\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{problem}[1][]{
+    title={Problem~\thetcbcounter},
     colframe=skyblue,
     colback=skyblue!12!white,
     boxed title style={colback=skyblue},
@@ -53,6 +67,19 @@
     }
 }
 
+
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\orb}[1]{{\rm #1}}
@@ -60,6 +87,9 @@
 \newcommand{\orbp}{\orb{p}}
 \newcommand{\orbd}{\orb{d}}
 \newcommand{\orbf}{\orb{f}}
+\newcommand{\orbg}{\orb{g}}
+\newcommand{\orbh}{\orb{h}}
+\newcommand{\varparallel}{/ \! /}
 
 \newcommand\Figref[1]{Fig \ref{#1}}
 \newcommand\Tableref[1]{Table \ref{#1}}
@@ -80,351 +110,510 @@
 	
 	\chapter{Hybrid Orbitals}
 	
-	\begin{exercise}
-		Determine the irreducible representations of $\mathscr{T}_{\rm d}$ to which f-orbitals belong.
-	\end{exercise}
+	% 11.1
+	\begin{problem}
+	
+	Determine the irreducible representations of $\mathscr{T}_{\rm d}$ to which f-orbitals belong.
+
+	\end{problem}
 
 	\begin{solution}
+	
+	Firstly, we demonstrate the character table for the  $\mathscr{T}_{\rm d}$ point group.
+	\begin{center}
+	\captionof{table}{Character table for the $\mathscr{T}_{\rm d}$ point group.} \label{table:character_table_of_td}
+	\begin{tabular}{c|ccccc}\hline
+$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$	\\ \hline
+		$A_1$	&	1	&	1	&	1	&	1	&	1	\\
+		$A_2$	&	1	&	1	&	1	&	-1	&	-1	\\
+		$E$		&	2	&	-1	&	2	&	0	&	0	\\
+		$T_1$	&	3	&	0	&	-1	&	1	&	-1	\\
+		$T_2$	&	3	&	0	&	-1	&	-1	&	1	\\ \hline
+	\end{tabular}
+	\end{center}
 
-		Firstly, the information of seven (un-normalized) f-orbitals is listed below and they are marked in my symbols.
-		\begin{center}
-		\begin{tabular}{ccc}\hline
-		angular function &	f-orbital symfol & 	my symbol \\ \hline
-	$\sin\theta\cos\phi(5\sin^2\theta\cos^2\phi-3)$ &	$\orbf_{x(5x^2-3r^2)}$ or $\orbf_{x^3}$ & $f_1$ \\
-	$\sin\theta\sin\phi(5\sin^2\theta\sin^2\phi-3)$ &	$\orbf_{y(5y^2-3r^2)}$ or $\orbf_{y^3}$ & $f_2$ \\
-	$5\cos^3\theta - 3\cos\theta$ &	$\orbf_{z(5z^2-3r^2)}$ or $\orbf_{z^3}$ & $f_3$ \\
-	$\sin\theta\cos\phi(\cos^2\theta-\sin^2\theta\sin^2\phi)$ &	$\orbf_{x(z^2-y^2)}$ & $f_4$ \\
-	$\sin\theta\sin\phi(\cos^2\theta-\sin^2\theta\cos^2\phi)$ &	$\orbf_{y(z^2-x^2)}$ & $f_5$ \\
-	$\sin^2\theta\cos\phi\cos2\phi$ & $\orbf_{z(x^2-y^2)}$ & $f_6$ \\
-	$\sin^2\theta\cos\phi\sin2\phi$ & $\orbf_{xyz}$ & $f_7$ \\\hline
-		\end{tabular}
-		\end{center}
-		
-		\begin{center}
-		\begin{tabular}{cccc}
-			\begin{minipage}[t]{0.22\linewidth}
-			\centering
-			\setlength{\abovecaptionskip}{0.5em}
-			\includegraphics[scale=1]{./structures/exercise_1/f-orbitals_C3.png}
-			\captionof*{figure}{class $\{C_3\}$}
-			\end{minipage} & 
-			\begin{minipage}[t]{0.22\linewidth}
-			\setlength{\abovecaptionskip}{0.5em}
-			\includegraphics[scale=1]{./structures/exercise_1/f-orbitals_C2.png}
-			\captionof*{figure}{class $\{C_2\}$}
-			\end{minipage} &
-			\begin{minipage}[t]{0.22\linewidth}
-			\centering
-			\setlength{\abovecaptionskip}{0.5em}
-			\includegraphics[scale=1]{./structures/exercise_1/f-orbitals_S4.png}
-			\captionof*{figure}{class $\{S_4\}$}
-			\end{minipage} & 
-			\begin{minipage}[t]{0.22\linewidth}
-			\setlength{\abovecaptionskip}{0.5em}
-			\includegraphics[scale=1]{./structures/exercise_1/f-orbitals_sigma.png}
-			\captionof*{figure}{class $\{\sigma_{\rm d}\}$}
-			\end{minipage}
-		\end{tabular}				
-		\captionof{figure}{aaaaaaa}
-		\end{center}
-		
-		Then, the definition of all operation $R$ is demonstrated below, and they are classified according to their classes. Note that $R(x^\prime,y^\prime,z^\prime)$ means that $x$, $y$, $z$ are converted to $x^\prime$, $y^\prime$, $z^\prime$, respectively.
-		\begin{itemize}
-
-		\item class $E$
-		
-		There is only one element, i.e. identical operation $E$, which is $E(x,y,z)$.
-		
-		\item class $C_3$
-
-		There are 8 elements, whose information is listed below. \vspace{-1em}
-		\begin{center}
-		\begin{tabular}{c|c} \hline
-			$C_{3xyz}(y,z,x)$	& rotate $\frac {2\pi}3$ clockwise around $\bm{i+j+k}$\\
-			$C^{-1}_{3\bar x\bar yz}(z,x,y)$ & rotate $\frac {4\pi}3$ clockwise around $\bm{i+j+k}$ \\
-			$C_{3\bar x\bar yz}(y,\bar z,\bar x)$ &  rotate $\frac {2\pi}3$ clockwise around $\bm{-i-j+k}$ \\
-			$C^{-1}_{3\bar x\bar yz}(\bar z,x,\bar y)$ & rotate $\frac {4\pi}3$ clockwise around $\bm{-i-j+k}$ \\
-			$C_{3\bar x y \bar z}(\bar y, \bar z,x)$ &  rotate $\frac {2\pi}3$ clockwise around $\bm{-i+j-k}$ \\
-			$C^{-1}_{3\bar x y \bar z}(z, \bar x,\bar y)$ & rotate $\frac {4\pi}3$ clockwise around $\bm{-i+j-k}$ \\
-			$C_{3x\bar y \bar z}(\bar y, z,\bar x)$ &  rotate $\frac {2\pi}3$ clockwise around $\bm{i-j-k}$ \\
-			$C^{-1}_{3x\bar y \bar z}(\bar z,\bar x,y)$ & rotate $\frac {4\pi}3$ clockwise around $\bm{i-j-k}$ \\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\item class $C_2$
-
-		There are 3 elements, whose information is listed below. \vspace{-1em}
-		\begin{center}
-		\begin{tabular}{c|c} \hline
-			$C_{2x}(x,\bar y, \bar z)$	& rotate $\pi$ clockwise around $x$-axis\\
-			$C_{2y}(\bar x, y, \bar z)$	& rotate $\pi$ clockwise around $y$-axis\\
-			$C_{2z}(\bar x,\bar y, z)$	& rotate $\pi$ clockwise around $z$-axis\\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\item class $S_4$
-
-		There are 6 elements, whose information is listed below. \vspace{-1em}
-		\begin{center}
-		\begin{tabular}{c|c} \hline
-			$S_{4x}(\bar x,\bar z, y)$	& rotate $\frac\pi2$ clockwise around $x$-axis and then perform horizontal mirror reflection\\
-			$S^3_{4x}(\bar x, z, \bar y)$	& rotate $\frac{3\pi}2$ clockwise around $x$-axis and then perform horizontal mirror reflection\\
-			$S_{4y}(z, \bar y, \bar x)$	& rotate $\frac\pi2$ clockwise around $y$-axis and then perform horizontal mirror reflection\\
-			$S^3_{4y}(\bar z, \bar y, x)$ & rotate $\frac{3\pi}2$ clockwise around $y$-axis and then perform horizontal mirror reflection\\
-			$S_{4z}(\bar y, x, \bar z)$	& rotate $\frac\pi2$ clockwise around $z$-axis and then perform horizontal mirror reflection\\
-			$S^3_{4z}(y, \bar x, \bar z)$	& rotate $\frac{3\pi}2$ clockwise around $z$-axis and then perform horizontal mirror reflection\\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\item class $\sigma_{\rm d}$
-
-		There are 6 elements, whose information is listed below. \vspace{-1em}
-		\begin{center}
-		\begin{tabular}{c|c} \hline
-			$\sigma_{{\rm d},yz}(x, z, y)$ & perform mirror reflection about the $y-z=0$ plane \\
-			$\sigma_{{\rm d},-yz}(x, \bar z, \bar y)$	& perform mirror reflection about the $y+z=0$ plane \\
-			$\sigma_{{\rm d},xz}(z, y, x)$ & perform mirror reflection about the $x-z=0$ plane \\
-			$\sigma_{{\rm d},-xz}(\bar z, y, \bar x)$	& perform mirror reflection about the $x+z=0$ plane \\
-			$\sigma_{{\rm d},xy}(y, x, z)$ & perform mirror reflection about the $x-y=0$ plane \\
-			$\sigma_{{\rm d},-xy}(\bar y, \bar x, z)$	& perform mirror reflection about the $x+y=0$ plane \\ \hline
-		\end{tabular}
-		\end{center}
-
-		\end{itemize}				
-		
-		Next, the result of the transformation of these orbitals under $O_R$ is listed below. \vspace{-0.5em}
-		\begin{center}
-		\begin{tabular}{ccccccccccccc} \hline
-			element & $E$ & $C_{3xyz}$ & $C^{-1}_{3xyz}$ & $C_{3\bar x \bar y z}$ & $C^{-1}_{3\bar x \bar yz}$ & $C_{3\bar x y \bar z}$ & $C^{-1}_{3\bar x y \bar z}$ &  $C_{3 x\bar y \bar z}$ & $C^{-1}_{3x\bar y \bar z}$ & $C_{2x}$ & $C_{2y}$ & $C_{2z}$ \\ \hline
-			$f_1$	&	$f_1$	&	$f_2$	&	$f_3$	&	$f_2$	&	$-f_3$	&	$-f_3$	&	$-f_2$	&	$f_3$	&	$-f_2$	&	$f_1$	&	$-f_1$	&	$-f_1$	\\
-			$f_4$	&	$f_4$	&	$-f_5$	&	$-f_6$	&	$-f_5$	&	$f_6$	&	$f_5$	&	$-f_6$	&	$f_5$	&	$f_6$	&	$f_4$	&	$-f_4$	&	$-f_4$	\\
-			$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	\\ \hline
-			element & $S_{4x}$ & $S^3_{4x}$ & $S_{4y}$ & $S^3_{4y}$ & $S_{4z}$ & $S^{3}_{4z}$ & $\sigma_{{\rm d},yz}$ &  $\sigma_{{\rm d},-yz}$ & $\sigma_{{\rm d},xz}$ & $\sigma_{{\rm d},-xz}$ & $\sigma_{{\rm d},xy}$ & $\sigma_{{\rm d},-xy}$ \\ \hline
-			$f_1$	&	$-f_1$	&	$-f_1$	&	$f_3$	&	$-f_3$	&	$-f_2$	&	$f_2$	&	$f_1$	&	$f_1$	&	$f_3$	&	$-f_3$	&	$f_2$	&	$-f_2$	\\
-			$f_4$	&	$f_4$	&	$f_4$	&	$f_6$	&	$-f_6$	&	$-f_5$	&	$f_5$	&	$-f_4$	&	$-f_4$	&	$f_6$	&	$-f_6$	&	$f_5$	&	$-f_5$	\\
-			$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	&	$f_7$	\\ \hline
-		\end{tabular}
-		\end{center}
-		
-		Here, we check the character table of the point group $\mathscr{T}_{\rm d}$, \vspace{-0.5em}
-		\begin{center}
-		\begin{tabular}{cccccccc}\hline
-	$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ &	$3C_2$	& $6S_4$	&	$6\sigma_{\rm d}$ &		&	\\ \hline
-		$A_1$	&	1	&	1	&	1	&	1	&	1	&	& $x^2+y^2+z^2$	\\
-		$A_2$	&	1	&	1	&	1	&	-1	&	-1	&	&	\\
-		$E$		&	2	&	-1	&	2	&	0	&	0	&	& ($2z^2-x^2-y^2$, $x^2-y^2$)	\\
-		$T_1$	&	3	&	0	&	-1	&	1	&	-1	& ($R_x$, $R_y$, $R_z$)	& 	\\
-		$T_2$	&	3	&	0	&	-1	&	-1	&	1	& ($x$, $y$, $z$)	&	($xy$, $xz$, $yz$) 	\\ \hline
-		\end{tabular}
-		\end{center}
-		and we find the character below for $\Gamma^{\rm hyb}$ for the $\mathscr{T}_{\rm d}$ point group.
-		\begin{center}
-		\begin{tabular}{cccccc} \hline
-			$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ &	$3C_2$	& $6S_4$	&	$6\sigma_{\rm d}$	\\ \hline
-			$\chi^{\rm hyb}(C_i)$ & 7 & 1 & -1 & 1 & 1 \\\hline
-		\end{tabular}
-		\end{center}
-		
-		We can calculate the reduction of representation $\Gamma^{\rm hyb}$,
-		\begin{align*}
-		a_1 &= \frac{1}{24} [ 1 \times 7 \times 1 + 8 \times 1 \times 1 + 3 \times (-1) \times 1 + 6 \times 1 \times 1 + 6 \times 1 \times 1 ] = 1 ,\\
-		a_2 &= \frac{1}{24} [ 1 \times 7 \times 1 + 8 \times 1 \times 1 + 3 \times (-1) \times 1 + 6 \times 1 \times (-1) + 6 \times 1 \times (-1) ] = 0, \\
-		e &= \frac{1}{24} [ 1 \times 7 \times 2 + 8 \times 1 \times (-1) + 3 \times (-1) \times 2 + 6 \times 1 \times 0 + 6 \times 1 \times 0 ] = 0, \\
-		t_1 &= \frac{1}{24} [ 1 \times 7 \times 3 + 8 \times 1 \times 0 + 3 \times (-1) \times (-1) + 6 \times 1 \times 1 + 6 \times 1 \times (-1) ] = 1 ,\\
-		t_2 &= \frac{1}{24} [ 1 \times 7 \times 3 + 8 \times 1 \times 0 + 3 \times (-1) \times (-1) + 6 \times 1 \times (-1) + 6 \times 1 \times 1 ] = 1 ,
-		\end{align*}
-		and we obtain
-		\begin{equation}
-			\Gamma^{\rm hyb} = \Gamma^{A_1} \oplus \Gamma^{T_1} \oplus \Gamma^{T_2}.
-		\end{equation}
-		
-		For simplification, we summarize the operations of the same classes.
-		\begin{center}
-		\begin{tabular}{cccccc}\hline
-	$\mathscr{T}_{\rm d}$ & $O_E$ & $\sum_{k=1}^8 O_{C_{3k}}$ & $\sum_{k=1}^3 O_{C_{2k}}$	& $\sum_{k=1}^6 O_{S_{4k}}$	&	$ \sum_{k=1}^6 O_{\sigma_{{\rm d},k}}$	\\ \hline
-		$f_1$	&	$f_1$	&	0	&	$-f_1$	&	$-2f_1$	&	$2f_1$	\\
-		$f_4$	&	$f_4$	&	0	&	$-f_4$	&	$2f_4$	&	$-2f_4$	\\
-		$f_7$	&	$f_7$	&	$8f_7$	&	$3f_7$	&	$6f_7$	&	$6f_7$	\\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\begin{align*}
-		P^{A_1} f_1 &= ( 1 \times O_E + 1 \times \sum_{k=1}^8 O_{C_{3k}} + 1 \times \sum_{k=1}^3 O_{C_{2k}} + 1 \times \sum_{k=1}^6 O_{S_{4k}} + 1 \times \sum_{k=1}^6 O_{\sigma_{{\rm d},k}} ) f_1 = 0, \\
-		P^{A_2} f_1 &= ( 1 \times O_E + 1 \times \sum_{k=1}^8 O_{C_{3k}} + 1 \times \sum_{k=1}^3 O_{C_{2k}} + (-1) \times \sum_{k=1}^6 O_{S_{4k}} + (-1) \times \sum_{k=1}^6 O_{\sigma_{{\rm d},k}} ) f_1 = 0, \\
-		P^E f_1 &= ( 2 \times O_E + (-1) \times \sum_{k=1}^8 O_{C_{3k}} + 2 \times \sum_{k=1}^3 O_{C_{2k}} + 0 \times \sum_{k=1}^6 O_{S_{4k}} + 0 \times \sum_{k=1}^6 O_{\sigma_{{\rm d},k}} ) f_1 = 0, \\
-		P^{T_1} f_1 &= ( 3 \times O_E + 0 \times \sum_{k=1}^8 O_{C_{3k}} + (-1) \times \sum_{k=1}^3 O_{C_{2k}} + 1 \times \sum_{k=1}^6 O_{S_{4k}} + (-1) \times \sum_{k=1}^6 O_{\sigma_{{\rm d},k}} ) f_1 = 0, \\
-		P^{T_2} f_1 &= ( 3 \times O_E + 0 \times \sum_{k=1}^8 O_{C_{3k}} + (-1) \times \sum_{k=1}^3 O_{C_{2k}} + (-1) \times \sum_{k=1}^6 O_{S_{4k}} + 1 \times \sum_{k=1}^6 O_{\sigma_{{\rm d},k}} ) f_1 = 8f_1. \\
-		\end{align*}
-		Thus, $f_1$ belongs to $T_2$, which is a three-dimentional irreducible representation. With
-		\begin{equation*}
-			C_{3xyz} f_1 = f_2, \quad C^{-1}_{3xyz} f_1 = f_3,
-		\end{equation*}
-		we conclude that $f_1$, $f_2$ and $f_3$ belong to $T_2$.
-		
-		Similarly, we note 
-		\begin{equation*}
-		P^{A_1} f_4 = 0, \quad	P^{A_2} f_4 = 0, \quad P^E f_4 = 0, \quad P^{T_1} f_4 = 8f_4, \quad P^{T_2} f_4 = 0.
-		\end{equation*}
-		So $f_4$ belongs to $T_1$. Besides, with
-		\begin{equation*}
-			C_{3xyz} f_4 = -f_5, \quad C^{-1}_{3xyz} f_4 = -f_6,
-		\end{equation*}				
-		we can also conclude that $f_4$, $f_5$ and $f_6$ belong to the same three-dimentional irreducible representation $T_1$.
-		\begin{equation*}
-		P^{A_1} f_7 = 24f_7, \quad	P^{A_2} f_7 = 0, \quad P^E f_7 = 0, \quad P^{T_1} f_7 = 0, \quad P^{T_2} f_7 = 0.
-		\end{equation*}
-		Thus, we conclude that $f_7$ belongs to the one-dimentional irreducible representation $A_1$.
-		
-		In conclusion, we find 
-		\begin{itemize}
-		
-		\item $f_1 \equiv \orbf_{x(5x^2-3r^2)}$, $f_2 \equiv \orbf_{y(5y^2-3r^2)}$ and $f_3 \equiv \orbf_{z(5z^2-3r^2)}$ belong to the three-dimentional irreducible representation $T_2$,
-
-		\item $f_4 \equiv \orbf_{x(z^2-y^2)}$, $f_5 \equiv \orbf_{y(z^2-x^2)}$ and $f_6 \equiv \orbf_{z(x^2-y^2)}$ belong to the three-dimentional irreducible representation $T_1$,
-		
-		\item $f_7 \equiv \orbf_{xyz}$ belongs to the one-dimentional irreducible representation $A_1$.
-
-		\end{itemize}				
-		 
+	Using the conclusion of the remark below this problem, we immediately obtain the characters of the representation $\Gamma^{\rm red}$ which uses 7 $\orbf$-orbitals ($l=3$) as its basis functions for the $\mathscr{T}_{\rm d}$ point group:
+	\begin{align*}
+		\chi^{\rm red}(E) &= 2l + 1 = 7 , \\
+		\chi^{\rm red}(C_3) &= \frac{ \sin \frac{ 2l+1 }{ 3 } \pi }{ \sin \frac{ \pi }{ 3 } } = \frac{ \sin \frac{7}{3} \pi }{ \sin \frac{ \pi }{ 3 } } = 1 , \\
+		\chi^{\rm red}(C_2) &= \frac{ \sin \frac{ 2l+1 }{ 2 } \pi }{ \sin \frac{ \pi }{ 2 } } = \frac{ \sin \frac{7}{2} \pi }{ \sin \frac{ \pi }{ 2 } } = -1 , \\
+		\chi^{\rm red}(S_4) &= \frac{ \cos \frac{ 2l+1 }{ 4 } \pi }{ \cos \frac{ \pi }{ 4 } } = \frac{ \cos \frac{7}{4} \pi }{ \cos \frac{ \pi }{ 4 } } = 1 , \\
+		\chi^{\rm red}(\sigma_{\rm d}) &= 1 .
+	\end{align*}		
+	
+	Summarizing these results, we obtain the character for $\Gamma^{\rm red}$ of the $\mathscr{T}_{\rm d}$ point group:
+	\begin{center}
+	\captionof{table}{Character of the reducible representation $\Gamma^{\rm red}$ of the $\mathscr{T}_{\rm d}$ point group.}
+	\begin{tabular}{c|ccccc}\hline
+	$\mathscr{T}_{\rm d}$ & $E$ & $8C_3$ & $3C_2$ & $6S_4$ & $6\sigma_d$	\\ \hline
+	$\chi^{\rm hyb}(C_i)$ & 7 & 1 & -1 & 1 & 1 \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Hence, Solving the system of linear equations like in Problem 7.1, we arrive at
+	\begin{equation*}
+		\Gamma^{\rm hyb} = \Gamma^{A_1} \oplus \Gamma^{T_1} \oplus \Gamma^{T_2} .
+	\end{equation*}
+	
+	At last, we should point all irreducible representations which $\orbf$-orbitals belong. 
+	
+	\begin{itemize}
+	
+	\item It is evident that only $\orbf_{xyz}$ is invariant under any $C_3$ operation. Thus, $\orbf_{xyz}$ belongs to the $\Gamma^{A_1}$.
+	
+	\item Note that the only two differences in the characters between $\Gamma^{T_1}$ and $\Gamma^{T_2}$, we analyse the behaviours of other $\orbf$-orbitals under the $S_{4z}$ operation. The $S_{4z}$ operation renders $x \rightarrow -y$, $y \rightarrow x$ and $z \rightarrow -z$, thus we find
+	\begin{center}
+	\begin{tabular}{ccc}
+		$\orbf_{x^3} \rightarrow - \orbf_{y^3}$,	& $\orbf_{y^3} \rightarrow \orbf_{x^3}$, 	& $\orbf_{z^3} \rightarrow - \orbf_{z^3}$,	\\
+		$\orbf_{x(y^2-z^2)} \rightarrow - \orbf_{y(x^2-z^2)}$,	& $\orbf_{y(z^2-x^2)} \rightarrow \orbf_{x(z^2-y^2)}$, 	& $\orbf_{z(x^2-y^2)} \rightarrow \orbf_{z(x^2-y^2)}$.
+	\end{tabular}		
+	\end{center}
+	In other words, the character of the 3 $S_4$ class of the irreducible representation, whose basis functions are $\orbf_{x(y^2-z^2)}$, $\orbf_{y(z^2-x^2)}$, and $\orbf_{x(z^2-y^2)}$, is 1 while that of the irreducible representation, whose basis functions are $\orbf_{x^3}$, $\orbf_{y^3}$, and $\orbf_{z^3}$ is -1. This means that $\orbf_{x(y^2-z^2)}$, $\orbf_{y(z^2-x^2)}$, and $\orbf_{x(z^2-y^2)}$ belong to the $\Gamma^{T_1}$, while $\orbf_{x^3}$, $\orbf_{y^3}$, and $\orbf_{z^3}$ belong to the $\Gamma^{T_2}$.
+	
+	\end{itemize}		
+	
+	Now we can conclude
+	\begin{itemize}
+	
+	\item $\orbf_{xyz}$ belongs to the $\Gamma^{A_1}$,
+	
+	\item $\orbf_{x(y^2-z^2)}$, $\orbf_{y(z^2-x^2)}$, and $\orbf_{x(z^2-y^2)}$ belong to the $\Gamma^{T_1}$,
+	
+	\item $\orbf_{x^3}$, $\orbf_{y^3}$, and $\orbf_{z^3}$ belong to the $\Gamma^{T_2}$.
+	
+	\end{itemize}
 		
 	\end{solution}
 	
-	\begin{exercise}
-		Show that for a molecule of octahedral symmetry the $\sigma$-bonding hybrid orbitals on the central atom are composed of six atomic orbitals: $\orbs$, $\orbp_x$, $\orbp_y$, $\orbp_z$, $\orbd_{z^2}$ and $\orbd_{x^2-y^2}$.
-	\end{exercise}
-
-	\begin{solution}
-		
-		The structure of a general molecule $\ce{AB6}$ of octahedral symmetry is shown in \Figref{fig:octahedral}.
-		
-		
-		\begin{minipage}[t]{1.0\linewidth}
-		\begin{center}
-		\setlength{\abovecaptionskip}{0.5em}
-		\includegraphics[scale=1.5]{./structures/exercise_2/octahedral.png}
-		\captionof{figure}{A set of vectors $v_1$, $v_2$, $v_3$, $v_4$, $v_5$, and $v_6$ representing the six $\sigma$-hybrid orbitals used by the atom $\ce{A}$ to bond the six $\ce{B}$ atoms in $\ce{AB6}$.}\label{fig:octahedral}
-		\end{center}
-		\end{minipage}		
-		
-		The character table of the point group $\mathscr{O}_{\rm h}$ is shown below.		
-		\begin{center}
-		\begin{tabular}{ccccccccccccc}\hline
-	$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ &	$3C_2$	& $6C_4$	&	$6C^\prime_2$	&	$i$	&	$8S_6$	&	$3\sigma_{h}$	&	$6S_4$ &	$6\sigma_{d}$	&	&\\ \hline
-			$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&		&	$x^2+y^2+z^2$\\
-			$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	& 		&	\\
-			$E_g$ 		&	2	&	-1	&	2	&	0	&	0	&	2	&	-1	&	2	&	0	&	0	& 		& ($2z^2-x^2-y^2$, $x^2-y^2$)\\
-			$T_{1g}$	&	3	&	0	&	-1	&	1	&	-1	&	3	&	0	&	-1	&	1	&	-1	& ($R_x$, $R_y$, $R_z$)	&	\\
-			$T_{2g}$ 	&	3	&	0	&	-1	&	-1	&	1	&	3	&	0	&	-1	&	-1	&	1	&		& ($xy$, $xz$, $yz$)\\
-			$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&		&	\\4
-			$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&		&	\\
-			$E_u$ 		&	2	&	-1	&	2	&	0	&	0	&	-2	&	1	&	-2	&	0	&	0	& 		& \\ 
-			$T_{1u}$	&	3	&	0	&	-1	&	1	&	-1	&	-3	&	0	&	1	&	-1	&	1	& ($x$, $y$, $z$)	&	\\
-			$T_{2u}$ 	&	3	&	0	&	-1	&	-1	&	1	&	-3	&	0	&	1	&	1	&	-1	&		&	\\	\hline
-		\end{tabular}
-		\end{center}
-		
-		The character for $\Gamma^{\rm hyb}$ for the $\mathscr{O}_{\rm h}$ point group is 
-		\begin{center}
-		\begin{tabular}{ccccccccccc}\hline
-	$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ &	$3C_2$	& $6C_4$	&	$6C^\prime_2$	&	$i$	&	$8S_6$	&	$3\sigma_{h}$	&	$6S_4$ &	$6\sigma_{d}$	\\ \hline
-	$\chi^{\rm hyb}(C_i)$ & 6 & 0 & 2 & 2 & 0 &	0 & 0 & 4 & 0 & 2 \\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\begin{equation*}
-			\Gamma^{\rm hyb} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1u}}.
-		\end{equation*}
-		
-		\begin{center}
-		\begin{tabular}{ccc} \hline
-		$\Gamma^{A_{1g}}$	&	$\Gamma^{E_g}$	&	$\Gamma^{T_{1u}}$\\	\hline
-		$\orbs$	&	($\orbd_{z^2}$, $\orbd_{x^2-y^2}$) & ($\orbp_x$, $\orbp_y$, $\orbp_z$) \\ \hline
-		\end{tabular}
-		\end{center}
-		
-		In conclusion, we have proved that for a molecule of octahedral symmetry the $\sigma$-bonding hybrid orbitals on the central atom are composed of six atomic orbitals, $\orbs$, $\orbp_x$, $\orbp_y$, $\orbp_z$, $\orbd_{z^2}$, and $\orbd_{x^2-y^2}$.
-		
-	\end{solution}
+	\begin{remark}
 	
-	\begin{exercise}
-		Determine what type of $\pi$-bonding hybrid orbitals can be formed for the square planar $\ce{AB4}$ molecule which belongs to the $\mathscr{D}_{\rm 4h}$ point group.
-	\end{exercise}
+	In quantum mechanics, a set of $2l+1$ spherical harmonics $Y^l_m \equiv Y^l_m(\theta, \phi)$ forms a basis for a representation of the rotation group ${\rm SO}(3)$. Now I derive the character for this set of all symmetry operations under a general point group.
 	
-	\begin{solution}
-		
-		The character table of the point group $\mathscr{D}_{\rm 4h}$ is shown below.
-		\begin{center}
-		\begin{tabular}{ccccccccccccc}\hline
-	$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{h}$	&	$2\sigma_{v}$ &	$2\sigma_{d}$	&		&\\ \hline
-			$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&		&	$x^2+y^2$; $z^2$\\
-			$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	& $R_z$	&	\\
-			$B_{1g}$	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&		&	$x^2-y^2$\\
-			$B_{2g}$ 	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&		&	$xy$	\\
-			$E_g$ 		&	2	&	0	&	-2	&	0	&	0	&	2	&	0	&	-2	&	0	&	0	& ($R_x$, $R_y$) & ($xz$, $yz$)\\ 
-			$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&		&	\\
-			$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&	$z$	&	\\
-			$B_{1u}$	&	1	&	-1	&	1	&	1	&	-1	&	-1	&	1	&	-1	&	-1	&	1	&		&	\\
-			$B_{2u}$ 	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&		&	\\
-			$E_u$ 		&	2	&	0	&	-2	&	0	&	0	&	-2	&	0	&	2	&	0	&	0	& ($x$, $y$)	&\\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\begin{minipage}[t]{1.0\linewidth}
-		\begin{center}
-		\setlength{\abovecaptionskip}{0.5em}
-		\includegraphics[scale=1.5]{./structures/exercise_3/square_planar.png}
-		\captionof{figure}{rehstrjstfjs}
-		\end{center}
-		\end{minipage}	
-		
-		\begin{center}
-		\begin{tabular}{ccccccccccccc}\hline
-	$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{h}$	&	$2\sigma_{v}$ &	$2\sigma_{d}$	&		&\\ \hline
-	$\chi^{\rm hyb}(C_i)$ & 8 & 0 & 0 & -4 & 0 & 0 & 0 & 0 & 0 & 0 \\
-	$\chi^{\rm hyb}_{\rm perp}(C_i)$ & 4 & 0 & 0 & -2 & 0 & 0 & 0 & -4 & 2 & 0 \\ 
-	$\chi^{\rm hyb}_{\rm plane}(C_i)$ & 4 & 0 & 0 & -2 & 0 & 0 & 0 & 4 & -2 & 0 \\ \hline
-		\end{tabular}
-		\end{center}
-		
-		\begin{align*}
-			\Gamma^{\rm hyb}_{\rm perp} &= \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \oplus \Gamma^{E_g}, \\
-			\Gamma^{\rm hyb}_{\rm plane} &= \Gamma^{A_{2g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_u}.
-		\end{align*}
-		
-		\begin{center}
-		\begin{tabular}{ccc|ccc} \hline
-		\multicolumn{3}{c|}{$\Gamma^{\rm hyb}_{\rm perp}$} & \multicolumn{3}{c}{$\Gamma^{\rm hyb}_{\rm plane}$} \\
-		$\Gamma^{A_{2u}}$	&	$\Gamma^{B_{2u}}$	&	$\Gamma^{E_g}$	&	$\Gamma^{A_{2g}}$	&	$\Gamma^{B_{2g}}$	&	$\Gamma^{E_u}$	\\	\hline
-		$\orbp_z$	&	none & ($\orbd_{xz}$, $\orbd_{yz}$)	&	none & $\orbd_{xy}$	&	($\orbp_x$, $\orbp_y$) \\ \hline
-		\end{tabular}
-		\end{center}
-		
-		Thus, we conclude two conclusions.
+	\begin{itemize}
+	
+	\item $E$: There are $2l+1$ basis functions and after the identical operation, a general basis function is invariant:
+	\begin{equation}
+		\boldsymbol{O}_E Y^l_m(\theta, \phi) = Y^l_m(\theta, \phi) .
+	\end{equation}
+	Thus, we obtain
+	\begin{equation}\label{eq:character_e}
+		\chi_l(E) = \sum_{i=-l}^l 1 = 2l+1 . 
+	\end{equation}
+	
+	\item $C_n$: When we rotate the system clockwise by an angle $\alpha = 2\pi/n$ about the $z$-axis, the wavefunctions transform as:
+	\begin{equation}
+		\boldsymbol{O}_{C_n} Y^l_m(\theta, \phi) = \hat{R}_z(\alpha) Y^l_m(\theta, \phi) = Y^l_m(\theta, \phi - \alpha) = e^{-im\alpha} Y^l_m(\theta, \phi) .
+	\end{equation}
+	Since each basis function $Y^l_m$ (where $m = -l, \dots, 0, \dots, l$) is simply multiplied by a phase factor, the rotation matrix is diagonal. The character $\chi_l(\alpha)$ is the trace of this matrix is
+	\[
+		\chi_l(\alpha) = \sum_{m=-l}^{l} e^{im\alpha} = e^{-il\alpha} + e^{-i(l-1)\alpha} + \dots + 1 + \dots + e^{i(l-1)\alpha} + e^{il\alpha} . 
+	\]
+	This is a geometric series with a starting term of $e^{-il\alpha}$, a common ratio of $e^{i\alpha}$, and a total of $2l+1$ terms. Therefore, we obtain
+	\begin{align*}
+		\chi_l(\alpha) = \frac{ e^{-il\alpha} ( 1 - e^{i(2l+1)\alpha} ) }{ 1 - e^{i\alpha} }
+	\end{align*}
+	To simplify this into sines, we ``factor out" the half-angle terms $e^{i(l+1/2)\alpha}$ and $e^{i\alpha/2}$ from the numerator and denominator respectively. Applying the famous Euler's formula,
+	\[
+		\sin \theta = \frac{e^{i\theta} - e^{-i\theta}}{2i} \Leftrightarrow e^{-i\theta} - e^{i\theta} = -2i \sin \theta ,
+	\]
+	the phase factors cancel out, leaving the elegant result:
+	\begin{equation*}
+		\chi_l(\alpha) = \frac{ e^{-il\alpha} e^{ i\frac{(2l+1)\alpha}{2} } }{ e^{ \frac{i\alpha}{2} } }  \frac{ e^{ -\frac{ i (2l+1) \alpha }{2} } - e^{ \frac{ i (2l+1) \alpha }{2} } }{ e^{-\frac{i\alpha}{2}} - e^{\frac{i\alpha}{2} } } = \frac{ e^{-il\alpha} e^{ i( l + \frac{1}{2} )\alpha} }{ e^{ \frac{i\alpha}{2} } } \frac{ -2i \sin \left( \frac{ 2l+1 }{ 2 } \alpha \right) }{ -2i \sin \frac{\alpha}{2} } = \frac{ \sin \frac{ 21+ 1 }{2} \alpha }{ \sin \frac{ \alpha }{2} } .
+	\end{equation*}
+	Now we substitute $\alpha$ by $\frac{2\pi}{n}$, we obtain
+	\begin{equation}\label{eq:character_cn}
+		\chi_l( C_n ) = \chi_l( \frac{2\pi}{n} ) = \frac{ \sin \frac{ 2l+1 }{ 2 } \frac{ 2 \pi }{ n } }{ \sin \frac{ 1 }{ 2 } \frac{ 2 \pi }{ n } } = \frac{ \sin \frac{ 2l+1 }{ n } \pi }{ \sin \frac{ \pi }{ n } } .
+	\end{equation}
+	
+	\item $i$: After the inverse operation, the result of a general $Y^l_m$ is:
 		\begin{itemize}
-			
-		\item There will be only 3 $\pi$-bonds which are formed by $\orbp_z$, $\orbd_{xz}$, and $\orbd_{yz}$, perpendicular to the molecular plane and they are shared equally amongst the 4 $\ce{B}$ atoms.
 		
-		\item There will be also only 3 $\pi$-bonds which are formed by $\orbd_{xy}$, $\orbp_x$, and $\orbp_y$, in the molecular plane and they are shared equally amongst the 4 $\ce{B}$ atoms.
+		\item {\it gerade} ($l$ is an even integer): $\orbs$, $\orbd$, $\orbg$ orbitals ($l=0, 2, 4$) are symmetric under the inversion operation.
+		
+		\item{\it ungerade} ($l$ is an odd integer): $\orbp$, $\orbf$, $\orbh$ orbitals ($l=1, 3, 5$) are antisymmetric (change sign) under the inversion operation.
 		
 		\end{itemize}
+	Therefore, we get two equations. One is the effect of the inverse operator $\boldsymbol{O}_i$:
+	\begin{equation}
+		\boldsymbol{O}_i Y^l_m = (-1)^l Y^l_m .
+	\end{equation}		
+	The other is the character:
+	\begin{equation}\label{eq:character_i}
+		\chi_l(i) = \sum_{i=-l}^l (-1)^{l} = (-1)^{l} \sum_{i=-l}^l 1 = (-1)^{l} (2l+1) .
+	\end{equation}
+	
+	\item $\sigma$: A reflection operation is mathematically equivalent to a $C_2$ rotation operation followed by an inversion operation ($i \cdot C_2$). Thus in the same way, with $\alpha = 2\pi/2 = \pi$, its effect is	
+	\begin{align}
+		\boldsymbol{O}_\sigma Y^l_m(\theta, \phi) &= \boldsymbol{O}_i \boldsymbol{O}_{C_2} Y^l_m(\theta, \phi) \notag \\
+		&= \boldsymbol{O}_i Y^l_m(\theta, \phi - \pi) = (-1)^l Y^l_m(\theta, \phi-\pi) = (-1)^l e^{-im\pi} Y^l_m(\theta, \phi) .
+	\end{align}
+	Hence, similar to the solution of the $\chi_l(C_n)$, we obtain
+	\begin{equation*}
+		\chi_l(\sigma) = \sum_{m=-l}^{l} (-1)^l e^{im\pi} = (-1)^l \sum_{m=-l}^{l} e^{im\pi} = (-1)^l \chi_l(C_2) = (-1)^l \frac{ \sin \frac{ 2l+1 }{ 2 } \pi }{ \sin \frac{ \pi }{ 2 } } .
+	\end{equation*}
+	Due to
+	\begin{equation*}
+		\sin \frac{ 2l+1 }{ 2 } \pi = \sin \left( l \pi + \frac{ \pi }{ 2 } \right) = \cos l \pi = (-1)^l \cos 0 \pi = (-1)^l ,
+	\end{equation*}
+	we have
+	\begin{equation}\label{eq:character_sigma}
+		\chi_l(\sigma) = (-1)^l \frac{ \sin \frac{ 2l+1 }{ 2 } \pi }{ \sin \frac{ \pi }{ 2 } } = (-1)^l \frac{ (-1)^l }{ 1 } = (-1)^{2l} = 1 .
+	\end{equation}
+	
+	\item $S_n$: A rotation-reflection operation is defined as a $C_n$ operation followed by a reflection operation ($\sigma \cdot C_n = i \cdot C_2 \cdot C_n$). Thus in the same way, substituting $\alpha$ by $\pi+\alpha$, its effect is
+	\begin{align}
+		\boldsymbol{O}_{S_n} Y^l_m(\theta, \phi) &= \boldsymbol{O}_i \boldsymbol{O}_{C_n} \boldsymbol{O}_{C_2} Y^l_m(\theta, \phi) = \boldsymbol{O}_i \hat{R}_z(\pi) \hat{R}_z(\alpha) Y^l_m(\theta, \phi) = \boldsymbol{O}_i \hat{R}_z(\pi + \alpha) Y^l_m(\theta, \phi) \notag \\
+		 & = \boldsymbol{O}_i Y^l_m(\theta, \phi - \alpha - \pi) = (-1)^l Y^l_m(\theta, \phi - \alpha - \pi) = (-1)^l e^{-im(\alpha+\pi)} Y^l_m(\theta, \phi).
+	\end{align}
+	Hence, similar to the solution of the $\chi_l(C_n)$, we obtain
+	\begin{equation*}
+		\chi^{S_n}_l(\alpha) = \sum_{m=-l}^{l} (-1)^l e^{im(\alpha+\pi)} = (-1)^l \sum_{m=-l}^{l} e^{im(\alpha+\pi)} .
+	\end{equation*}
+	This is also a geometric series but with a first term of $e^{-il(\alpha+\pi)}$, a common ratio of $e^{i(\alpha+\pi)}$, and a total of $2l+1$ terms. Therefore, we obtain
+	\begin{align*}
+		\chi^{S_n}_l(\alpha) &= (-1)^l \frac{ e^{-il(\alpha+\pi)} ( 1 - e^{i(2l+1)(\alpha+\pi)} ) }{ 1 - e^{i(\alpha+\pi) }} = (-1)^l \frac{ \sin \frac{ 2l+1 }{2} (\alpha + \pi) }{ \sin \frac{ \alpha + \pi }{2} } = (-1)^l \frac{ \sin \left( \frac{ 2l+1 }{2} \alpha + l\pi +  \frac{ \pi }{2} \right) }{ \sin \left( \frac{ \alpha }{2} + \frac{\pi}{2} \right) } \\
+		&= (-1)^l \frac{ \cos \left( \frac{ 2l+1 }{2} \alpha + l\pi \right) }{ \cos \frac{ \alpha }{2} } = (-1)^l \frac{ (-1)^l \cos \left( \frac{ 2l+1 }{2} \alpha \right) }{ \cos \frac{ \alpha }{2} } = (-1)^{2l} \frac{ \cos \left( \frac{ 2l+1 }{2} \alpha \right) }{ \cos \frac{ \alpha }{2} } = \frac{ \cos \left( \frac{ 2l+1 }{2} \alpha \right) }{ \cos \frac{ \alpha }{2} } .
+	\end{align*}
+	Now we substitute $\alpha$ by $\frac{2\pi}{n}$, we obtain
+	\begin{equation}\label{eq:character_sn}
+		\chi_l( S_n ) = \chi^{S_n}_l( \frac{2\pi}{n} ) = \frac{ \cos \frac{ 2l+1 }{ 2 } \frac{ 2 \pi }{ n } }{ \cos \frac{ 1 }{ 2 } \frac{ 2 \pi }{ n } } = \frac{ \cos \frac{ 2l+1 }{ n } \pi }{ \cos \frac{ \pi }{ n } } .
+	\end{equation}
+	
+	\end{itemize}
+	
+	It is very efficient to deal with similar problems like Problem 5.1 and Problem 7.6, with eqns \eqref{eq:character_e}, \eqref{eq:character_cn}, \eqref{eq:character_i}, \eqref{eq:character_sigma} and \eqref{eq:character_sn}.
+	
+	\end{remark}
+	
+	% 11.2	
+	\begin{problem}
+	
+	Show that for a molecule of octahedral symmetry the $\sigma$-bonding hybrid orbitals on the central atom are composed of six atomic orbitals: $\orbs$, $\orbp_x$, $\orbp_y$, $\orbp_z$, $\orbd_{z^2}$ and $\orbd_{x^2-y^2}$.
+
+	\end{problem}
+
+	\begin{solution}
+		
+	The structure of an octahedral $\ce{AB6}$ is shown in \Figref{fig:octahedral}.
+	\begin{center}
+	\includegraphics[scale=1.4]{../diagrams/chapter_11/octahedral.png}
+	\captionof{figure}{Vectors $v_1$, $v_2$, $v_3$, $v_4$, $v_5$, and $v_6$ represent the 6 $\sigma$-bonding hybrid orbitals between the $\ce{A}$ atom to one of 6 $\ce{B}$ atoms in $\ce{AB6}$.}\label{fig:octahedral}
+	\end{center}
+	
+	$\ce{AB6}$ has 3 $C_4$ axes, and a center of symmetry $i$ but no $C_5$ axis. Thus it belongs to the $\mathscr{O}_{\rm h}$ point group. Then, I show the character table of the $\mathscr{O}_{\rm h}$ point group as below.		
+	\begin{center}
+	\captionof{table}{Character table for the $\mathscr{O}_{\rm h}$ point group.}\label{table:character_table_of_oh}
+	\begin{tabular}{c|cccccccccccc}\hline
+$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ &	$3C_2$	& $6C_4$	&	$6C^\prime_2$	&	$i$	&	$8S_6$	&	$3\sigma_{h}$	&	$6S_4$ &	$6\sigma_{d}$	&	&\\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&		&	$x^2+y^2+z^2$\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	& 		&	\\
+		$E_g$ 		&	2	&	-1	&	2	&	0	&	0	&	2	&	-1	&	2	&	0	&	0	& 		& ($2z^2-x^2-y^2$, $x^2-y^2$)\\
+		$T_{1g}$	&	3	&	0	&	-1	&	1	&	-1	&	3	&	0	&	-1	&	1	&	-1	& ($R_x$, $R_y$, $R_z$)	&	\\
+		$T_{2g}$ 	&	3	&	0	&	-1	&	-1	&	1	&	3	&	0	&	-1	&	-1	&	1	&		& ($xy$, $xz$, $yz$)\\
+		$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&		&	\\
+		$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&		&	\\
+		$E_u$ 		&	2	&	-1	&	2	&	0	&	0	&	-2	&	1	&	-2	&	0	&	0	& 		& \\ 
+		$T_{1u}$	&	3	&	0	&	-1	&	1	&	-1	&	-3	&	0	&	1	&	-1	&	1	& ($x$, $y$, $z$)	&	\\
+		$T_{2u}$ 	&	3	&	0	&	-1	&	-1	&	1	&	-3	&	0	&	1	&	1	&	-1	&		&	\\	\hline
+	\end{tabular}
+	\end{center}
+	
+	After lots of calculation, the character for $\Gamma^{\rm hyb}$ for the $\mathscr{O}_{\rm h}$ point group is 
+	\begin{center}
+	\captionof{table}{Character for the $\Gamma^{\rm hyb}$ representation of the $\mathscr{O}_{\rm h}$ point group.}
+	\begin{tabular}{c|cccccccccc}\hline
+		$\mathscr{O}_{\rm h}$ & $E$ & $8C_3$ &	$3C_2$	& $6C_4$	&	$6C^\prime_2$	&	$i$	&	$8S_6$	&	$3\sigma_{h}$	&	$6S_4$ &	$6\sigma_{d}$	\\ \hline
+$\chi^{\rm hyb}(C_i)$ & 6 & 0 & 2 & 2 & 0 &	0 & 0 & 4 & 0 & 2 \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Hence, solving the system of linear equations like in Problem 7.1, we arrive at	
+	\begin{equation}
+		\Gamma^{\rm hyb} = \Gamma^{A_{1g}} \oplus \Gamma^{E_g} \oplus \Gamma^{T_{1u}}.
+	\end{equation}
+	
+	From \Tableref{table:character_table_of_oh}, we know that only the following 6 atomic orbitals can be used to construct $\sigma$-bonding molecular orbitals. In other words, for a molecule of octahedral symmetry the $\sigma$-bonding hybrid orbitals on the central atom are composed of six atomic orbitals: $\orbs$, $\orbp_x$, $\orbp_y$, $\orbp_z$, $\orbd_{z^2}$ and $\orbd_{x^2-y^2}$
+	\begin{center}
+	\begin{tabular}{ccc} \hline
+		$\Gamma^{A_{1g}}$	&	$\Gamma^{E_g}$	&	$\Gamma^{T_{1u}}$\\	\hline
+		$\orbs$				&	$\orbd_{z^2}$, $\orbd_{x^2-y^2}$ & $\orbp_x$, $\orbp_y$, $\orbp_z$ \\ \hline
+	\end{tabular}
+	\end{center}
 		
 	\end{solution}
 	
-	\begin{exercise}
-		Show that for the square planar $\ce{AB4}$ molecule a possible set of four $\sigma$-hybrid orbitals on A is composed of the atomic orbitals: $\orbs$, $\orbd_{x^2-y^2}$, $\orbp_x$, and $\orbp_y$. Find explicit expressions for the four hybrid orbitals.
-	\end{exercise}
+	% 11.3
+	\begin{problem}
+	
+	Determine what type of $\pi$-bonding hybrid orbitals can be formed for the square planar $\ce{AB4}$ molecule which belongs to the $\mathscr{D}_{\rm 4h}$ point group.
+
+	\end{problem}
+	
+	\begin{solution}
+	
+	The structure of a square planar $\ce{AB4}$ with $\pi$-bonding hybrid orbitals is shown in \Figref{fig:square_planar_pi}.
+	\begin{center}
+	\includegraphics[scale=1.5]{../diagrams/chapter_11/square_planar_pi.png}
+	\captionof{figure}{Vectors $v_1$, $v_2$, $v_3$, $v_4$, $v_5$, $v_6$, $v_7$ and $v_8$ represent the $\pi$-bonding hybrid orbitals between the $\ce{A}$ atom to one of 4 $\ce{B}$ atoms in $\ce{AB4}$.}\label{fig:square_planar_pi}
+	\end{center}
+	
+	The character table of the point group $\mathscr{D}_{\rm 4h}$ is shown below.
+	\begin{center}
+	\captionof{table}{Character table for the $\mathscr{D}_{\rm 4h}$ point group.}\label{table:character_table_of_d4h}
+	\begin{tabular}{c|cccccccccccc}\hline
+		$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{\rm h}$	&	$2\sigma_{\rm v}$ &	$2\sigma_{\rm d}$	&		&\\ \hline
+		$A_{1g}$	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&	1	&		&	$x^2+y^2$; $z^2$\\
+		$A_{2g}$	&	1	&	1	&	1	&	-1	&	-1	&	1	&	1	&	1	&	-1	&	-1	& $R_z$	&	\\
+		$B_{1g}$	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&		&	$x^2-y^2$\\
+		$B_{2g}$ 	&	1	&	-1	&	1	&	-1	&	1	&	1	&	-1	&	1	&	-1	&	1	&		&	$xy$	\\
+		$E_g$ 		&	2	&	0	&	-2	&	0	&	0	&	2	&	0	&	-2	&	0	&	0	& ($R_x$, $R_y$) & ($xz$, $yz$)\\ 
+		$A_{1u}$	&	1	&	1	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&		&	\\
+		$A_{2u}$	&	1	&	1	&	1	&	-1	&	-1	&	-1	&	-1	&	-1	&	1	&	1	&	$z$	&	\\
+		$B_{1u}$	&	1	&	-1	&	1	&	1	&	-1	&	-1	&	1	&	-1	&	-1	&	1	&		&	\\
+		$B_{2u}$ 	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&	1	&	-1	&		&	\\
+		$E_u$ 		&	2	&	0	&	-2	&	0	&	0	&	-2	&	0	&	2	&	0	&	0	& ($x$, $y$)	&\\ \hline
+	\end{tabular}
+	\end{center}
+	
+	After lots of calculation, the character for the $\Gamma^{\rm hyb}_{\rm perp}$ representation whose basis functions are $v_1$, $v_2$, $v_3$, and $v_4$, and $\Gamma^{\rm hyb}_{\rm plane}$ representation whose basis functions are $v_5$, $v_6$, $v_7$, and $v_8$, for the $\mathscr{D}_{\rm 4h}$ point group is 	
+	\begin{center}
+	\captionof{table}{Character for the $\Gamma^{\rm hyb}_{\rm perp}$, and $\Gamma^{\rm hyb}_{\rm plane}$ representations of the $\mathscr{D}_{\rm 4h}$ point group.}
+	\begin{tabular}{c|cccccccccccc}\hline
+		$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{\rm h}$	&	$2\sigma_{\rm v}$ &	$2\sigma_{\rm d}$	&		&\\ \hline
+		$\chi^{\rm hyb}_{\rm perp}(C_i)$ & 4 & 0 & 0 & -2 & 0 & 0 & 0 & -4 & 2 & 0 \\ 
+		$\chi^{\rm hyb}_{\rm plane}(C_i)$ & 4 & 0 & 0 & -2 & 0 & 0 & 0 & 4 & -2 & 0 \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Hence, solving the system of linear equations like in Problem 7.1, we arrive at	
+	\begin{align}
+		\Gamma^{\rm hyb}_{\rm perp} &= \Gamma^{A_{2u}} \oplus \Gamma^{B_{2u}} \oplus \Gamma^{E_g}, \\
+		\Gamma^{\rm hyb}_{\rm plane} &= \Gamma^{A_{2g}} \oplus \Gamma^{B_{2g}} \oplus \Gamma^{E_u}.
+	\end{align}
+	
+	From \Tableref{table:character_table_of_d4h}, we know that only the following 6 atomic orbitals can be used to construct $\pi$-bonding molecular orbitals.
+	\begin{center}
+	{
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ccc|ccc} \hline
+	\multicolumn{3}{c|}{$\Gamma^{\rm hyb}_{\rm perp}$} & \multicolumn{3}{c}{$\Gamma^{\rm hyb}_{\rm plane}$} \\
+	$\Gamma^{A_{2u}}$	&	$\Gamma^{B_{2u}}$	&	$\Gamma^{E_g}$	&	$\Gamma^{A_{2g}}$	&	$\Gamma^{B_{2g}}$	&	$\Gamma^{E_u}$	\\	\hline
+	$\orbp_z$	&	none & ($\orbd_{xz}$, $\orbd_{yz}$)	&	none & $\orbd_{xy}$	&	($\orbp_x$, $\orbp_y$) \\ \hline
+	\end{tabular}
+	}	
+	\end{center}
+	
+	Based on symmetry-adapted linear combinations (SALCs) of the ligand $p$-orbitals, the $\pi$-bonding framework can be summarized as follows:
+	\begin{itemize}
+	
+	\item Out-of-Plane $\pi$-System ($\pi_{\perp}$): The 4 ligand $\orbp_z$ orbitals transform as $a_{2u} + b_{2u} + e_g$. Symmetry matching confirms that the central atom $\ce{A}$ utilizes its $\orbp_z$ ($a_{2u}$) and $(\orbd_{xz}, \orbd_{yz})$ ($e_g$) orbitals to form 3 sets of bonding molecular orbitals. These interactions result in $\pi$-electron density delocalized above and below the molecular plane across all 4 B atoms. The $b_{2u}$ combination remains non-bonding due to the absence of a valence orbital of the same symmetry on the central atom.
+	
+	\item In-Plane $\pi$-System ($\pi_{\varparallel}$): The 4 ligand $\orbp$ orbitals lying in the $xy$-plane transform as $a_{2g} + b_{2g} + e_u$. The primary $\pi$-contribution arises from the overlap of the ligand $b_{2g}$ SALC with the central atom $\ce{A}$'s $\orbd_{xy}$ orbital. While the $(\orbp_x, \orbp_y)$ ($e_u$) orbitals are symmetry-allowed for $\pi$-bonding, they are typically partitioned to the stronger $\sigma$-bonding framework, thus their contribution to the $\pi$-system is secondary.
+	
+	\end{itemize}
+	
+	\end{solution}
+	
+	\begin{remark}
+	
+	Note that from the next problem, we can know that while $\orbp_x$, $\orbp_y$, and $\orbp_z$ of the center atom $\ce{A}$ are technically available for $\pi$-bonding, they are often heavily involved in the primary $\sigma$-bonding framework ($a_{1g} + b_{1g} + e_u$). In such cases, the $\pi$-interaction is dominated by the $\orbd$-orbitals ($\orbd_{xz}$, $\orbd_{yz}$, $\orbd_{xy}$).
+	
+	\end{remark}	
+	
+	% 11.4
+	\begin{problem}
+	
+	Show that for the square planar $\ce{AB4}$ molecule a possible set of four $\sigma$-hybrid orbitals on A is composed of the atomic orbitals: $\orbs$, $\orbd_{x^2-y^2}$, $\orbp_x$, and $\orbp_y$. Find explicit expressions for the four hybrid orbitals.
+
+	\end{problem}
 	
 	\begin{solution}
 		
-		
-				\begin{minipage}[t]{1.0\linewidth}
-		\begin{center}
-		\setlength{\abovecaptionskip}{0.5em}
-		\includegraphics[scale=1.5]{./structures/exercise_4/square_planar.png}
-		\captionof{figure}{fdsgfgsgh}
-		\end{center}
-		\end{minipage}	
-		
+	The structure of a square planar $\ce{AB4}$ with $\pi$-bonding hybrid orbitals is shown in \Figref{fig:square_planar_sigma}.
+	
+	\begin{minipage}[t]{1.0\linewidth}
+	\begin{center}
+	\setlength{\abovecaptionskip}{0.5em}
+	\includegraphics[scale=1.5]{../diagrams/chapter_11/square_planar_sigma.png}
+	\captionof{figure}{Vectors $v_1$, $v_2$, $v_3$, and $v_4$ represent the $\sigma$-bonding hybrid orbitals between the $\ce{A}$ atom to one of 4 $\ce{B}$ atoms in $\ce{AB4}$.}\label{fig:square_planar_sigma}
+	\end{center}
+	\end{minipage}
+	
+	The character table of the point group $\mathscr{D}_{\rm 4h}$ can be seen in \Tableref{table:character_table_of_d4h}. After lots of calculation, the character for $\Gamma^{\rm hyb}$ for the $\mathscr{D}_{\rm 4h}$ point group is 	
+	\begin{center}
+	\captionof{table}{Character for the $\Gamma^{\rm hyb}$ representations of the $\mathscr{D}_{\rm 4h}$ point group.}
+	\begin{tabular}{c|cccccccccc}\hline
+		$\mathscr{D}_{\rm 4h}$ & $E$ & $2C_4$ &	$C_2$	& $2C^\prime_2$	&	$2C^{\prime\prime}_2$	&	$i$	&	$2S_4$	&	$\sigma_{\rm h}$	&	$2\sigma_{\rm v}$ &	$2\sigma_{\rm d}$	\\ \hline
+		$\chi^{\rm hyb}(C_i)$ & 4 & 0 & 0 & 2 & 0 & 0 & 0 & 4 & 2 & 0 \\ \hline
+	\end{tabular}
+	\end{center}
+	
+	Hence, solving the system of linear equations like in Problem 7.1, we arrive at	
+	\begin{equation}
+		\Gamma^{\rm hyb} = \Gamma^{A_{1g}} \oplus \Gamma^{B_{1g}} \oplus \Gamma^{E_u} .
+	\end{equation}
+	
+	From \Tableref{table:character_table_of_d4h}, we know that only the following 6 atomic orbitals can be used to construct $\pi$-bonding molecular orbitals.
+	\begin{center}
+	{
+	\renewcommand{\arraystretch}{1.2}
+	\begin{tabular}{ccc} \hline
+	$\Gamma^{A_{1g}}$	&	$\Gamma^{B_{1g}}$	&	$\Gamma^{E_u}$	\\	\hline
+	$\orbs$, $\orbd_{z^2}$	& $\orbd_{x^2-y^2}$ & $\orbp_x$, $\orbp_y$\\ \hline
+	\end{tabular}
+	}	
+	\end{center}
+	
+	Although both $\orbs$ and $\orbd_{z^2}$ belong to the $\Gamma^{A_{1g}}$ irreducible representation, the widely accepted $\orbd\orbs\orbp^2$ hybridization scheme predominantly incorporates $\orbs$ alongside the $\orbd_{x^2-y^2}$, $\orbp_x$, and $\orbp_y$ orbitals. This selection is governed not by group theory alone, but by the physical constraints outlined in Molecular Orbital (MO) theory:
+	\begin{itemize}
+	
+	\item The Symmetry Principle: While $\orbd_{z^2}$ is symmetry-allowed for $\sigma$-bonding in the $\mathscr{D}_{\rm 4h}$ point group, symmetry is merely a ``selection rule" that permits interaction but does not guarantee its strength.
+	
+	\item The Energy Similarity Principle: In a square planar ligand field, the $\orbd$ orbitals undergo significant splitting. It is generally considered that from the energy perspective, $(n-1)\orbd < n\orbs < n\orbp$. In a square planar field, $\orbd_{z^2}$ has a lower energy than $\orbd_{x^2-y^2}$, while the energy of $\orbs$ is higher than that of $\orbd_{x^2-y^2}$ and lower than $\orbp_x$ and $\orbp_y$.
+	
+	\item The Maximum Overlap Principle: $\orbs$ is spherically symmetric, with a large electron cloud distribution in the $xy$ plane; while the main body of $\orbd_{z^2}$ (two large ``lobes") points towards the z-axis, and the ligands of the $\ce{AB4}$ molecule are all in the $xy$ plane. Although $\orbd_{z^2}$ has a central ring region ("doughnut") in the $xy$ plane, the electron cloud density of that ring is much smaller than that of the $\orbs$ orbital, resulting in lower overlap efficiency. This is demonstrated in \Figref{fig:p_and_d_orbitals}.
+	
+	\end{itemize}
+	
+	\begin{center}
+	\begin{tabular}{ccc}
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_1.png}
+		\captionof*{figure}{$\orbp_x$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_2.png}
+		\captionof*{figure}{$\orbp_y$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.28]{../diagrams/chapter_05/orbital_p_3.png}
+		\captionof*{figure}{$\orbp_z$}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_1.png}
+		\captionof*{figure}{$\orbd_{x^2-y^2}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_2.png}
+		\captionof*{figure}{$\orbd_{xy}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.26]{../diagrams/chapter_05/orbital_d_3.png}
+		\captionof*{figure}{$\orbd_{yz}$}
+		\end{minipage} \\
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.27]{../diagrams/chapter_05/orbital_d_4.png}
+		\captionof*{figure}{$\orbd_{xz}$}
+		\end{minipage} & 
+		\begin{minipage}[t]{0.3\linewidth}
+		\centering
+		\setlength{\abovecaptionskip}{-2em}
+		\includegraphics[scale=0.27]{../diagrams/chapter_05/orbital_d_5.png}
+		\captionof*{figure}{$\orbd_{z^2}$}
+		\end{minipage} 
+	\end{tabular}
+	\captionof{figure}{Diagrams of 3 $2\orbp$-orbitals and 5 3$\orbd$-orbitals.}\label{fig:p_and_d_orbitals}
+	\end{center}
+	
+	Consequently, $\orbs$ rather than $\orbd_{z^2}$ takes part in the $\orbd\orbs\orbp^2$ hybridization scheme, and $\orbd_{z^2}$ is typically regarded as a non-bonding or weakly interacting orbital in the square planar $\sigma$-framework, in the general qualitative analysis.
+	
+	Now we solve the explicit expressions for the 4 hybrid orbitals.
+	
+	\begin{itemize}
+	
+	\item For the $\Gamma^{A_{1g}}$ representation, we have
+	\begin{equation*}
+		P^{A_{1g}} v_1 = \sum_R \chi^{A_{1g}*}(R) \boldsymbol{O}_R v_1 = \sum_R \boldsymbol{O}_R v_1 = 4( v_1 + v_2 + v_3 + v_4 ) .
+	\end{equation*}
+	Thus, the only normalized basis function of the $\Gamma^{A_{1g}}$ representation is 
+	\begin{equation}
+		\psi^{a_{1g}} = \frac{ 1 }{ \sqrt{( P^{A_{1g}} v_1 | P^{A_{1g}} v_1 )} } P^{A_{1g}} v_1 = \frac{ 1 }{ 8 } 4( v_1 + v_2 + v_3 + v_4 ) = \frac{ 1 }{ 2 } ( v_1 + v_2 + v_3 + v_4 ) ,
+	\end{equation}
+	and it should be equal to $\orbs$.
+	
+	\item For the $\Gamma^{B_{1g}}$ representation, similarly, we have
+	\begin{equation*}
+		P^{B_{1g}} v_1 = \sum_R \chi^{B_{1g}*}(R) \boldsymbol{O}_R v_1 = 4( - v_1 + v_2 - v_3 + v_4 ) .
+	\end{equation*}
+	Thus, the only normalized basis function of the $\Gamma^{A_{1g}}$ representation is 
+	\begin{equation}
+		\psi^{b_{1g}} = \frac{ 1 }{ \sqrt{( P^{B_{1g}} v_1 | P^{B_{1g}} v_1 )} } P^{B_{1g}} v_1 = \frac{ 1 }{ 8 } 4( - v_1 + v_2 - v_3 + v_4 ) = \frac{ 1 }{ 2 } ( - v_1 + v_2 - v_3 + v_4 ) ,
+	\end{equation}
+	and it should be equal to $\orbd_{x^2-y^2}$.
+	
+	\item For the $\Gamma^{E_u}$ representation, similarly, we have
+	\begin{align*}
+		P^{E_u} v_1 &= \sum_R \chi^{E_u*}(R) \boldsymbol{O}_R v_1 = 4( v_1 - v_3 ) , \\
+		P^{E_u} v_2 &= \sum_R \chi^{E_u*}(R) \boldsymbol{O}_R v_2 = 4( v_2 - v_4 ) .
+	\end{align*}
+	It is easy to verify that these two basis functions are orthogonal. We normalize them:
+	\begin{align*}
+		\psi^{e_u}_1 = \frac{ 1 }{ \sqrt{( P^{E_u} v_1 | P^{E_u} v_1 )} } P^{E_u} v_1 = \frac{ 1 }{ 4\sqrt{2} } 4( v_1 - v_3 ) = \frac{ 1 }{ \sqrt{2} } ( v_1 - v_3 ) , \\
+		\psi^{e_u}_2 = \frac{ 1 }{ \sqrt{( P^{E_u} v_2 | P^{E_u} v_2 )} } P^{E_u} v_2 = \frac{ 1 }{ 4\sqrt{2} } 4( v_2 - v_4 ) = \frac{ 1 }{ \sqrt{2} } ( v_2 - v_4 ) .
+	\end{align*}
+	Because both $v_1$ and $v_3$ are on the $x$ axis while both $v_2$ and $v_4$ are on the $y$ axis, thus $\psi^{e_u}_1$, $\psi^{e_u}_2$ should be $\orbp_x$ and $\orbp_y$, respectively.
+	
+	Summarizing these contributions, we obtain a system of linear equations:
+	\begin{equation*}
+		\begin{pmatrix}
+			\orbs \\ \orbd_{x^2-y^2} \\ \orbp_x \\ \orbp_y
+		\end{pmatrix} = 
+		\begin{pmatrix}
+				\frac{1}{2}	&	\frac{1}{2}	&	\frac{1}{2}	&	\frac{1}{2}	\\
+				-\frac{1}{2}	&	\frac{1}{2}	&	-\frac{1}{2}	&	\frac{1}{2}	\\
+		\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} & 0 \\
+				0	& \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}
+		\end{pmatrix}
+		\begin{pmatrix}
+			v_1 \\ v_2 \\ v_3 \\ v_4
+		\end{pmatrix} = A \begin{pmatrix}
+			v_1 \\ v_2 \\ v_3 \\ v_4
+		\end{pmatrix} .
+	\end{equation*}
+	It is easy to verift that the transition matrix $A$ is an real orthogonal matrix and thus $A^{-1} = \tilde{A}$, viz., eqn (A.4-1.12) at the page 61 in the textbook. Hence, we obtain
+	\begin{equation*}
+		\begin{pmatrix}
+			v_1 \\ v_2 \\ v_3 \\ v_4
+		\end{pmatrix} = \begin{pmatrix}
+			\frac{1}{2}	&	-\frac{1}{2}	&	\frac{1}{\sqrt{2}}	&	0	\\
+			\frac{1}{2}	&	\frac{1}{2}	&	0	&	\frac{1}{\sqrt{2}}	\\
+			\frac{1}{2} 	& 	-\frac{1}{2}& -\frac{1}{\sqrt{2}} & 0 \\
+			\frac{1}{2}	&   \frac{1}{2}	& 0 & -\frac{1}{\sqrt{2}}
+		\end{pmatrix} \begin{pmatrix}
+			\orbs \\ \orbd_{x^2-y^2} \\ \orbp_x \\ \orbp_y
+		\end{pmatrix} .
+	\end{equation*}
+	
+	Now we can demonstrate the explicit expressions for the 4 $\sigma$-hybrid orbitals. Now we substitute $v_i$ by $\psi_i$:
+	\begin{align}
+		\psi_1 &= \frac{1}{2} \orbs - \frac{1}{2} \orbd_{x^2-y^2} + \frac{1}{\sqrt{2}} \orbp_x , \\
+		\psi_2 &= \frac{1}{2} \orbs + \frac{1}{2} \orbd_{x^2-y^2} + \frac{1}{\sqrt{2}} \orbp_y , \\
+		\psi_3 &= \frac{1}{2} \orbs - \frac{1}{2} \orbd_{x^2-y^2} - \frac{1}{\sqrt{2}} \orbp_x , \\
+		\psi_4 &= \frac{1}{2} \orbs + \frac{1}{2} \orbd_{x^2-y^2} - \frac{1}{\sqrt{2}} \orbp_y .
+	\end{align}
+	
+	\end{itemize}
+	
 	\end{solution}
+	
+	\begin{remark}
+	
+	Through this problem and the subsequent chapter, it becomes evident that while group theory is an indispensable tool in quantum chemistry, its power lies primarily in qualitative symmetry-based predictions. A comprehensive understanding of a specific molecular system's chemical structure can only be achieved by integrating these symmetry principles with quantitative quantum mechanical calculations, which account for the unique energy profiles and electronic environments of the system.
+	
+	\end{remark}
 
 \end{document}
