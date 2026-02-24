@@ -1,6 +1,8 @@
 \documentclass[a4paper]{book}
 
 \usepackage{afterpage}
+\usepackage{arydshln}
+\usepackage{amssymb}
 \usepackage[hypcap=false]{caption}
 \usepackage{enumitem}	% 定制enumerate标号
 \usepackage{geometry}
@@ -41,8 +43,8 @@
 
 \definecolor{skyblue}{rgb}{0.54, 0.81, 0.94}
 
-\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{exercise}[1][]{
-    title={Exercise~\thetcbcounter},
+\newtcolorbox[auto counter, number within=chapter, number format=\arabic]{problem}[1][]{
+    title={Problem~\thetcbcounter},
     colframe=skyblue,
     colback=skyblue!12!white,
     boxed title style={colback=skyblue},
@@ -66,6 +68,18 @@
     }
 }
 
+\newtcolorbox{remark}[1][]{
+    title={Remark},
+    colframe=yellow!45!orange,
+    colback=yellow!45!white,
+    coltitle=white,
+    boxed title style={colback=yellow!45!orange},
+    overlay unbroken and first={
+        \node[below right,font=\small,color=white,text width=.8\linewidth]
+        at (title.north east) {#1};
+    }
+}
+
 \newcommand{\AO}{{\rm AO}}
 \newcommand{\Heff}{H^{\rm eff,\pi}}
 \newcommand{\Hp}{H^\prime}
@@ -77,6 +91,7 @@
 \newcommand{\orbp}{\orb{p}}
 
 \newcommand{\Tr}[1]{\text{Trace}(#1)}
+\newcommand{\Det}[1]{\text{det}(#1)}
 
 \allowdisplaybreaks
 
@@ -94,12 +109,12 @@
 	\chapter{Matrices}
 
 	% 4.1
-	\begin{exercise}
+	\begin{problem}
 	
 	Show that for two matrices $A$ and $B$:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 		
-	\item $\tilde{AB} = \tilde{B} \tilde{A}$,
+	\item $\widetilde{AB} = \tilde{B} \tilde{A}$,
 	
 	\item $(AB)^\dagger = B^\dagger A^\dagger$, and
 	
@@ -107,17 +122,53 @@
 	
 	\end{enumerate}		
 	
-	\end{exercise}
+	\end{problem}
 
 	\begin{solution}
+	
+	From the definition of equality of two matrices, we prove these propositions with eqns in the table 4-1.1 at the page 49 in the textbook.
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item For a general $m \times k$ matrix $A$ and a general $k \times n$ matrix $B$, we have
+	\[
+		(\widetilde{AB})_{ij} = (AB)_{ji} = \sum_k A_{jk} B_{ki} = \sum_k (\tilde{A})_{kj} (\tilde{B})_{ik} = \sum_k (\tilde{B})_{ik} (\tilde{A})_{kj} = (\tilde{B} \tilde{A})_{ij} .
+	\]
+	This equals
+	\begin{equation}
+		\widetilde{AB} = \tilde{B} \tilde{A} .
+	\end{equation}
+	
+	\item For a general $m \times k$ matrix $A$ and a general $k \times n$ matrix $B$, we have
+	\begin{align*}
+		[(AB)^\dagger]_{ij} &= [(AB)_{ji}]^* = \left( \sum_k A_{jk} B_{ki} \right)^* = \sum_k (A_{jk})^* (B_{ki})^* \\
+		&= \sum_k (A^\dagger)_{kj} (B^\dagger)_{ik} = \sum_k (B^\dagger)_{ik} (A^\dagger)_{kj} = ( B^\dagger A^\dagger )_{ij} .
+	\end{align*}
+	This equals
+	\begin{equation}
+		(AB)^\dagger = B^\dagger A^\dagger .
+	\end{equation}
+	
+	\item For two general $n \times n$ matrices $A$ and $B$, we have
+	\begin{align*}
+		(AB) (B^{-1}A^{-1}) = A B B^{-1} A^{-1} = A ( B B^{-1} ) A^{-1} = A E_n A^{-1} = A A^{-1} = E_n .
+	\end{align*}
+	Therefore, from the definition of the inverse of a matrix, we can say
+	\begin{equation}
+		(AB)^{-1} = B^{-1} A^{-1} .
+	\end{equation}
+	
+	\end{enumerate}
+	
+	These propositions are important and will used in next problems.	
 	
 	\end{solution}
 	
 	% 4.2
-	\begin{exercise}
+	\begin{problem}
 	
 	Prove that
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item the product of two unitary matrices is also unitary and
 	
@@ -125,48 +176,119 @@
 	
 	\end{enumerate}		
 	
-	\end{exercise}
+	\end{problem}
 
 	\begin{solution}
 
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item For two unitary matrices $A$ and $B$, 	
+	\[
+		A^\dagger = A^{-1} , \quad B^\dagger = B^{-1} ,
+	\]
+	with the proposition in Problem 4.1 (b) and (c), we find
+	\begin{equation}
+		(AB)^\dagger = B^\dagger A^\dagger = B^{-1} A^{-1} = (AB)^{-1} .
+	\end{equation}
+	Hence, we conclude that the product of two unitary matrices is unitary, too.
+	
+	\item From the first proposition in the following Remark, for a general unitary matrix $A$, we have
+	\begin{equation}
+		( A^{-1} )^\dagger = ( A^\dagger )^\dagger = A .
+	\end{equation}
+	Therefore, we conclude that the inverse of a unitary matrix is also unitary.
+	
+	\end{enumerate}
+
 	\end{solution}
+	
+	\begin{remark}
+	
+	We prove 2 easy but important propositions.
+	
+	\begin{itemize}
+	
+	\item $(A^\dagger)^\dagger = A$. Its proof is trivial:
+	\begin{equation}
+		[(A^\dagger)^\dagger]_{ij} = [(A^\dagger)_{ji}]^* = [ (A_{ij})^* ]^* = A_{ij} .
+	\end{equation}
+	
+	\item $(A^{-1})^{-1} = A$. It is evident just from the definition of the inverse of a matrix. For any square matrix $A$, 
+	\[
+		E_n = A A^{-1} = [ ( A^{-1} )^{-1} ] A^{-1} . 
+	\]
+	Due to the uniqueness of the inverse of a matrix, which is also obvious from the eqn (A.4-2.5) at the page 63 in the textbook (after all, the explicit expression has been delivered), we conclude
+	\begin{equation}
+		( A^{-1} )^{-1} = A .
+	\end{equation}
+	
+	\end{itemize}
+	
+	\end{remark}
 
 	% 4.3
-	\begin{exercise}
+	\begin{problem}
 	
 	Show that if four matrices obey the equation $D=ABC$, then
 	\[
 		D_{ij} = \sum_k \sum_l A_{ik} B_{kl} C_{lj} .
 	\]	
 	
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	For a general $m \times n$ matrix $A$, a general $n \times p$ matrix $B$, and a general $p \times q$ matrix $C$, the proof is very trivial:
+	\[
+		D_{ij} = [(AB)C]_{ij} = \sum_{l=1}^p (AB)_{il} C_{lj} = \sum_{l=1}^p C_{lj} \sum_{k=1}^n A_{ik} B_{kl} = \sum_{k=1}^n \sum_{l=1}^p A_{ik} B_{kl} C_{lj} .
+	\]
+	In other words,
+	\begin{equation}
+		D_{ij} = \sum_k \sum_l A_{ik} B_{kl} C_{lj} .
+	\end{equation}
 		
 	\end{solution}
 	
 	% 4.4
-	\begin{exercise}
+	\begin{problem}
 	
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item Show that $\Tr{AB} = \sum_i \sum_j A_{ij} B_{ji}$.
 	
-	\item Given two matrices $A$ and $B$ of demensions $n \times m$ and $m \times n$ respectively, prove $\Tr{AB}=\Tr{BA}$.
+	\item Given two matrices $A$ and $B$ of dimensions $n \times m$ and $m \times n$ respectively, prove $\Tr{AB}=\Tr{BA}$.
 	
 	\end{enumerate}		
 	
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item For a general $m \times n$ matrix $A$ and a general $n \times m$ $B$, from the definition of trace, we find
+	\begin{equation*}
+		\Tr{AB} = \sum_{i=1}^m (AB)_{ii} = \sum_{i=1}^m \sum_{j=1}^n A_{ij} B_{ji} .
+	\end{equation*}
+	In other words,
+	\begin{equation}
+		\Tr{AB} = \sum_i \sum_j A_{ij} B_{ji} .
+	\end{equation}
+	
+	\item Pay attention to the permutation symmetry between two dummy indices $i$ and $j$, we find
+	\begin{equation}
+		\Tr{AB} = \sum_i \sum_j A_{ij} B_{ji} = \sum_j \sum_i B_{ji} A_{ij} = \sum_j (BA)_{jj} = \Tr{BA} . 
+	\end{equation}
+	
+	\end{enumerate}
 	
 	\end{solution}
 	
 	% 4.5
-	\begin{exercise}
+	\begin{problem}
 	
 	Prove that for any matrix $A$:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item $A A^\dagger$ and $A^\dagger A$ are Hermitian;
 	
@@ -174,28 +296,81 @@
 	
 	\end{enumerate}		
 	
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item With $(A^\dagger)^\dagger = A$, the proof is trivial:
+	\begin{equation}
+		(A A^\dagger)^\dagger = (A^\dagger)^\dagger A^\dagger = A A^\dagger .
+	\end{equation}
+	Now we conclude that for a general matrix $A$, both $A A^\dagger$ and $A^\dagger A$ are Hermitian.
+		
+	\item From the two propositions in the following Remark, for a general matrix $A$, we have
+	\begin{equation}
+		( A + A^\dagger ) = A^\dagger + ( A^\dagger )^\dagger = A^\dagger + A = A + A^\dagger ,
+	\end{equation}
+	and
+	\begin{equation}
+		[i( A - A^\dagger )]^\dagger = [ iA + (-i)A^\dagger ]^\dagger = (iA)^\dagger + [(-i)A^\dagger]^\dagger = -iA^\dagger + i A = iA + i(-A^\dagger) = i ( A - A^\dagger ) .
+	\end{equation}
+	Now we also conclude that for a general matrix $A$, both $(A + A^\dagger)$ and $i(A - A^\dagger)$ are Hermitian.	
+	
+	\end{enumerate}
 	
 	\end{solution}
 	
+	\begin{remark}
+	
+	We prove another set of two easy but important propositions: 
+	\begin{itemize}
+	
+	\item $( A + B )^\dagger = A^\dagger + B^\dagger$. Its proof is trivial:
+	\begin{equation}
+		[(A + B)^\dagger]_{ij} = [ ( A + B )_{ji} ]^* = ( A_{ji} + B_{ji} )^* = ( A_{ji} )^* + ( B_{ji} )^* = (A^\dagger)_{ij} + (B^\dagger)_{ij} = ( A^\dagger + B^\dagger )_{ij} .
+	\end{equation}
+	
+	\item $(c A)^\dagger = c^* A^\dagger$. Its proof is also trivial:
+	\begin{equation}
+		[(c A)^\dagger]_{ij} = [ (c A)_{ji} ]^* = (c A_{ji})^* = c^* (A_{ji})^* = c^* (A^\dagger)_{ij} = ( c^* A^\dagger )_{ij} .
+	\end{equation}
+	
+	\end{itemize}		
+	
+	\end{remark}
+	
 	% 4.6
-	\begin{exercise}
+	\begin{problem}
 		
 	If $A B = B A$, show that $Q A \tilde{Q}$ and $Q B \tilde{Q}$ commute if $Q$ is orthogonal.		
 		
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	Because $Q$ is an orthogonal matrix, we know that
+	\[
+		\tilde{Q} = Q^{-1} \Rightarrow Q \tilde{Q} = Q Q^{-1} = I_n , \quad \tilde{Q} Q = Q^{-1} Q = I_n .
+	\]	
+	Therefore, we find
+	\begin{align*}
+		( Q A \tilde{Q} ) ( Q B \tilde{Q} ) &= Q A \tilde{Q} Q B \tilde{Q} = Q A (\tilde{Q} Q) B \tilde{Q} = Q A I_n B \tilde{Q} = Q AB \tilde{Q} \\
+		&= Q BA \tilde{Q} = Q B I_n A \tilde{Q} = Q B \tilde{Q} Q A \tilde{Q} = (Q B \tilde{Q}) (Q A \tilde{Q}) .
+	\end{align*}
+	This means that 
+	\begin{equation}
+		( Q A \tilde{Q} ) ( Q B \tilde{Q} ) = (Q B \tilde{Q}) (Q A \tilde{Q}) .
+	\end{equation}		
 	
 	\end{solution}
 	
 	% 4.7
-	\begin{exercise}
+	\begin{problem}
 
 	Find the inverse of:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item $\begin{pmatrix}
 		a + ib 	&	c + id \\
@@ -233,17 +408,210 @@
 	
 	\end{enumerate}
 
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
 	
+	In each issue, we always mark the matrix as $A$. In fact, no one who has learnt linear algebra solves these issues by calculating cofactors of every matrix elements one by one to obtain the matrix inverse.
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item First we check the determinant of this matrix, which is
+	\[
+		\Det{A} = \begin{vmatrix}
+			a + ib 	&	c + id \\
+		-c +id	& 	a - ib 
+		\end{vmatrix} = ( a + ib )( a - ib ) - ( c + id )( -c + id ) = a^3 + b^2 + c^2 + d^2 .
+	\]
+	Due to the complex form of matrix elements, we assume that all of $a$, $b$, $c$ and $d$ are real numbers and thus $\Det{A} \geq 0.$ If all $a$, $b$, $c$ and $d$ are zero, $A$ will be inreversible, otherwise, its inverse exists and it is
+	\begin{equation}
+		\begin{pmatrix}
+			a + ib 	&	c + id \\
+			-c +id	& 	a - ib 
+		\end{pmatrix}^{-1} = \frac{1}{ a^2 + b^2 + c^2 + d^2 } \begin{pmatrix}
+			a - ib & - c - id \\
+			c - id & a + ib 
+		\end{pmatrix}, \quad a^2 + b^2 + c^2 + d^2 > 0 .
+	\end{equation}
+	
+	\item It is evident that the inverse of an identity matrix is itself: $E_n E_n = E_n$. Thus,
+	\begin{equation}
+		\begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix}^{-1}  = \begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix} .
+	\end{equation}
+	
+	\item Similarly, we check the determinant of this matrix, which is
+	\[
+		\begin{vmatrix}
+			0 & 0 & a \\
+			0 & b & 0 \\
+			c & 0 & 0 
+		\end{vmatrix} = a \begin{vmatrix}
+			0 & b \\ c & 0 
+		\end{vmatrix} = a ( 0 - bc ) = -abc .
+	\]
+	If one of $a$, $b$, and $c$ is zero, the matrix will be inreversible, otherwise its inverse exists and it is
+	\begin{equation}
+		\begin{pmatrix}
+			0 & 0 & a \\
+			0 & b & 0 \\
+			c & 0 & 0 
+		\end{pmatrix}^{-1} = \begin{pmatrix}
+			0 & 0 & \frac{1}{c} \\
+			0 & \frac{1}{b} & 0 \\
+			\frac{1}{a} & 0 & 0
+		\end{pmatrix} = \frac{1}{abc} \begin{pmatrix}
+			0	&	0	&	ab	\\
+			0	&	ac	&	0	\\
+			bc	&	0	&	0
+		\end{pmatrix} , \quad abc \neq 0 .
+	\end{equation}
+	
+	\item Similar to issue (a), we obtain that if both $a$ and $b$ are zero, $A$ will be inreversible, otherwise, $A$ is reversible and its inverse is
+	\begin{equation}
+		\begin{pmatrix}
+			a	& -b 	\\
+			b	& a 
+		\end{pmatrix}^{-1} = \frac{1}{a^2+b^2} \begin{pmatrix}
+			a	&	b	\\
+			-b	&	a
+		\end{pmatrix} , \quad a^2 + b^2 > 0 .
+	\end{equation}
+	
+	\item Using the conclusion in the last issue, we immediately get
+	\begin{equation}
+		\begin{pmatrix}
+			0	& 	-i 		\\
+			i	& 	0 
+		\end{pmatrix}^{-1} = \frac{1}{0^2+i^2} \begin{pmatrix}
+			0	&	i	\\
+			-i	&	0	
+		\end{pmatrix} = \frac{1}{-1} \begin{pmatrix}
+			0	&	i	\\
+			-i	&	0	
+		\end{pmatrix} = \begin{pmatrix}
+			0	&	-i	\\
+			i	&	0	
+		\end{pmatrix} .
+	\end{equation}
+	
+	\item After boring calculation, we obtain
+	\begin{equation}
+		\begin{pmatrix}
+			2 & 3 & 1 \\
+			3 & 5 & 2 \\
+			0 & 0 & 2 
+		\end{pmatrix}^{-1} = \begin{pmatrix}
+			5	&	-3	&	\frac{1}{2}	\\
+			-3	&	2	&	-\frac{1}{2}	\\
+			0	&	0	&	\frac{1}{2}
+		\end{pmatrix} .
+	\end{equation}
+	
+	\end{enumerate}
+	
 	\end{solution}
 	
+	\begin{remark}
+	
+	A special proposition and a general method for solving the matrix inverse will be introduced here.
+	
+	\begin{itemize}
+	
+	\item For a general $2\times2$ matrix $A$,
+	\[
+		A = \begin{pmatrix}
+				a & b \\ 
+				c & d
+			\end{pmatrix} ,
+	\]
+	if it is reversible, its inverse is	
+	\begin{equation}
+		A^{-1} = \frac{1}{ad - bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}.
+	\end{equation}
+	
+	% Readers can verify this equation by themselves.
+	
+	\item After learning the method of using cofactors and determinants, I believe that readers know how tedious it becomes as the matrix grows. For any matrix larger than $3 \times 3$, we prefer a more efficient approach, Elementary Row Operations. The core idea is to treat the matrix $A$ and the Identity matrix $I$ as a pair. We create what we call an Augmented Matrix:
+	\[
+		( A | E )
+	\]
+	Think of this as $A$ looking into a mirror and seeing $E$ on the other side. Our goal is to perform ``mathematical surgery" on the left side to turn $A$ into $E$. Because we apply every operation to the entire row, the Identity matrix on the right will "absorb" those changes and transform into $A^{-1}$:
+	\[
+		( E | A^{-1} ).
+	\]
+	
+	To transform the left side into the Identity matrix $E$, readers are allowed 3 specific "Row Operations" that do not change the underlying logic of the system:
+		\begin{enumerate}
+		
+		\item Swapping: Switch any two rows.
+		
+		\item Scaling: Multiply a whole row by a non-zero constant.
+
+		\item Pivoting: Add or subtract a multiple of one row to another row.	
+		
+		\end{enumerate}
+		
+	We usually follow a specific flow to avoid undoing our own work:
+		\begin{enumerate}
+		
+		\item Forward Elimination: Work from the first column to the last, using the ``pivots" (the diagonal elements) to create zeros below them. This turns the left side into an upper triangular matrix.
+		
+		\item Normalization: Scale each row so that the pivots become $1$.
+		
+		\item Backward Substitution: Work from the bottom up, using those same pivots to create zeros above them.
+
+		Take the last issue as an instance.
+		\begin{align*}
+			&\left( \begin{array}{ccc:ccc}
+				2 & 3 & 1 & 1 & 0 & 0 \\
+				3 & 5 & 2 &	0 & 1 & 0 \\
+				0 & 0 & 2 & 0 & 0 & 1
+			\end{array} \right) \xrightarrow{ R_2 + (-\frac{3}{2}) R_1 } 
+			\left( \begin{array}{ccc:ccc}
+				2 & 3 & 1 & 1 & 0 & 0 \\
+				0 & \frac{1}{2} & \frac{1}{2} & -\frac{3}{2} & 1 & 0 \\
+				0 & 0 & 2 & 0 & 0 & 1
+			\end{array} \right) \\
+			\xrightarrow{ \substack{ R_1 \times \frac{1}{2} \\ R_2 \times 2 \\ R_3 \times \frac{1}{2} } } 
+			& \left( \begin{array}{ccc:ccc}
+				1 & \frac{3}{2} & \frac{1}{2} & \frac{1}{2} & 0 & 0 \\
+				0 & 1 & 1 & -3 & 2 & 0 \\
+				0 & 0 & 1 & 0 & 0 & \frac{1}{2}
+			\end{array} \right) \xrightarrow{ \substack{ R_1 + ( -\frac{1}{2} ) R_3 \\ R_2 - R_3 } }
+			\left( \begin{array}{ccc:ccc}
+				1 & \frac{3}{2} & 0 & \frac{1}{2} & 0 & -\frac{1}{4} \\
+				0 & 1 & 0 & -3 & 2 & -\frac{1}{2} \\
+				0 & 0 & 1 & 0 & 0 & \frac{1}{2}
+			\end{array} \right) \\
+			\xrightarrow{ R_1 + ( - \frac{3}{2} ) R_2 } & \left( \begin{array}{ccc:ccc}
+				1 & 0 & 0 & 5 & -3 & \frac{1}{2} \\
+				0 & 1 & 0 & -3 & 2 & -\frac{1}{2} \\
+				0 & 0 & 1 & 0 & 0 & \frac{1}{2}
+			\end{array} \right) .
+		\end{align*}
+		This is the process of solving the matrix inverse, where $R_n$ means the $n$-the row.
+
+		\end{enumerate}
+		
+	\end{itemize}
+	
+	\end{remark}
+	
 	% 4.8
-	\begin{exercise}
+	\begin{problem}
 
 	Show that the matrices:
-	\begin{enumerate}
+	\begin{enumerate}[label=(\alph*)]
 	
 	\item $\begin{pmatrix}
 		\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}		\\
@@ -264,28 +632,91 @@
 	
 	are orthogonal.
 	
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	From the definition of the orthogonal matrix, we can verify these issues. However, this method is very tedious and boring. Pay attention to that the issue (a) and (b) are special cases of the issue (c). Therefore, we verify the equation in the issue (c) and then deliver a special value for $\theta$ to verify equations in the issue (a) and (b).
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\setcounter{enumi}{2}
+	
+	\item With $\cos^2 \theta + \sin^2 \theta = 1$, we find	
+	\begin{equation}
+		\begin{pmatrix}
+			\cos \theta 	& \sin \theta \\
+			\sin \theta 	& - \cos \theta
+		\end{pmatrix}\begin{pmatrix}
+			\cos \theta 	& \sin \theta \\
+			\sin \theta 	& - \cos \theta
+		\end{pmatrix} = \begin{pmatrix}
+			\cos^2 \theta + \sin^2 \theta	&	0		\\
+			0	&	\cos^2 \theta + \sin^2 \theta
+		\end{pmatrix} = \begin{pmatrix}
+			1	&	0		\\
+			0	&	1
+		\end{pmatrix} = E_2 .
+	\end{equation}
+	
+	\setcounter{enumi}{0}
+	\item Substituting $\theta$ by $\frac{7\pi}{4}$, we obtain
+	\begin{equation}
+		\begin{pmatrix}
+			\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}		\\
+			\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}
+		\end{pmatrix} \begin{pmatrix}
+			\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}		\\
+			- \frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}
+		\end{pmatrix} = \begin{pmatrix}
+			1	&	0		\\
+			0	&	1
+		\end{pmatrix} = E_2 .
+	\end{equation}
+	
+	\item Substituting $\theta$ by $\frac{\pi}{4}$, we obtain
+	\begin{equation}
+		\begin{pmatrix}
+			\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}		\\
+			\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}
+		\end{pmatrix} \begin{pmatrix}
+			\frac{1}{\sqrt{2}}	&	\frac{1}{\sqrt{2}}		\\
+			\frac{1}{\sqrt{2}}	&	- \frac{1}{\sqrt{2}}
+		\end{pmatrix} = \begin{pmatrix}
+			1	&	0		\\
+			0	&	1
+		\end{pmatrix} = E_2 .
+	\end{equation}	
+	
+	\end{enumerate}		
 	
 	\end{solution}
 	
 	% 4.9
-	\begin{exercise}
+	\begin{problem}
 
-		Show that if $\lambda_1$, $\lambda_2$, $\dots$, $\lambda_n$ are the eigenvalues of $A$, then $\lambda_1 - k$, $\lambda_2 - k$, $\dots$, $\lambda_n - k$ are the eigenvalues of $A - kE$.
+	Show that if $\lambda_1$, $\lambda_2$, $\dots$, $\lambda_n$ are the eigenvalues of $A$, then $\lambda_1 - k$, $\lambda_2 - k$, $\dots$, $\lambda_n - k$ are the eigenvalues of $A - kE$.
 
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	If $\lambda_1$, $\lambda_2$, $\dots$, $\lambda_n$ are the eigenvalues of $A$, for each eigenvalue, there will exist at least one eigenvector corresponding it, we denote this as
+	\[
+		A \alpha_i = \lambda_i \alpha_i .
+	\]
+	Hence, it is obvious that for the eigenvector $\alpha_i$ belonging to the eigenvalue $\lambda_i$, we have
+	\begin{equation}
+		( A - kE ) \alpha_i = A \alpha_i - k E \alpha_i = \lambda_i \alpha_i - k \alpha_i = ( \lambda_i - k ) \alpha_i .
+	\end{equation}
+	This means that $\lambda_1 - k$, $\lambda_2 - k$, $\dots$, $\lambda_n - k$ are also the eigenvalues of $A - kE$.
 	
 	\end{solution}
 
 	% 4.10
-	\begin{exercise}
+	\begin{problem}
 
 		Obtain the eigenvalues and normalized eigenvectors of:
-		\begin{enumerate}
+		\begin{enumerate}[label=(\alph*)]
 		
 		\item $\begin{pmatrix}
 			1	&	-8	\\
@@ -299,21 +730,513 @@
 		\end{pmatrix}$,
 		
 		\item $\begin{pmatrix}
-				\cos \theta 		& \sin \theta 	& 0 \\
-				- \sin \theta 	& \cos \theta 	& 0 \\
-				0		 		& 0	 			& 1
+			\cos \theta 		& \sin \theta 	& 0 \\
+			- \sin \theta 	& \cos \theta 	& 0 \\
+			0		 		& 0	 			& 1
 		\end{pmatrix}$.
 		
 		\end{enumerate}
 
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
 	
+	We denote the matrix in each issue as $A$.	
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item The determinantal equation is
+	\[
+		\Det{A-\lambda E} = \begin{vmatrix}
+			1 - \lambda	&	-8	\\
+			2	&	11 - \lambda	
+		\end{vmatrix} = \lambda^2 - 12 \lambda + 27 =  ( \lambda - 3 )( \lambda - 9 ) = 0 .
+	\]
+
+	For each eigenvalue, we calculate their eigenvectors:
+		\begin{itemize}
+
+		\item For the eigenvalue $\lambda_1 = 3$, we have
+		\begin{align*}
+			\begin{pmatrix}
+				1 - 3	&	-8	\\
+				2	&	11 - 3
+			\end{pmatrix} = \begin{pmatrix}
+				-2	&	-8	\\
+				2	&	8
+			\end{pmatrix} \xrightarrow{ \substack{ R_2 + 1 R_1 } }
+			\begin{pmatrix}
+				-2	&	-8	\\
+				0	&	0	
+			\end{pmatrix} \xrightarrow{ \substack{ R_1 \times ( - \frac{1}{8}) } }
+			\begin{pmatrix}
+				\frac{1}{4}	&	1	\\
+				0	&	0
+			\end{pmatrix} ,
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_1=3$ is 
+		\[
+			\begin{pmatrix}
+				-4	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_1=3$:
+		\begin{equation}
+			\alpha_1 = \frac{1}{ \sqrt{ (-4)^2 + 1^2 } } \begin{pmatrix}
+				-4	\\ 1
+			\end{pmatrix} = \frac{1}{ \sqrt{ 17 } } \begin{pmatrix}
+				-4	\\ 1
+			\end{pmatrix} .
+		\end{equation}
+		
+		\item For the eigenvalue $\lambda_2 = 9$, we have
+		\begin{align*}
+			\begin{pmatrix}
+				1 - 9	&	-8	\\
+				2	&	11 - 9
+			\end{pmatrix} = \begin{pmatrix}
+				-8	&	-8	\\
+				2	&	2
+			\end{pmatrix} \xrightarrow{ \substack{ R_2 + \frac{1}{4} R_1 } }
+			\begin{pmatrix}
+				-8	&	-8	\\
+				0	&	0	
+			\end{pmatrix} \xrightarrow{ \substack{ R_1 \times ( - \frac{1}{8}) } }
+			\begin{pmatrix}
+				1	&	1	\\
+				0	&	0
+			\end{pmatrix} ,
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_2=9$ is
+		\[
+			\begin{pmatrix}
+				-1	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_1=3$:
+		\begin{equation}
+			\alpha_1 = \frac{1}{ \sqrt{ (-1)^2 + 1^2 } } \begin{pmatrix}
+				-1	\\ 1
+			\end{pmatrix} = \frac{1}{ \sqrt{ 2 } } \begin{pmatrix}
+				-1	\\ 1
+			\end{pmatrix} .
+		\end{equation}
+	
+		\end{itemize}
+	
+	\item The determinantal equation is
+	\begin{align*}
+		\Det{A-\lambda E} &= \begin{vmatrix}
+			5 - \lambda	&	10	&	8	\\
+			10	&	2 - \lambda	&	-2	\\
+			8	&	-2	&	11 - \lambda	
+		\end{vmatrix} \\
+		&= ( 5 - \lambda ) [ ( 2 - \lambda )( 11 - \lambda ) - 4 ] - 10 [ 10 ( 11 - \lambda ) + 16 ] + 8 [ -20 - 8 ( 2 - \lambda ) ] \\
+		&= ( 5 - \lambda ) ( \lambda^2 - 13 \lambda + 22 - 4 ) - 10 ( 110 - 10 \lambda + 16 ) + 8 ( -20 -16 + 8 \lambda ) \\
+		&= ( 5 - \lambda ) ( \lambda^2 - 13 \lambda + 18 ) - 10 ( - 10 \lambda + 126 ) + 8 ( 8 \lambda - 36 ) \\
+		&= 5 \lambda^2 - 65 \lambda + 90 - \lambda^3 + 13 \lambda^2 - 18 \lambda + 100 \lambda -1260 + 64 \lambda -288 \\
+		&= - \lambda^3 + 18 \lambda^2 + 81 \lambda - 1458 = - ( \lambda^2 - 81 )( \lambda - 18 ) = - ( \lambda + 9 )( \lambda - 9 )( \lambda - 18 ) = 0 .
+	\end{align*}
+	For each eigenvalue, we calculate their eigenvectors:
+		\begin{itemize}
+		
+		\item For the eigenvalue $\lambda_1 = -9$, we have
+		\begin{align*}
+			&\begin{pmatrix}
+				5 - (-9)	&	10	&	8	\\
+				10	&	2 - (-9)	&	-2	\\
+				8	&	-2	&	11 - (-9)	
+			\end{pmatrix} = \begin{pmatrix}
+				14	&	10	&	8	\\
+				10	&	11	&	-2	\\
+				8	&	-2	&	20	
+			\end{pmatrix} \\
+			\xrightarrow{ R_1 + (-1)R_3 } &\begin{pmatrix}
+				6	&	12	&	-12	\\
+				10	&	11	&	-2	\\
+				8	&	-2	&	20
+			\end{pmatrix} \xrightarrow{ R_1 \times \frac{1}{6} } \begin{pmatrix}
+				1	&	2	&	-2	\\
+				10	&	11	&	-2	\\
+				8	&	-2	&	20
+			\end{pmatrix} \\
+			\xrightarrow{ \substack{ R_2 + (-10)R_1 \\ R_3 + (-8)R_1 } } & \begin{pmatrix}
+				1	&	2	&	-2	\\
+				0	&	-9	&	18	\\
+				0	&	-18	&	36
+			\end{pmatrix}  \xrightarrow{ \substack{ R_2 \times -\frac{1}{9} \\ R_3 \times -\frac{1}{18} } } \begin{pmatrix}
+				1	&	2	&	-2	\\
+				0	&	1	&	-2	\\
+				0	&	1	&	-2
+			\end{pmatrix} \\
+			\xrightarrow{ R_3 + (-1)R_2 } &\begin{pmatrix}
+				1	&	2	&	-2	\\
+				0	&	1	&	-2	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ R_1 + (-2)R_2 } \begin{pmatrix}
+				1	&	0	&	2	\\
+				0	&	1	&	-2	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ \substack{ R_1 \times \frac{1}{2} \\ R_2 \times - \frac{1}{2} } } \begin{pmatrix}
+				\frac{1}{2}	&	0	&	1	\\
+				0	&	-\frac{1}{2}	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix} ,
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_1=-9$ is
+		\[
+			\begin{pmatrix}
+				-2	\\	2	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_1=-9$:
+		\begin{equation}
+			\alpha_1 = \frac{1}{\sqrt{ (-2)^2 + 2^2 + 1^2 }} \begin{pmatrix}
+				-2	\\	2	\\ 1
+			\end{pmatrix} = \frac{1}{3} \begin{pmatrix}
+				-2	\\	2	\\ 1
+			\end{pmatrix} .
+		\end{equation}
+		
+		\item For the eigenvalue $\lambda_2 = 9$, we have
+		\begin{align*}
+			&\begin{pmatrix}
+				5 - 9	&	10	&	8	\\
+				10	&	2 - 9	&	-2	\\
+				8	&	-2		&	11 - 9	
+			\end{pmatrix} = \begin{pmatrix}
+				-4	&	10	&	8	\\
+				10	&	-7	&	-2	\\
+				8	&	-2	&	2	
+			\end{pmatrix} \\
+			\xrightarrow{ R_1 \times - \frac{1}{2} } & \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				10	&	-7	&	-2	\\
+				8	&	-2	&	2	
+			\end{pmatrix} \xrightarrow{ R_2 + (-1)R_3 } \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				2	&	-5	&	-4	\\
+				8	&	-2	&	2	
+			\end{pmatrix} \\
+			\xrightarrow{ R_2 + (-1)R_1 } & \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				0	&	0	&	0	\\
+				8	&	-2	&	2	
+			\end{pmatrix} \xrightarrow{ R_2 \leftrightarrow R_3 } \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				8	&	-2	&	2	\\
+				0	&	0	&	0
+			\end{pmatrix} \\
+			\xrightarrow{ R_2 + (-4)R_1 } & \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				0	&	18	&	18	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ R_2 \times \frac{1}{18} } \begin{pmatrix}
+				2	&	-5	&	-4	\\
+				0	&	1	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix}
+			\xrightarrow{ R_1 + 5 R_2 } \begin{pmatrix}
+				2	&	0	&	1	\\
+				0	&	1	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix}
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_2=9$ is
+		\[
+			\begin{pmatrix}
+				-\frac{1}{2}	\\	-1	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_2=9$:
+		\begin{equation}
+			\alpha_2 = \frac{1}{\sqrt{ (-\frac{1}{2})^2 + (-1)^2 + 1^2 }} \begin{pmatrix}
+				-\frac{1}{2}	\\	-1	\\ 1
+			\end{pmatrix} = \frac{1}{ \frac{3}{2} } \begin{pmatrix}
+				-\frac{1}{2}	\\	-1	\\ 1
+			\end{pmatrix} = \frac{1}{3} \begin{pmatrix}
+				-1	\\	-2	\\ 2
+			\end{pmatrix} .
+		\end{equation}
+		
+	\item For the eigenvalue $\lambda_3 = 18$, we have
+		\begin{align*}
+			&\begin{pmatrix}
+				5 - 18	&	10	&	8	\\
+				10	&	2 - 18	&	-2	\\
+				8	&	-2		&	11 - 18	
+			\end{pmatrix} = \begin{pmatrix}
+				-13	&	10	&	8	\\
+				10	&	-16	&	-2	\\
+				8	&	-2	&	-7	
+			\end{pmatrix} \\
+			\xrightarrow{ R_2 \times \frac{1}{2} } & \begin{pmatrix}
+				-13	&	10	&	8	\\
+				5	&	-8	&	-1	\\
+				8	&	-2	&	-7	
+			\end{pmatrix} \xrightarrow{ R_1 + R_2 } \begin{pmatrix}
+				-8	&	2	&	7	\\
+				5	&	-8	&	-1	\\
+				8	&	-2	&	-7	
+			\end{pmatrix} \\
+			\xrightarrow{ R_1 + R_3 } & \begin{pmatrix}
+				0	&	0	&	0	\\
+				5	&	-8	&	-1	\\
+				8	&	-2	&	-7	
+			\end{pmatrix} \xrightarrow{ R_1 \leftrightarrow R_3 } \begin{pmatrix}
+				5	&	-8	&	-1	\\
+				8	&	-2	&	-7	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ R_2 + ( - \frac{8}{5} ) R_1 } \begin{pmatrix}
+				5	&	-8	&	-1	\\
+				0	&	\frac{54}{5}	&	-\frac{27}{5}	\\
+				0	&	0	&	0
+			\end{pmatrix} \\
+			 \xrightarrow{ R_2 \times -\frac{5}{27} } & \begin{pmatrix}
+				5	&	-8	&	-1	\\
+				0	&	-2	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ R_1 + (-4)R_2 } \begin{pmatrix}
+				5	&	0	&	-5	\\
+				0	&	-2	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix} \xrightarrow{ R_1 \times ( - \frac{1}{5} ) } \begin{pmatrix}
+				-1	&	0	&	1	\\
+				0	&	-2	&	1	\\
+				0	&	0	&	0
+			\end{pmatrix} .
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_3=18$ is
+		\[
+			\begin{pmatrix}
+				1	\\	\frac{1}{2}	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_3=18$:
+		\begin{equation}
+			\alpha_3 = \frac{1}{\sqrt{ 1^2 + (\frac{1}{2})^2 + 1^2 }} \begin{pmatrix}
+				1	\\	\frac{1}{2}	\\ 1
+			\end{pmatrix} = \frac{1}{ \frac{3}{2} } \begin{pmatrix}
+				1	\\	\frac{1}{2}	\\ 1
+			\end{pmatrix} = \frac{1}{3} \begin{pmatrix}
+				2	\\	1	\\ 2
+			\end{pmatrix} .
+		\end{equation}
+		
+		\end{itemize}
+		
+	\item While it is tempting to view this matrix through the lens of real-valued sine and cosine functions, we must address a critical theoretical caveat: the choice of the number field. In linear algebra, a real matrix is not guaranteed to be diagonalizable unless all its eigenvalues lie within the real field $\mathbb{R}$. The determinantal equation is
+	\begin{align*}
+		\Det{ A - \lambda E } &=	\begin{vmatrix}
+			\cos \theta - \lambda		& \sin \theta 	& 0 \\
+			- \sin \theta 	& \cos \theta - \lambda 	& 0 \\
+			0		 		& 0	 			& 1 - \lambda
+		\end{vmatrix} = ( 1 - \lambda ) \begin{vmatrix}
+			\cos \theta - \lambda		& \sin \theta 	\\
+			- \sin \theta 	& \cos \theta - \lambda
+		\end{vmatrix} \\
+		&= - ( \lambda - 1 ) [ ( \cos \theta - \lambda )^2 + \sin^2 \theta ] = - ( \lambda - 1 ) ( \lambda^2 - 2 \lambda \cos \theta + \cos^2 \theta + \sin^2 \theta ) \\
+		&= - ( \lambda - 1 ) ( \lambda^2 - 2 \lambda \cos \theta + 1 ) = 0 .
+	\end{align*}
+	For a quadratic polynomial, the discriminant of $\lambda^2 - 2 \lambda \cos \theta + 1$ is
+	\[
+		\Delta_\lambda = ( -2\cos \theta )^2 - 4 \times 1 \times 1 = 4 \cos^2 \theta - 4 = 4 ( \cos^2 \theta - 1 ) = - 4 \sin^2 \theta \leq 0 .
+	\]
+	If and only if $\theta = k\pi$, where $k \in \mathbb{Z}$, the discriminant equals to zero, otherwise it is less than zero. There are two cases.
+		\begin{itemize}
+		
+		\item $k = 2n+1$, where $n \in \mathbb{Z}$, at this time, $\cos \theta = \cos k\pi = -1$, and 
+		\[
+			A = \begin{pmatrix}
+				-1	&	0	&	0	\\
+				0	&	-1	&	0	\\
+				0	&	0	&	1
+			\end{pmatrix} .
+		\]
+		Obviously, it has three eigenvalues, -1 (two-fold) and 1. Moreover, eigenvalue $\lambda_1 = \lambda_2 = -1$ has two eigenvectors:
+		\begin{equation}
+			\alpha_1 = \begin{pmatrix}
+				1	\\	0	\\	0
+			\end{pmatrix}, \quad \alpha_2 = \begin{pmatrix}
+				0	\\	1	\\	0
+			\end{pmatrix} .
+		\end{equation}
+		Besides, eigenvalue $\lambda_3 = -1$ has one eigenvector:
+		\begin{equation}
+			\alpha_3 = \begin{pmatrix}
+				0	\\	0	\\	1
+			\end{pmatrix} .
+		\end{equation}
+		
+		\item $k = 2n$, where $n \in \mathbb{Z}$, at this time, $\cos \theta = \cos k\pi = 1$, and 
+		\[
+			A = \begin{pmatrix}
+				1	&	0	&	0	\\
+				0	&	1	&	0	\\
+				0	&	0	&	1
+			\end{pmatrix} .
+		\]
+		Obviously, it has three eigenvalues, 1 (three-fold). Moreover, eigenvalue $\lambda_1 = \lambda_2 = \lambda_3 = 1$ has three eigenvectors:
+		\begin{equation}
+			\alpha_1 = \begin{pmatrix}
+				1	\\	0	\\	0
+			\end{pmatrix}, \quad \alpha_2 = \begin{pmatrix}
+				0	\\	1	\\	0
+			\end{pmatrix}, \quad \alpha_3 = \begin{pmatrix}
+				0	\\	0	\\	1
+			\end{pmatrix} .
+		\end{equation}
+		
+		\end{itemize}
+		
+	Otherwise, when $\theta \neq k \pi$, where $k \in \mathbb{Z}$, $A$ has only one real eigenvalue $\lambda_1 = 1$. We have
+	\begin{align*}
+		\begin{pmatrix}
+			\cos \theta - 1		& \sin \theta 	& 0 \\
+			- \sin \theta 	& \cos \theta - 1 	& 0 \\
+			0		 		& 0	 			& 1 - 1
+		\end{pmatrix} = \begin{pmatrix}
+			\cos \theta - 1		& \sin \theta 		& 0 \\
+			- \sin \theta 		& \cos \theta - 1 	& 0 \\
+			0		 			& 0	 				& 0
+		\end{pmatrix} .
+	\end{align*}
+	The rank of the $2 \times 2$ subblock is 2 for its determinant is
+	\[
+		\begin{vmatrix}
+			\cos \theta - 1	& \sin \theta 	 \\
+			- \sin \theta 	& \cos \theta - 1
+		\end{vmatrix} = ( \cos \theta - 1 )^2 + \sin^2 \theta = 2( 1 - \cos \theta ) > 0 ,
+	\]
+	due to $\theta \neq k \pi$, where $k \in \mathbb{Z}$. Thus, the eigenvector of eigenvalue $\lambda_1 = 1$ is
+	\begin{equation}
+		\alpha_1 = \begin{pmatrix}
+			0	\\	0	\\	1 
+		\end{pmatrix} .
+	\end{equation}
+	
+	If readers want to diagonalize $A$ witihin the complex field $\mathbb{C}$, the determinantal equation is
+	\begin{align*}
+		\Det{ A - \lambda E } &=	- ( \lambda - 1 ) ( \lambda^2 - 2 \lambda \cos \theta + 1 ) = - ( \lambda - 1 ) ( \lambda - e^{i \theta} )( \lambda - e^{-i\theta} ) = 0 .
+	\end{align*}
+	Apart from the eigenvalue $\lambda_1 = 1$, which has the eigenvector 
+	\begin{equation}
+		\alpha_1 = \begin{pmatrix}
+			0	\\	0	\\	1 
+		\end{pmatrix} ,
+	\end{equation}
+	there are two other eigenvalues, $\lambda_2 = e^{-i\theta}$ and $\lambda_3 = e^{i \theta}$. With the famous Euler's formula,
+	\begin{equation}
+		\sin \theta = \frac{ e^{i\theta} - e^{-i\theta} }{ 2i } , \quad \cos \theta = \frac{ e^{i\theta} + e^{-i\theta} }{2} ,
+	\end{equation}
+	we calculate the eigenvectors of these two eigenvalues. Note that we can assume that $\theta \neq k\pi$, where $k \in \mathbb{Z}$, because we have discussed these cases.
+	\begin{itemize}
+	
+		\item For the eigenvalue $\lambda_2 = e^{-i\theta}$, we have	
+		\begin{align*}
+		&\begin{pmatrix}
+			\cos \theta - e^{-i\theta}	& \sin \theta 		& 0 \\
+			- \sin \theta 	& \cos \theta - e^{-i\theta} 	& 0 \\
+			0		 		& 0	 			& 1 - e^{-i\theta}
+		\end{pmatrix} = \begin{pmatrix}
+			i\sin \theta	 	& \sin \theta 		& 0 \\
+			- \sin \theta 	& i\sin \theta	 	& 0 \\
+			0		 		& 0	 				& 1 - e^{-i\theta}
+		\end{pmatrix} \\
+		\xrightarrow{ R_2 + (-i) R_1 } & \begin{pmatrix}
+			i\sin \theta	 	& \sin \theta 		& 0 \\
+			0 				& 0	 				& 0 \\
+			0				& 0					& 1 - e^{-i\theta}
+		\end{pmatrix} \xrightarrow{ R_2 \leftrightarrow R_3 } \begin{pmatrix}
+			i\sin \theta	 	& \sin \theta 		& 0 \\
+			0				& 0					& 1 - e^{-i\theta} \\
+			0 				& 0	 				& 0 
+		\end{pmatrix} \\
+		\xrightarrow{ R_1 \times \frac{1}{ \sin \theta } } & \begin{pmatrix}
+			i 	& 1 		& 0 \\
+			0	& 0		& 1 - e^{-i\theta} \\
+			0 	& 0	 	& 0 
+		\end{pmatrix} .
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_2=e^{-i\theta}$ is
+		\[
+			\begin{pmatrix}
+				i	\\	1	\\ 0
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_2=e^{-i\theta}$:
+		\begin{equation}
+			\alpha_2 = \frac{1}{\sqrt{ |i|^2 + 1^2 + 0^2 }} \begin{pmatrix}
+				i	\\	1	\\ 0
+			\end{pmatrix} = \frac{1}{ \sqrt{2} } \begin{pmatrix}
+				i	\\	1	\\ 0
+			\end{pmatrix} .
+		\end{equation}
+		
+		\item For the eigenvalue $\lambda_3 = e^{i\theta}$, we have	
+		\begin{align*}
+		&\begin{pmatrix}
+			\cos \theta - e^{i\theta}	& \sin \theta 		& 0 \\
+			- \sin \theta 	& \cos \theta - e^{i\theta} 		& 0 \\
+			0		 		& 0	 			& 1 - e^{i\theta}
+		\end{pmatrix} = \begin{pmatrix}
+			-i\sin \theta	 & \sin \theta 		& 0 \\
+			- \sin \theta 	& -i\sin \theta	 	& 0 \\
+			0		 		& 0	 				& 1 - e^{i\theta}
+		\end{pmatrix} \\
+		\xrightarrow{ R_2 + i R_1 } & \begin{pmatrix}
+			-i\sin \theta	 	& \sin \theta 		& 0 \\
+			0 				& 0	 				& 0 \\
+			0				& 0					& 1 - e^{i\theta}
+		\end{pmatrix} \xrightarrow{ R_2 \leftrightarrow R_3 } \begin{pmatrix}
+			-i\sin \theta	 	& \sin \theta 		& 0 \\
+			0				& 0					& 1 - e^{i\theta} \\
+			0 				& 0	 				& 0 
+		\end{pmatrix} \\
+		\xrightarrow{ R_1 \times \frac{1}{ \sin \theta } } & \begin{pmatrix}
+			-i 	& 1 		& 0 \\
+			0	& 0		& 1 - e^{i\theta} \\
+			0 	& 0	 	& 0 
+		\end{pmatrix} .
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_3=e^{i\theta}$ is
+		\[
+			\begin{pmatrix}
+				-i	\\	1	\\ 0
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_3=e^{i\theta}$:
+		\begin{equation}
+			\alpha_3 = \frac{1}{\sqrt{ |-i|^2 + 1^2 + 0^2 }} \begin{pmatrix}
+				-i	\\	1	\\ 0
+			\end{pmatrix} = \frac{1}{ \sqrt{2} } \begin{pmatrix}
+				-i	\\	1	\\ 0
+			\end{pmatrix} .
+		\end{equation}
+	
+	\end{itemize}
+	
+	Now we have discussed all common cases. Briefly summarizing these results as below:
+	\begin{itemize}
+	
+	\item Within the real field $\mathbb{R}$, only when $\theta = k \pi$, where $k \in \mathbb{Z}$, this matrix has 3 real eigenvalues, otherwise this matrix has only one eigenvalue $\lambda_1 = 1$.
+	
+	\item Within the complex field $\mathbb{C}$, whatever this matrix has 3 complex eigenvalues: $\lambda_1 = 1$, $\lambda_2 = e^{-i\theta}$, and $\lambda_3 = e^{i\theta}$.
+	
+	\end{itemize} 
+	
+	\end{enumerate}
+	
 	\end{solution}
 	
+	\begin{remark}
+	
+	Readers with a deeper background in linear algebra will recognize that the rank of a matrix is equal to the order of its largest non-zero minor. Moreover, the complete process for solving the basic solution set of a system of linear equations is like this, and readers who are not familiar with this need to study the structure of solutions of linear systems and Gaussian elimination in linear algebra by themselves.
+		
+	\end{remark}
+	
 	% 4.11
-	\begin{exercise}
+	\begin{problem}
 		
 		If
 		$
@@ -330,17 +1253,64 @@
 			\end{pmatrix}
 		$, show that $Q^{-1} A Q$ is diagonal.
 		
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
+	
+	It is obvious to verify that $Q$ is orthogonal:
+	\[
+		Q \tilde{Q} = \begin{pmatrix}
+				\frac{1}{2} 			& \frac{\sqrt{3}}{2}		& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix} \begin{pmatrix}
+				\frac{1}{2} 			& -\frac{\sqrt{3}}{2}		& 0 \\
+				\frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix} = \begin{pmatrix}
+				1 	& 0		& 0 \\
+				0	& 1	 	& 0 \\
+				0	& 0		& 1 
+			\end{pmatrix} = E_3 .
+	\]
+	Thus, we just calculate $Q^{-1} A Q = \tilde{Q} A Q$:
+	\begin{align}
+		Q^{-1} A Q = \tilde{Q} A Q &= \begin{pmatrix}
+				\frac{1}{2} 			& -\frac{\sqrt{3}}{2}		& 0 \\
+				\frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix} \begin{pmatrix}
+				- \frac{1}{2} 		& - \frac{\sqrt{3}}{2}	& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 2 
+			\end{pmatrix} \begin{pmatrix}
+				\frac{1}{2} 			& \frac{\sqrt{3}}{2}		& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix} \notag \\
+			&= \begin{pmatrix}
+				\frac{1}{2}			& - \frac{\sqrt{3}}{2}	& 0 \\
+				- \frac{\sqrt{3}}{2} & - \frac{1}{2}			& 0 \\
+				0					& 0 						& 2
+			\end{pmatrix} \begin{pmatrix}
+				\frac{1}{2} 			& \frac{\sqrt{3}}{2}		& 0 \\
+				- \frac{\sqrt{3}}{2}	& \frac{1}{2}		 	& 0 \\
+				0					& 0						& 1 
+			\end{pmatrix} = \begin{pmatrix}
+				1					& 0						& 0 \\
+				0					& -1						& 0 \\
+				0					& 0 						& 2
+			\end{pmatrix} .
+	\end{align}
+	Hence, we verify that $Q^{-1} A Q$ is diagonal.
 	
 	\end{solution}
 	
 	% 4.12
-	\begin{exercise}
+	\begin{problem}
 
 		Diagonalize the following matrices:
-		\begin{enumerate}
+		\begin{enumerate}[label=(\alph*)]
 		
 		\item $\begin{pmatrix}
 				5 & 10 & 8 \\
@@ -361,11 +1331,154 @@
 		
 		\end{enumerate}
 	
-	\end{exercise}
+	\end{problem}
 	
 	\begin{solution}
 	
+	We should use the conclusion of Problem 4.10.	
+	
+	\begin{enumerate}[label=(\alph*)]
+	
+	\item The result is direct:
+	\begin{equation}
+		\begin{pmatrix}
+				5 & 10 & 8 \\
+				10 & 2 & -2 \\
+				8 & -2 & 11
+		\end{pmatrix} = \begin{pmatrix}
+			-\frac{2}{3}& \frac{-1}{3}	& \frac{2}{3}	\\
+			\frac{2}{3}	& \frac{-2}{3}	& \frac{1}{3}	\\
+			\frac{1}{3}	& \frac{2}{3}	& \frac{2}{3}
+		\end{pmatrix} \begin{pmatrix}
+			-9 & 0 & 0 \\
+			0 & 9 & 0 \\
+			0 & 0 & 18
+		\end{pmatrix} \begin{pmatrix}
+			-\frac{2}{3}& \frac{-1}{3}	& \frac{2}{3}	\\
+			\frac{2}{3}	& \frac{-2}{3}	& \frac{1}{3}	\\
+			\frac{1}{3}	& \frac{2}{3}	& \frac{2}{3}
+		\end{pmatrix}^{-1} . 
+	\end{equation}
+	
+	\item Within the real field $\mathbb{R}$ and $\theta \neq k\pi$, where $k \in \mathbb{Z}$, this matrix cannot be diagonalized; otherwise it is a diagonal matrix. Within the complex field $\mathbb{C}$, we have
+	\begin{equation}
+		\begin{pmatrix}
+				\cos \theta 		& \sin \theta 	& 0 \\
+				- \sin \theta 	& \cos \theta 	& 0 \\
+				0		 		& 0	 			& 1
+		\end{pmatrix} = \begin{pmatrix}
+			0	&	\frac{i}{ \sqrt{2} }	&	-\frac{i}{ \sqrt{2} }	\\
+			0	&	\frac{1}{ \sqrt{2} }	&	\frac{1}{ \sqrt{2} }	\\
+			1	&	0					&	0
+		\end{pmatrix} \begin{pmatrix}
+			1	&	0			&	0			\\
+			0	&	e^{-i\theta} &	0			\\
+			0	&	0			&	e^{i\theta}	
+		\end{pmatrix} \begin{pmatrix}
+			0	&	\frac{i}{ \sqrt{2} }	&	-\frac{i}{ \sqrt{2} }	\\
+			0	&	\frac{1}{ \sqrt{2} }	&	\frac{1}{ \sqrt{2} }	\\
+			1	&	0					&	0
+		\end{pmatrix}^{-1} .
+	\end{equation}
+	
+	\item The determinantal equation is
+	\[
+		\begin{vmatrix}
+			2 - \lambda & 4 - i \\
+			4 + i 		& -14 - \lambda
+		\end{vmatrix} = \lambda^2 + 12 \lambda - 45 = ( \lambda + 15 )( \lambda - 3 ) = 0.
+	\]
+	For each eigenvalue, we calculate their eigenvectors:
+		\begin{itemize}
+
+		\item For the eigenvalue $\lambda_1 = -15$, we have
+		\begin{align*}
+			&\begin{pmatrix}
+				2 - (-15)	&	4-i	\\
+				4+i	&	-14 - (-15)
+			\end{pmatrix} = \begin{pmatrix}
+				17	&	4-i	\\
+				4+i	&	1
+			\end{pmatrix} \\
+			\xrightarrow{ R_1 + (-4+i) R_2 } & \begin{pmatrix}
+				0	&	0	\\
+				4+i	&	1	
+			\end{pmatrix} \xrightarrow{ R_1 \leftrightarrow R_2 }
+			\begin{pmatrix}
+				4+i	&	1	\\
+				0	&	0
+			\end{pmatrix} ,
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_1=-15$ is 
+		\[
+			\begin{pmatrix}
+				\frac{-4+i}{17}	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_1=-15$:
+		\begin{equation}
+			\alpha_1 = \frac{1}{ \sqrt{ | \frac{ -4+i }{17} |^2 + 1^2 } } \begin{pmatrix}
+				\frac{-4+i}{17}	\\ 1
+			\end{pmatrix} = \frac{ \sqrt{17} }{ 3 \sqrt{ 2 } } \begin{pmatrix}
+				\frac{-4+i}{17}	\\ 1
+			\end{pmatrix} =\frac{ 1 }{ 3 \sqrt{ 34 } } \begin{pmatrix}
+				-4+i	\\ 17
+			\end{pmatrix} .
+		\end{equation}
+		
+		\item For the eigenvalue $\lambda_2 = 3$, we have
+		\begin{align*}
+			\begin{pmatrix}
+				2 - 3	&	4-i	\\
+				4+i	&	-14 - 3
+			\end{pmatrix} = \begin{pmatrix}
+				-1	&	4-i	\\
+				4+i	&	-17
+			\end{pmatrix} \xrightarrow{ R_2 + (4+i) R_1 } \begin{pmatrix}
+				-1	&	4-i	\\
+				0	&	0
+			\end{pmatrix} \xrightarrow{ R_1 \times \frac{4+i}{17} }
+			\begin{pmatrix}
+				-\frac{4+i}{17}	&	1	\\
+				0	&	0
+			\end{pmatrix} ,
+		\end{align*}
+		Thus, the unnormalized eigenvector belonging to the eigenvalue $\lambda_2=3$ is 
+		\[
+			\begin{pmatrix}
+				4-i	\\ 1
+			\end{pmatrix} .
+		\]
+		After normalization, we know the normalized eigenvector belonging to the eigenvalue $\lambda_2=3$:
+		\begin{equation}
+			\alpha_2 = \frac{1}{ \sqrt{ | 4-i |^2 + 1^2 } } \begin{pmatrix}
+				4-i	\\ 1
+			\end{pmatrix} = \frac{ 1 }{ 3 \sqrt{ 2 } } \begin{pmatrix}
+				4-i \\ 1
+			\end{pmatrix} .
+		\end{equation}
+	
+		\end{itemize}
+		
+		Hence, we obtain
+		\begin{equation}
+			\begin{pmatrix}
+				2 		& 4 - i \\
+				4 + i 	& -14
+			\end{pmatrix} = \begin{pmatrix}
+				\frac{ -4+i }{ 3\sqrt{34} } & \frac{ 4-i }{ 3\sqrt{2} } \\
+				\frac{ 17 }{ 3\sqrt{34} } & \frac{ 1 }{ 3\sqrt{2} } \\
+			\end{pmatrix} \begin{pmatrix}
+				-15 & 0 \\
+				0 & 3
+			\end{pmatrix} \begin{pmatrix}
+				\frac{ -4+i }{ 3\sqrt{34} } & \frac{ 4-i }{ 3\sqrt{2} } \\
+				\frac{ 17 }{ 3\sqrt{34} } & \frac{ 1 }{ 3\sqrt{2} } \\
+			\end{pmatrix}^{-1} .
+		\end{equation}
+		
+	\end{enumerate}
+	
 	\end{solution}
 	
-
 \end{document}
