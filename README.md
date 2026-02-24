@@ -16,7 +16,6 @@
     <td width="25%" style="border: none; vertical-align: top; text-align: center;">
       <img src="./diagrams/cover.png" width="100%" style="max-width: 150px; border-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
       <p style="font-size: 12px; color: #666; margin-top: 8px; white-space: nowrap;">
-        <i>Group Theory and Chemistry</i> — David M. Bishop
       </p>
     </td>
   </tr>
